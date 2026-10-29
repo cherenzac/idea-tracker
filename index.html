@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>IdeaVision — Tune into your next idea</title><link rel="stylesheet" href="style.css"></head>
+<body>
+<main class="television">
+  <header><span class="brand">◈ IDEA<span>VISION</span></span><span class="model">CREATIVE SIGNAL / MODEL 01</span></header>
+  <div class="console">
+    <section class="screen" aria-labelledby="heading">
+      <div class="broadcast"><span><i></i> ON AIR</span><span id="count">CH 01</span></div>
+      <h1 id="heading">Big ideas.<br><em>Small screen.</em></h1>
+      <p class="intro">A little space for the things you might build next.</p>
+      <div class="toolbar"><label class="search"><span class="sr-only">Search ideas</span><input id="search" type="search" placeholder="Find a signal…"></label><label><span class="sr-only">Filter by status</span><select id="filter"><option value="all">All channels</option><option>New</option><option>Exploring</option><option>Built</option></select></label></div>
+      <div id="ideas" class="ideas"></div>
+      <p id="empty" hidden>No signals here. Add an idea or change your filter.</p>
+      <form id="form">
+        <h2 id="form-heading">Broadcast a new idea</h2>
+        <label>Idea title<input id="title" required maxlength="100" placeholder="What if we built…"></label>
+        <label>The spark<textarea id="description" maxlength="500" rows="2" placeholder="A sentence or two about the idea"></textarea></label>
+        <div class="form-row"><label>Channel<select id="icon"><option value="✦">✦ Creative</option><option value="◉">◉ Learning</option><option value="⚡">⚡ Tools</option><option value="♧">♧ Everyday</option></select></label><label>Status<select id="status"><option>New</option><option>Exploring</option><option>Built</option></select></label></div>
+        <div class="buttons"><button type="submit" id="save">+ Add idea</button><button type="button" id="cancel" hidden>Cancel edit</button></div>
+      </form>
+      <p id="message" role="status" aria-live="polite"></p>
+      <footer>Your browser. Your ideas. No accounts, no uploads.</footer>
+    </section>
+    <aside aria-label="Television details"><span class="tuning">UHF</span><div class="dial" aria-hidden="true"></div><span class="tuning">VHF</span><div class="dial small" aria-hidden="true"></div><div class="speaker" aria-hidden="true"></div><span class="power"><i></i> POWER</span></aside>
+  </div>
+  <div class="bottom"><span>SAVE YOUR SPARKS.</span><button id="export" type="button">↓ Export ideas</button></div>
+</main>
+<p class="caption">A retro-inspired idea notebook • Fictional starter ideas • Stored only on this device</p>
+<script src="app.js"></script>
+</body></html>

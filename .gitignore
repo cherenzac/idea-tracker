@@ -1,0 +1,4 @@
+# Local-only files
+.DS_Store
+*.log
+node_modules/
