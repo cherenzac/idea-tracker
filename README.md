@@ -14,7 +14,7 @@ Then visit `http://localhost:8080`. Use a local server for consistent browser st
 
 ## Features
 
-- Ten generic home/family AI project concepts (not implemented AI features)
+- Eleven generic home/family AI project concepts (not implemented AI features)
 - Five official external inspiration links, clearly attributed to their creators
 - Add, edit, and delete ideas (deletion asks for confirmation)
 - New, Exploring, and Built statuses
@@ -30,7 +30,9 @@ Do not add passwords, API keys, private notes, or personal information to this r
 
 ## Saved-data upgrades
 
-This version uses `ideavision.ideas.v2`. On the first visit it copies personal and edited entries from the original v1 storage, replaces only untouched original examples with the new ten concepts, and leaves v1 data as a backup. Deleting an idea in v2 stays deleted on reload. Invalid saved data is not overwritten.
+This version uses `ideavision.ideas.v3`. Returning v2 visitors receive one new concept, **Toybox Tales**, while keeping all existing entries, edits and deletions. The prior v2 data is left unchanged as a backup. The addition happens once; deleting the new idea stays deleted on reload. Earlier v1 data still migrates while retaining personal and edited entries. Invalid saved data is never overwritten.
+
+Toybox Tales is a project concept, not a working AI generator: choose three pretend toys and imagine a short, adult-reviewed puppet-show script. It requires no names, photos or recordings.
 
 ## Development and attribution
 
@@ -43,6 +45,8 @@ Run the dependency-free smoke checks:
 ```sh
 node --check app.js
 node test.js
+node --check channels.js
+node test-channels.js
 ```
 
 The tests exercise initial rendering, create/edit/cancel, filtering, deletion and reload persistence using a minimal DOM harness. They are not a substitute for visual browser testing.

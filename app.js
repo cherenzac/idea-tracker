@@ -1,12 +1,21 @@
 'use strict';
-const KEY = 'ideavision.ideas.v2';
+const KEY = 'ideavision.ideas.v3';
+const PREVIOUS_KEY = 'ideavision.ideas.v2';
 const LEGACY_KEY = 'ideavision.ideas.v1';
 const legacySeeds = [
  {id:'seed-1',title:'A tiny tutor for big questions',description:'An AI learning companion that turns a tricky concept into three small experiments you can try.',icon:'◉',status:'New'},
  {id:'seed-2',title:'The meeting-to-momentum machine',description:'A sandbox that turns fictional meeting notes into clear next steps, with a human review before anything is shared.',icon:'⚡',status:'Exploring'},
  {id:'seed-3',title:'A creative constraint generator',description:'Generate playful constraints for a weekend project: one color, one button, one surprisingly useful outcome.',icon:'✦',status:'New'}
 ];
+const nightlyIdea = {
+ id: 'family-2026-10-29',
+ title: 'Toybox Tales',
+ description: 'An AI project idea: choose three pretend toys and invent a short puppet-show script, with an adult reviewing the story before play. No names, photos or recordings needed.',
+ icon: '✦',
+ status: 'New'
+};
 const seeds = [
+ nightlyIdea,
  {
   "id": "family-v2-1",
   "title": "Story Spark",
@@ -92,13 +101,21 @@ try {
   if (!validIdeas(parsed)) throw new Error('Invalid saved data');
   ideas = parsed;
  } else {
-  const legacy = localStorage.getItem(LEGACY_KEY);
-  if (legacy !== null) {
-   const parsed = JSON.parse(legacy);
-   if (!validIdeas(parsed)) throw new Error('Invalid legacy data');
-   // Replace only untouched original examples, never personal or edited entries.
-   const personal = parsed.filter(x => !legacySeeds.some(seed => ['id','title','description','icon','status'].every(key => x[key] === seed[key])));
-   ideas = [...personal, ...seeds.filter(seed => !personal.some(x => x.id === seed.id)).map(x => ({...x}))];
+  const previous = localStorage.getItem(PREVIOUS_KEY);
+  if (previous !== null) {
+   const parsed = JSON.parse(previous);
+   if (!validIdeas(parsed)) throw new Error('Invalid previous data');
+   // Carry forward every edit and deletion; add only this release's new idea once.
+   ideas = parsed.some(x => x.id === nightlyIdea.id) ? parsed : [{...nightlyIdea}, ...parsed];
+  } else {
+   const legacy = localStorage.getItem(LEGACY_KEY);
+   if (legacy !== null) {
+    const parsed = JSON.parse(legacy);
+    if (!validIdeas(parsed)) throw new Error('Invalid legacy data');
+    // Replace only untouched original examples, never personal or edited entries.
+    const personal = parsed.filter(x => !legacySeeds.some(seed => ['id','title','description','icon','status'].every(key => x[key] === seed[key])));
+    ideas = [...personal, ...seeds.filter(seed => !personal.some(x => x.id === seed.id)).map(x => ({...x}))];
+   }
   }
   // A separate versioned key keeps the old data as a backup and prevents reseeding on reload.
   localStorage.setItem(KEY, JSON.stringify(ideas));
