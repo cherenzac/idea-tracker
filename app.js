@@ -1,22 +1,109 @@
 'use strict';
-const KEY = 'ideavision.ideas.v1';
-const seeds = [
+const KEY = 'ideavision.ideas.v2';
+const LEGACY_KEY = 'ideavision.ideas.v1';
+const legacySeeds = [
  {id:'seed-1',title:'A tiny tutor for big questions',description:'An AI learning companion that turns a tricky concept into three small experiments you can try.',icon:'◉',status:'New'},
  {id:'seed-2',title:'The meeting-to-momentum machine',description:'A sandbox that turns fictional meeting notes into clear next steps, with a human review before anything is shared.',icon:'⚡',status:'Exploring'},
  {id:'seed-3',title:'A creative constraint generator',description:'Generate playful constraints for a weekend project: one color, one button, one surprisingly useful outcome.',icon:'✦',status:'New'}
+];
+const seeds = [
+ {
+  "id": "family-v2-1",
+  "title": "Story Spark",
+  "description": "Turn three imaginary words into a short, cheerful choose-your-own-adventure.",
+  "icon": "✦",
+  "status": "New"
+ },
+ {
+  "id": "family-v2-2",
+  "title": "Doodle Detective",
+  "description": "Draw a silly object and let a tiny model guess what it is.",
+  "icon": "✦",
+  "status": "New"
+ },
+ {
+  "id": "family-v2-3",
+  "title": "Pantry Remix",
+  "description": "Type a few ingredients and get playful meal ideas to review before cooking; check allergies and food safety yourself.",
+  "icon": "♧",
+  "status": "New"
+ },
+ {
+  "id": "family-v2-4",
+  "title": "Poem Postcards",
+  "description": "Turn a theme into a tiny poem on a colorful downloadable card.",
+  "icon": "✦",
+  "status": "New"
+ },
+ {
+  "id": "family-v2-5",
+  "title": "Pocket Piano",
+  "description": "Tap a few keys to create a surprisingly musical mini tune.",
+  "icon": "✦",
+  "status": "New"
+ },
+ {
+  "id": "family-v2-6",
+  "title": "Word Bridge",
+  "description": "Play a cooperative word-association game with AI-powered clues.",
+  "icon": "◉",
+  "status": "New"
+ },
+ {
+  "id": "family-v2-7",
+  "title": "Rainy-Day Quest",
+  "description": "Generate an indoor scavenger hunt from a theme and ordinary objects, with adult review for safe play.",
+  "icon": "♧",
+  "status": "New"
+ },
+ {
+  "id": "family-v2-8",
+  "title": "Talk to a Checklist",
+  "description": "Turn a short spoken or typed thought into an editable to-do list.",
+  "icon": "⚡",
+  "status": "New"
+ },
+ {
+  "id": "family-v2-9",
+  "title": "Kindness Quest",
+  "description": "Generate small, practical kindness challenges for home or friends.",
+  "icon": "♧",
+  "status": "New"
+ },
+ {
+  "id": "family-v2-10",
+  "title": "Prompt Playground",
+  "description": "Describe a fictional scene, then compare your words with an AI picture.",
+  "icon": "◉",
+  "status": "New"
+ }
 ];
 const $ = id => document.getElementById(id);
 let ideas = seeds.map(x => ({...x}));
 let editing = null;
 let storageReady = true;
+function validIdeas(value) {
+ return Array.isArray(value) && value.every(x => x && typeof x.id === 'string' && typeof x.title === 'string' && typeof x.description === 'string' && ['New','Exploring','Built'].includes(x.status) && ['✦','◉','⚡','♧'].includes(x.icon));
+}
 try {
  const saved = localStorage.getItem(KEY);
  if (saved !== null) {
   const parsed = JSON.parse(saved);
-  if (!Array.isArray(parsed) || !parsed.every(x => x && typeof x.id === 'string' && typeof x.title === 'string' && typeof x.description === 'string' && ['New','Exploring','Built'].includes(x.status) && ['✦','◉','⚡','♧'].includes(x.icon))) throw new Error('Invalid saved data');
+  if (!validIdeas(parsed)) throw new Error('Invalid saved data');
   ideas = parsed;
+ } else {
+  const legacy = localStorage.getItem(LEGACY_KEY);
+  if (legacy !== null) {
+   const parsed = JSON.parse(legacy);
+   if (!validIdeas(parsed)) throw new Error('Invalid legacy data');
+   // Replace only untouched original examples, never personal or edited entries.
+   const personal = parsed.filter(x => !legacySeeds.some(seed => ['id','title','description','icon','status'].every(key => x[key] === seed[key])));
+   ideas = [...personal, ...seeds.filter(seed => !personal.some(x => x.id === seed.id)).map(x => ({...x}))];
+  }
+  // A separate versioned key keeps the old data as a backup and prevents reseeding on reload.
+  localStorage.setItem(KEY, JSON.stringify(ideas));
  }
-} catch { storageReady = false; $('message').textContent = 'Saved data could not be read. This session works in memory; export to keep your ideas. Existing storage will not be overwritten.'; }
+} catch { storageReady = false; $('message').textContent = 'Saved data could not be read or upgraded. This session works in memory; export to keep your ideas. Existing storage will not be overwritten.'; }
 function persist() {
  if (!storageReady) return false;
  try {localStorage.setItem(KEY, JSON.stringify(ideas)); return true;}

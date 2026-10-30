@@ -14,7 +14,8 @@ Then visit `http://localhost:8080`. Use a local server for consistent browser st
 
 ## Features
 
-- Three clearly fictional AI starter ideas
+- Ten generic home/family AI project concepts (not implemented AI features)
+- Five official external inspiration links, clearly attributed to their creators
 - Add, edit, and delete ideas (deletion asks for confirmation)
 - New, Exploring, and Built statuses
 - Search, status filters, and JSON export
@@ -25,7 +26,11 @@ Then visit `http://localhost:8080`. Use a local server for consistent browser st
 
 The public repository contains code and fictional examples only. Ideas you type are stored in your browser's localStorage, not sent to GitHub or another server. There is no synchronization or account isolation: people using the same browser profile and origin can access that storage. Clearing site data removes it. Export JSON to make your own backup. Avoid sensitive information on a shared device. Exported files contain the ideas you entered; share them thoughtfully.
 
-Do not add passwords, API keys, private notes, or personal information to this repository. No runtime dependencies or external network requests are used by this app.
+Do not add passwords, API keys, private notes, or personal information to this repository. No runtime dependencies or automatic external network requests are used by this app. External inspiration links open third-party websites with their own privacy practices and age requirements; no idea content is included in those links.
+
+## Saved-data upgrades
+
+This version uses `ideavision.ideas.v2`. On the first visit it copies personal and edited entries from the original v1 storage, replaces only untouched original examples with the new ten concepts, and leaves v1 data as a backup. Deleting an idea in v2 stays deleted on reload. Invalid saved data is not overwritten.
 
 ## Development and attribution
 

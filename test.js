@@ -17,9 +17,9 @@ function load(){
  vm.runInNewContext(fs.readFileSync(__dirname+'/app.js','utf8'),context);return context;
 }
 function submit(){els.form.handlers.submit({preventDefault(){}});}
-load();assert.equal(els.ideas.children.length,3);
+load();assert.equal(els.ideas.children.length,10);
 els.title.value='  Test signal  ';els.description.value='<script>not executable</script>';submit();
-assert.equal(els.ideas.children.length,4);assert.match(els.message.textContent,/Saved/);
+assert.equal(els.ideas.children.length,11);assert.match(els.message.textContent,/Saved/);
 assert.equal(els.ideas.children[0].children[1].children[0].textContent,'Test signal');
 assert.equal(els.ideas.children[0].children[1].children[1].textContent,'<script>not executable</script>');
 let actions=els.ideas.children[0].children[1].children[2].children[1];actions.children[0].onclick();
@@ -29,9 +29,22 @@ actions=els.ideas.children[0].children[1].children[2].children[1];actions.childr
 assert.equal(els.title.value,'');assert.equal(els.cancel.hidden,true);
 els.filter.value='Built';els.filter.handlers.change();assert.equal(els.ideas.children.length,1);
 els.search.value='absent';els.search.handlers.input();assert.equal(els.ideas.children.length,0);assert.equal(els.empty.hidden,false);
-load();assert.equal(els.ideas.children.length,4);assert.equal(els.ideas.children[0].children[1].children[0].textContent,'Changed');
-actions=els.ideas.children[0].children[1].children[2].children[1];actions.children[1].onclick();assert.equal(els.ideas.children.length,3);
-load();assert.equal(els.ideas.children.length,3);
+load();assert.equal(els.ideas.children.length,11);assert.equal(els.ideas.children[0].children[1].children[0].textContent,'Changed');
+actions=els.ideas.children[0].children[1].children[2].children[1];actions.children[1].onclick();assert.equal(els.ideas.children.length,10);
+load();assert.equal(els.ideas.children.length,10);
 els.title.value='   ';submit();assert.equal(els.title.invalid,'Please give your idea a title.');
-storage.set('ideavision.ideas.v1','invalid');load();assert.match(els.message.textContent,/could not be read/);els.title.value='In memory';submit();assert.equal(storage.get('ideavision.ideas.v1'),'invalid');assert.match(els.message.textContent,/Not saved/);
+storage.set('ideavision.ideas.v2','invalid');load();assert.match(els.message.textContent,/could not be read/);els.title.value='In memory';submit();assert.equal(storage.get('ideavision.ideas.v2'),'invalid');assert.match(els.message.textContent,/Not saved/);
+storage.clear();
+const oldSeeds = vm.runInNewContext(fs.readFileSync(__dirname+'/app.js','utf8').split('const $ = id')[0] + '\nlegacySeeds;');
+const edited = {...oldSeeds[1], title:'My edited example'};
+const personal = {id:'personal-example', title:'User-created idea',description:'Generic test text',icon:'✦',status:'New'};
+const legacy = JSON.stringify([oldSeeds[0], edited, personal]);
+storage.set('ideavision.ideas.v1',legacy);load();
+assert.equal(els.ideas.children.length,12);
+assert.equal(els.ideas.children[0].children[1].children[0].textContent,'My edited example');
+assert.equal(els.ideas.children[1].children[1].children[0].textContent,'User-created idea');
+assert.equal(storage.get('ideavision.ideas.v1'),legacy);
+load();assert.equal(els.ideas.children.length,12);
+storage.set('ideavision.ideas.v2','[]');load();assert.equal(els.ideas.children.length,0);
+console.log('PASS: v1 migration preserves user entries, edited examples and old backup; no duplicate reseeding; empty v2 stays empty.');
 console.log('PASS: initial render, create, safe text, edit, cancel, search/filter, empty state, delete, reload, blank title, corrupt storage preservation.');
