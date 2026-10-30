@@ -26,7 +26,7 @@ Then visit `http://localhost:8080`. Use a local server for consistent browser st
 
 The public repository contains code and fictional examples only. Ideas you type are stored in your browser's localStorage, not sent to GitHub or another server. There is no synchronization or account isolation: people using the same browser profile and origin can access that storage. Clearing site data removes it. Export JSON to make your own backup. Avoid sensitive information on a shared device. Exported files contain the ideas you entered; share them thoughtfully.
 
-Do not add passwords, API keys, private notes, or personal information to this repository. No runtime dependencies or automatic external network requests are used by this app. External inspiration links open third-party websites with their own privacy practices and age requirements; no idea content is included in those links.
+Do not add passwords, API keys, private notes, or personal information to this repository. The notebook has no runtime dependencies or automatic external network requests. The optional X preview described below is loaded only on request. External inspiration links open third-party websites with their own privacy practices and age requirements; no idea content is included in those links.
 
 ## Saved-data upgrades
 
@@ -46,3 +46,13 @@ node test.js
 ```
 
 The tests exercise initial rendering, create/edit/cancel, filtering, deletion and reload persistence using a minimal DOM harness. They are not a substitute for visual browser testing.
+
+## Live AI News channel (incremental preview)
+
+Two keyboard-accessible TV tabs preserve the notebook and add a **setup-pending** news screen. No X account is connected, no headlines are seeded, and no scheduled refresh is running. Visitors can explicitly request an official X public-profile widget; a direct profile link remains available when embeds are unavailable. No private following feed is exposed. Switching tabs does not erase edits or stored ideas.
+
+The optional widget is a third-party runtime dependency loaded only after the visitor submits a public handle. This is the exception to the notebook's no-external-request behavior: X receives normal browser request information and may use cookies. `dnt: true` is passed to the official widget but is not a promise of zero tracking. No notebook data is included. Clearing the preview removes its content; reload to unload the script. No handle or OAuth credential is persisted. No automatic reload or freshness timestamp is claimed.
+
+A reliable 4–5-hour refresh needs a legitimate backend/scheduler, official X API access, an approved public source list and budget, with secrets kept outside public code. An authenticated personal following feed would need a private interface and scoped OAuth. Do not put API tokens in static JavaScript or GitHub commits.
+
+Official references: [embeds](https://help.x.com/en/using-x/embed-x-feed), [API pricing](https://docs.x.com/x-api/getting-started/pricing), [timelines](https://docs.x.com/x-api/posts/timelines/introduction).

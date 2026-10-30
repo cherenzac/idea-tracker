@@ -5,7 +5,9 @@
 <main class="television">
   <header><span class="brand">◈ IDEA<span>VISION</span></span><span class="model">CREATIVE SIGNAL / MODEL 01</span></header>
   <div class="console">
-    <section class="screen" aria-labelledby="heading">
+    <section class="screen" aria-label="IdeaVision television">
+      <div class="channels" role="tablist" aria-label="TV channels"><button type="button" id="tab-ideas" role="tab" aria-selected="true" aria-controls="panel-ideas">01 · TV Ideas</button><button type="button" id="tab-news" role="tab" aria-selected="false" aria-controls="panel-news" tabindex="-1">02 · Live AI News</button></div>
+      <div id="panel-ideas" role="tabpanel" aria-labelledby="tab-ideas">
       <div class="broadcast"><span><i></i> ON AIR</span><span id="count">CH 01</span></div>
       <h1 id="heading">Big ideas.<br><em>Small screen.</em></h1>
       <p class="intro">10 playful AI project ideas for home, family, and friends.</p>
@@ -33,6 +35,17 @@
       </form>
       <p id="message" role="status" aria-live="polite"></p>
       <footer>Your browser. Your ideas. No accounts, no uploads.</footer>
+      </div>
+      <div id="panel-news" role="tabpanel" aria-labelledby="tab-news" hidden>
+        <div class="broadcast"><span>CH 02 / X SIGNAL</span><span>SETUP PENDING</span></div>
+        <h1>Live AI<br><em>News.</em></h1>
+        <p class="intro">A new channel for public AI conversations on X. Your X account is not connected, and no headlines have been fetched.</p>
+        <div class="news-status"><strong>No live feed configured</strong><p>The target is updates every 4–5 hours. Scheduled refresh is not active. A public X embed is an optional preview, not a guaranteed fresh news feed.</p></div>
+        <form id="news-form"><h2>Preview a public X profile</h2><label>Public handle (without @)<input id="news-handle" maxlength="15" pattern="[A-Za-z0-9_]{1,15}" required placeholder="Public account handle" autocomplete="off"></label><p class="intro">Loading contacts X and may use its cookies. Only public posts can appear. Nothing from your idea notebook is sent. Do not enter a password or API key.</p><button type="submit" id="load-news">Load public X preview</button><button type="button" id="clear-news">Clear preview</button></form>
+        <p id="news-message" role="status" aria-live="polite">No external X resources loaded.</p><div id="news-feed"></div>
+        <p class="intro">X controls availability and ordering. Blank, blocked, older, or login-only results are possible. Loading or reloading this view does not prove new posts were published.</p>
+        <details class="news-plan"><summary>What is needed for scheduled news?</summary><p>An approved public source list, official X developer access, a server-side secret store, and an approved API budget. An authenticated personal feed would require a separate private experience—not this public site.</p><a href="https://help.x.com/en/using-x/embed-x-feed" target="_blank" rel="noopener noreferrer">Official X embed guide ↗</a></details>
+      </div>
     </section>
     <aside aria-label="Television details"><span class="tuning">UHF</span><div class="dial" aria-hidden="true"></div><span class="tuning">VHF</span><div class="dial small" aria-hidden="true"></div><div class="speaker" aria-hidden="true"></div><span class="power"><i></i> POWER</span></aside>
   </div>
@@ -40,4 +53,5 @@
 </main>
 <p class="caption">A retro-inspired idea notebook • Generic project concepts • Stored only on this device</p>
 <script src="app.js"></script>
+<script src="channels.js"></script>
 </body></html>
