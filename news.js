@@ -2,7 +2,7 @@
 (function(root){
  const REFRESH_MS=5*60*1000;
  function cleanQuery(value){return String(value||'').trim().replace(/\s+/g,' ').slice(0,80);}
- function safeUrl(value){try{const u=new URL(value);return ['http:','https:'].includes(u.protocol)?u.href:null;}catch{return null;}}
+ function safeUrl(value){try{const u=new URL(value);return ['http:','https:'].includes(u.protocol)&&!u.username&&!u.password?u.href:null;}catch{return null;}}
  function feedUrl(query,now=Date.now()){
   const params=new URLSearchParams({query:cleanQuery(query),tags:'story',hitsPerPage:'30',numericFilters:'created_at_i>'+Math.floor((now-7*86400000)/1000)});
   return 'https://hn.algolia.com/api/v1/search_by_date?'+params;
