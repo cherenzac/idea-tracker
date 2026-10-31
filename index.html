@@ -1,13 +1,23 @@
 <!doctype html>
 <html lang="en">
-<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>IdeaVision — Tune into your next idea</title><link rel="stylesheet" href="style.css?v=4-brickword"></head>
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>IdeaVision — Tune into your next idea</title><link rel="stylesheet" href="style.css?v=5-directory"></head>
 <body>
 <main class="television">
   <header><span class="brand">◈ IDEA<span>VISION</span></span><span class="model">CREATIVE SIGNAL / MODEL 01</span></header>
   <div class="console">
     <section class="screen" aria-label="IdeaVision television">
-      <div class="channels" role="tablist" aria-label="TV channels"><button type="button" id="tab-ideas" role="tab" aria-selected="true" aria-controls="panel-ideas">01 · TV Ideas</button><button type="button" id="tab-news" role="tab" aria-selected="false" aria-controls="panel-news" tabindex="-1">02 · Live AI News</button><button type="button" id="tab-bricks" role="tab" aria-selected="false" aria-controls="panel-bricks" tabindex="-1">03 · Brick Word</button></div>
-      <div id="panel-ideas" role="tabpanel" aria-labelledby="tab-ideas">
+      <nav class="launcher" aria-label="Project navigation">
+        <div class="launcher-top"><span class="launcher-label">YOUR CREATIVE CHANNELS</span><span id="project-count"></span></div>
+        <p class="recent-label">Recently opened <span>· last five on this device</span></p>
+        <div id="recent-projects" class="channels"></div>
+        <details id="project-browser"><summary>Browse all projects</summary>
+          <label for="project-search">Search projects</label><input id="project-search" type="search" placeholder="Find a tool, idea or endpoint…">
+          <label for="project-picker">Jump to a project</label><select id="project-picker"><option value="">Choose a project…</option></select>
+          <p id="project-results" role="status" aria-live="polite"></p><div id="project-directory"></div>
+        </details>
+        <p id="navigation-status" role="status" aria-live="polite"></p>
+      </nav>
+      <div id="panel-ideas" role="region" aria-label="TV Ideas notebook">
       <div class="broadcast"><span><i></i> ON AIR</span><span id="count">CH 01</span></div>
       <h1 id="heading">Big ideas.<br><em>Small screen.</em></h1>
       <p class="intro">Playful AI project ideas for home, family, and friends.</p>
@@ -36,7 +46,7 @@
       <p id="message" role="status" aria-live="polite"></p>
       <footer>Your browser. Your ideas. No accounts, no uploads.</footer>
       </div>
-      <div id="panel-news" role="tabpanel" aria-labelledby="tab-news" hidden>
+      <div id="panel-news" role="region" aria-label="Live AI News" hidden>
         <div class="broadcast"><span>CH 02 / X SIGNAL</span><span>SETUP PENDING</span></div>
         <h1>Live AI<br><em>News.</em></h1>
         <p class="intro">A new channel for public AI conversations on X. Your X account is not connected, and no headlines have been fetched.</p>
@@ -46,7 +56,7 @@
         <p class="intro">X controls availability and ordering. Blank, blocked, older, or login-only results are possible. Loading or reloading this view does not prove new posts were published.</p>
         <details class="news-plan"><summary>What is needed for scheduled news?</summary><p>An approved public source list, official X developer access, a server-side secret store, and an approved API budget. An authenticated personal feed would require a separate private experience—not this public site.</p><a href="https://help.x.com/en/using-x/embed-x-feed" target="_blank" rel="noopener noreferrer">Official X embed guide ↗</a></details>
       </div>
-      <div id="panel-bricks" role="tabpanel" aria-labelledby="tab-bricks" hidden>
+      <div id="panel-bricks" role="region" aria-label="Brick Word" hidden>
         <div class="broadcast"><span>CH 03 / MAKE SOMETHING</span><span>READY TO BUILD</span></div>
         <h1>Small bricks.<br><em>Big words.</em></h1>
         <p class="intro">Turn a word into colorful LEGO-style brick lettering. Build it. Download it. Make someone smile.</p>
@@ -67,6 +77,8 @@
 </main>
 <p class="caption">A retro-inspired idea notebook • Generic project concepts • Stored only on this device</p>
 <script src="app.js?v=20261029-nightly"></script>
-<script src="channels.js?v=2-brickword"></script>
+<script src="projects.js?v=1"></script>
+<script src="navigation.js?v=1"></script>
+<script src="channels.js?v=3-directory"></script>
 <script src="brickword.js?v=1"></script>
 </body></html>
