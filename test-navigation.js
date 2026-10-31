@@ -6,3 +6,9 @@ assert.equal(validProjects(fifty).length,50);assert.equal(searchProjects(fifty,'
 assert.deepEqual(recentIds(['p49','p2','p49','missing','p3','p4','p5','p6'],fifty),['p49','p2','p3','p4','p5']);
 assert.equal(validProjects([{id:'x',title:'Unsafe',url:'javascript:alert(1)'},{id:'a',title:'Okay',url:'https://example.com'},{id:'a',title:'Duplicate',panel:'p'}]).length,1);
 assert.equal(searchProjects(registry,'lego png')[0].id,'bricks');console.log('PASS: 50 projects, multiple-term search, five recents, dedupe, stale ids, URL filtering, actual registry.');
+
+const {clearHistory}=require('./navigation');
+const stored=new Map([['ideavision.recent-projects.v1','["bricks"]'],['ideavision.ideas.v3','private notebook']]);
+assert.equal(clearHistory({removeItem:key=>stored.delete(key)}),true);assert.equal(stored.has('ideavision.recent-projects.v1'),false);assert.equal(stored.get('ideavision.ideas.v3'),'private notebook');
+assert.equal(clearHistory({removeItem(){throw new Error('blocked')}}),false);
+console.log('PASS: clear only recent project history; preserve notebook; storage errors handled.');
