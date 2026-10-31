@@ -1,12 +1,12 @@
 <!doctype html>
 <html lang="en">
-<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>IdeaVision — Tune into your next idea</title><link rel="stylesheet" href="style.css?v=3"></head>
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>IdeaVision — Tune into your next idea</title><link rel="stylesheet" href="style.css?v=4-brickword"></head>
 <body>
 <main class="television">
   <header><span class="brand">◈ IDEA<span>VISION</span></span><span class="model">CREATIVE SIGNAL / MODEL 01</span></header>
   <div class="console">
     <section class="screen" aria-label="IdeaVision television">
-      <div class="channels" role="tablist" aria-label="TV channels"><button type="button" id="tab-ideas" role="tab" aria-selected="true" aria-controls="panel-ideas">01 · TV Ideas</button><button type="button" id="tab-news" role="tab" aria-selected="false" aria-controls="panel-news" tabindex="-1">02 · Live AI News</button></div>
+      <div class="channels" role="tablist" aria-label="TV channels"><button type="button" id="tab-ideas" role="tab" aria-selected="true" aria-controls="panel-ideas">01 · TV Ideas</button><button type="button" id="tab-news" role="tab" aria-selected="false" aria-controls="panel-news" tabindex="-1">02 · Live AI News</button><button type="button" id="tab-bricks" role="tab" aria-selected="false" aria-controls="panel-bricks" tabindex="-1">03 · Brick Word</button></div>
       <div id="panel-ideas" role="tabpanel" aria-labelledby="tab-ideas">
       <div class="broadcast"><span><i></i> ON AIR</span><span id="count">CH 01</span></div>
       <h1 id="heading">Big ideas.<br><em>Small screen.</em></h1>
@@ -46,6 +46,20 @@
         <p class="intro">X controls availability and ordering. Blank, blocked, older, or login-only results are possible. Loading or reloading this view does not prove new posts were published.</p>
         <details class="news-plan"><summary>What is needed for scheduled news?</summary><p>An approved public source list, official X developer access, a server-side secret store, and an approved API budget. An authenticated personal feed would require a separate private experience—not this public site.</p><a href="https://help.x.com/en/using-x/embed-x-feed" target="_blank" rel="noopener noreferrer">Official X embed guide ↗</a></details>
       </div>
+      <div id="panel-bricks" role="tabpanel" aria-labelledby="tab-bricks" hidden>
+        <div class="broadcast"><span>CH 03 / MAKE SOMETHING</span><span>READY TO BUILD</span></div>
+        <h1>Small bricks.<br><em>Big words.</em></h1>
+        <p class="intro">Turn a word into colorful LEGO-style brick lettering. Build it. Download it. Make someone smile.</p>
+        <form id="brick-form">
+          <div class="brick-controls"><label>Your word or short phrase<input id="brick-word" maxlength="48" value="HELLO" required placeholder="Try DREAM BIG" autocomplete="off" aria-describedby="brick-help"></label><label>Brick colors<select id="brick-palette"><option value="classic">Toybox classics</option><option value="sunset">Sunset candy</option><option value="ocean">Ocean blue</option></select></label></div>
+          <p id="brick-help" class="intro">Up to 24 characters. Letters are built from studs, not AI-generated objects. Text stays in your browser.</p>
+          <div class="buttons"><button type="submit">Build image ↗</button><button type="button" id="brick-download">↓ Download PNG</button></div>
+        </form>
+        <div class="brick-presets" aria-label="Try a sample word"><span>TRY</span><button type="button" data-brick-word="PLAY">PLAY</button><button type="button" data-brick-word="DREAM BIG">DREAM BIG</button><button type="button" data-brick-word="ROBOT">ROBOT</button></div>
+        <div class="brick-preview"><canvas id="brick-canvas" width="1400" height="900" role="img" aria-label="Building-block lettering preview">Your browser needs canvas support to show the brick image.</canvas></div>
+        <p id="brick-message" role="status" aria-live="polite"></p>
+        <p class="intro">Free, local rendering. No account, API key, or upload. Not affiliated with or endorsed by the LEGO Group.</p>
+      </div>
     </section>
     <aside aria-label="Television details"><span class="tuning">UHF</span><div class="dial" aria-hidden="true"></div><span class="tuning">VHF</span><div class="dial small" aria-hidden="true"></div><div class="speaker" aria-hidden="true"></div><span class="power"><i></i> POWER</span></aside>
   </div>
@@ -53,5 +67,6 @@
 </main>
 <p class="caption">A retro-inspired idea notebook • Generic project concepts • Stored only on this device</p>
 <script src="app.js?v=20261029-nightly"></script>
-<script src="channels.js?v=1"></script>
+<script src="channels.js?v=2-brickword"></script>
+<script src="brickword.js?v=1"></script>
 </body></html>

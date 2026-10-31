@@ -1,0 +1,12 @@
+'use strict';
+const assert=require('node:assert/strict');const b=require('./brickword.js');
+assert.equal(b.normalize('  DREAM\n BIG  '),'DREAM BIG');assert.equal(Array.from(b.normalize('a'.repeat(50))).length,24);
+assert.deepEqual(b.linesFor('HELLO'),['HELLO']);assert.deepEqual(b.linesFor('THIS IS A LONG WORD'),['THIS IS A','LONG WORD']);
+assert.equal(b.linesFor('abcdefghijklmnopqrstuvwx').join('').length,24);assert.equal(b.normalize('cafe\u0301'),'café');
+assert.equal(b.filename('<script>alert(1)</script>'),'brick-word-script-alert-1-script.png');assert.equal(b.filename('你好'),'brick-word-art.png');
+assert.throws(()=>b.paint({},''),/Type a word/);
+assert.throws(()=>b.paint({getContext:()=>null},'HELLO'),/cannot draw/);
+let draws=0;const ctx={fillRect(){draws++},beginPath(){},arc(){},ellipse(){},fill(){},stroke(){},fillText(){}};
+const mask={getContext:()=>({...ctx,measureText:s=>({width:s.length*100}),getImageData:()=>({data:new Uint8ClampedArray(1400*900*4).fill(255)})})};
+const canvas={getContext:()=>ctx};const result=b.paint(canvas,'HELLO','unknown',()=>mask);assert.equal(canvas.width,1400);assert.equal(canvas.height,900);assert.ok(result.count>0);assert.ok(draws>result.count);
+console.log('PASS: normalization, length bounds, wrapping, Unicode, safe filenames, canvas errors and drawing pipeline.');

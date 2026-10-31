@@ -53,10 +53,16 @@ The tests exercise initial rendering, create/edit/cancel, filtering, deletion an
 
 ## Live AI News channel (incremental preview)
 
-Two keyboard-accessible TV tabs preserve the notebook and add a **setup-pending** news screen. No X account is connected, no headlines are seeded, and no scheduled refresh is running. Visitors can explicitly request an official X public-profile widget; a direct profile link remains available when embeds are unavailable. No private following feed is exposed. Switching tabs does not erase edits or stored ideas.
+Keyboard-accessible TV tabs preserve the notebook and add a **setup-pending** news screen. No X account is connected, no headlines are seeded, and no scheduled refresh is running. Visitors can explicitly request an official X public-profile widget; a direct profile link remains available when embeds are unavailable. No private following feed is exposed. Switching tabs does not erase edits or stored ideas.
 
 The optional widget is a third-party runtime dependency loaded only after the visitor submits a public handle. This is the exception to the notebook's no-external-request behavior: X receives normal browser request information and may use cookies. `dnt: true` is passed to the official widget but is not a promise of zero tracking. No notebook data is included. Clearing the preview removes its content; reload to unload the script. No handle or OAuth credential is persisted. No automatic reload or freshness timestamp is claimed.
 
 A reliable 4–5-hour refresh needs a legitimate backend/scheduler, official X API access, an approved public source list and budget, with secrets kept outside public code. An authenticated personal following feed would need a private interface and scoped OAuth. Do not put API tokens in static JavaScript or GitHub commits.
 
 Official references: [embeds](https://help.x.com/en/using-x/embed-x-feed), [API pricing](https://docs.x.com/x-api/getting-started/pricing), [timelines](https://docs.x.com/x-api/posts/timelines/introduction).
+
+## Brick Word studio
+
+The third TV channel converts a word or short phrase into LEGO-style **lettering** with colored bricks and studs. This is deterministic, browser-local canvas typography, not an AI model that generates objects from prompts. Up to 24 Unicode code points are rendered using installed fonts; unsupported characters may display fallback glyphs. Choose three palettes, try presets, and download a 1400×900 PNG. No user text is sent to a service or saved, and no API key is needed. LEGO is a trademark of the LEGO Group; this independent experiment is not affiliated with or endorsed by it.
+
+Additional checks: `node --check brickword.js && node test-brickword.js`. Existing notebook storage/version and news behavior are unchanged.

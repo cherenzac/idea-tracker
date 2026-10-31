@@ -1,12 +1,12 @@
 'use strict';
 (() => {
  const el=id=>document.getElementById(id);
- const tabs=[el('tab-ideas'),el('tab-news')];
- const panels=[el('panel-ideas'),el('panel-news')];
+ const tabs=[el('tab-ideas'),el('tab-news'),el('tab-bricks')];
+ const panels=[el('panel-ideas'),el('panel-news'),el('panel-bricks')];
  function select(index){tabs.forEach((tab,i)=>{tab.setAttribute('aria-selected',String(i===index));tab.tabIndex=i===index?0:-1;panels[i].hidden=i!==index;});el('export').hidden=index!==0;}
  tabs.forEach((tab,index)=>{
   tab.addEventListener('click',()=>select(index));
-  tab.addEventListener('keydown',event=>{let next;if(event.key==='ArrowRight'||event.key==='ArrowLeft')next=1-index;else if(event.key==='Home')next=0;else if(event.key==='End')next=1;else return;event.preventDefault();select(next);tabs[next].focus();});
+  tab.addEventListener('keydown',event=>{let next;if(event.key==='ArrowRight')next=(index+1)%tabs.length;else if(event.key==='ArrowLeft')next=(index-1+tabs.length)%tabs.length;else if(event.key==='Home')next=0;else if(event.key==='End')next=tabs.length-1;else return;event.preventDefault();select(next);tabs[next].focus();});
  });
  let generation=0;
  let scriptPromise;
