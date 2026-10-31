@@ -1,0 +1,24 @@
+'use strict';
+const assert=require('node:assert/strict');
+const {cleanQuery,safeUrl,feedUrl,xSearchUrl,normalizeHits,createFeedController}=require('./news');
+const now=Date.parse('2026-10-31T04:00:00Z');
+assert.equal(cleanQuery('  AI   agents  '),'AI agents');assert.equal(cleanQuery('x'.repeat(100)).length,80);
+assert.equal(safeUrl('javascript:alert(1)'),null);assert.equal(safeUrl('https://example.com/a'),'https://example.com/a');
+const u=new URL(feedUrl('AI agents',now));assert.equal(u.hostname,'hn.algolia.com');assert.equal(u.searchParams.get('query'),'AI agents');assert.equal(u.searchParams.get('tags'),'story');assert.ok(u.searchParams.get('numericFilters').startsWith('created_at_i>'));
+assert.equal(new URL(xSearchUrl('AI agents & tools')).searchParams.get('q'),'AI agents & tools');
+const good={objectID:'123',title:'A real agent launch',created_at:'2026-10-30T23:00:00Z',url:'javascript:bad',author:'a',points:2};
+const items=normalizeHits([good,good,{...good,objectID:'bad'},{...good,objectID:'999',created_at:'invalid'}],now);
+assert.equal(items.length,1);assert.equal(items[0].url,'https://news.ycombinator.com/item?id=123');assert.equal(items[0].title,good.title);
+(async()=>{
+ const states=[];let response={ok:true,json:async()=>({hits:[good]})};
+ const c=createFeedController({fetcher:async()=>response,onState:s=>states.push(s),now:()=>now});
+ await c.refresh('AI agents');assert.equal(states.at(-1).status,'ready');assert.equal(states.at(-1).items.length,1);
+ response={ok:false,status:503};await c.refresh('AI agents');assert.equal(states.at(-1).status,'error');assert.equal(states.at(-1).previous.items.length,1);
+ await c.refresh('different topic');assert.equal(states.at(-1).previous,null);
+ await c.refresh(' ');assert.equal(states.at(-1).status,'invalid');
+ response={ok:true,json:async()=>({hits:[]})};await c.refresh('new');assert.equal(states.at(-1).status,'ready');assert.equal(states.at(-1).items.length,0);
+ response={ok:true,json:async()=>({wrong:[]})};await c.refresh('new');assert.equal(states.at(-1).status,'error');
+ let finish;const order=[];const race=createFeedController({fetcher:()=>new Promise(resolve=>{finish=resolve;}),onState:s=>order.push(s),now:()=>now});
+ const pending=race.refresh('old');race.cancel();finish({ok:true,json:async()=>({hits:[good]})});await pending;assert.equal(order.length,1);
+ console.log('PASS: topic encoding, safe URLs, dedupe, dates, successful fetch, empty state, stale errors, schema errors, invalid input, cancellation.');
+})().catch(e=>{console.error(e);process.exitCode=1;});

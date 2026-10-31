@@ -1,6 +1,6 @@
 <!doctype html>
 <html lang="en">
-<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>IdeaVision — Tune into your next idea</title><link rel="stylesheet" href="style.css?v=5-directory"></head>
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>IdeaVision — Tune into your next idea</title><link rel="stylesheet" href="style.css?v=6-radar"></head>
 <body>
 <main class="television">
   <header><span class="brand">◈ IDEA<span>VISION</span></span><span class="model">CREATIVE SIGNAL / MODEL 01</span></header>
@@ -46,15 +46,26 @@
       <p id="message" role="status" aria-live="polite"></p>
       <footer>Your browser. Your ideas. No accounts, no uploads.</footer>
       </div>
-      <div id="panel-news" role="region" aria-label="Live AI News" hidden>
-        <div class="broadcast"><span>CH 02 / X SIGNAL</span><span>SETUP PENDING</span></div>
-        <h1>Live AI<br><em>News.</em></h1>
-        <p class="intro">A new channel for public AI conversations on X. Your X account is not connected, and no headlines have been fetched.</p>
-        <div class="news-status"><strong>No live feed configured</strong><p>The target is updates every 4–5 hours. Scheduled refresh is not active. A public X embed is an optional preview, not a guaranteed fresh news feed.</p></div>
-        <form id="news-form"><h2>Preview a public X profile</h2><label>Public handle (without @)<input id="news-handle" maxlength="15" pattern="[A-Za-z0-9_]{1,15}" required placeholder="Public account handle" autocomplete="off"></label><p class="intro">Loading contacts X and may use its cookies. Only public posts can appear. Nothing from your idea notebook is sent. Do not enter a password or API key.</p><button type="submit" id="load-news">Load public X preview</button><button type="button" id="clear-news">Clear preview</button></form>
-        <p id="news-message" role="status" aria-live="polite">No external X resources loaded.</p><div id="news-feed"></div>
-        <p class="intro">X controls availability and ordering. Blank, blocked, older, or login-only results are possible. Loading or reloading this view does not prove new posts were published.</p>
-        <details class="news-plan"><summary>What is needed for scheduled news?</summary><p>An approved public source list, official X developer access, a server-side secret store, and an approved API budget. An authenticated personal feed would require a separate private experience—not this public site.</p><a href="https://help.x.com/en/using-x/embed-x-feed" target="_blank" rel="noopener noreferrer">Official X embed guide ↗</a></details>
+      <div id="panel-news" role="region" aria-label="AI Agent Radar" hidden>
+        <div class="broadcast"><span>CH 02 / AGENT RADAR</span><span id="agent-news-source">HACKER NEWS</span></div>
+        <h1>Catch the<br><em>next signal.</em></h1>
+        <p class="intro">Fresh conversations about AI agents, tools and launches. Search a topic, not just a handle.</p>
+        <form id="agent-news-form">
+          <label>What are you following?<input id="agent-news-query" maxlength="80" required value="AI agents" placeholder="AI agents, agentic AI, coding agents" autocomplete="off"></label>
+          <div class="buttons"><button type="submit" id="agent-news-refresh">Refresh stories ↻</button><button type="button" id="agent-news-pause" aria-pressed="false">Pause auto-refresh</button></div>
+        </form>
+        <div class="brick-presets" id="agent-news-presets" aria-label="News topics"><button type="button" data-news-topic="AI agents">AI agents</button><button type="button" data-news-topic="agentic AI">Agentic AI</button><button type="button" data-news-topic="coding agents">Coding agents</button><button type="button" data-news-topic="multi-agent">Multi-agent</button></div>
+        <p id="agent-news-status" role="status" aria-live="polite">Open this tab to fetch the latest matching Hacker News stories.</p>
+        <div id="agent-news-list" aria-label="Recent Hacker News stories"></div>
+        <p class="intro">Source: Hacker News community submissions via Algolia. Times are submission dates, not original article publication dates. Community claims are not independently verified. Topics are sent to Algolia; notebook content is not.</p>
+        <p class="intro">This feed refreshes every five minutes while open and visible. It does not run in the background after you close the page, and upstream indexing may lag.</p>
+        <div class="news-status"><strong>Want the conversation on X?</strong><p>This is a Hacker News feed, not X posts. Open the latest X search for your topic. X may ask you to sign in.</p><a id="agent-news-x-search" href="https://x.com/search?q=AI+agents&amp;src=typed_query&amp;f=live" target="_blank" rel="noopener noreferrer">Search latest on X ↗</a></div>
+        <details class="news-plan"><summary>Optional public X profile preview</summary>
+          <form id="news-form"><label>Public handle (without @)<input id="news-handle" maxlength="15" pattern="[A-Za-z0-9_]{1,15}" required placeholder="Public account handle" autocomplete="off"></label><p class="intro">Loading contacts X and may use its cookies. Only public posts can appear. Nothing from your notebook is sent. Do not enter passwords or API keys.</p><button type="submit" id="load-news">Load public X preview</button><button type="button" id="clear-news">Clear preview</button></form>
+          <p id="news-message" role="status" aria-live="polite">No external X resources loaded.</p><div id="news-feed"></div>
+          <p class="intro">X controls availability and ordering. An embedded profile is not a topic-search feed or a guarantee of freshness.</p>
+        </details>
+        <details class="news-plan"><summary>Connect a real X topic feed</summary><p>Automatic X search needs approved developer access, a server-side credential store and an API budget. No X API is connected or billed here. Never put a secret key in this public page or repository.</p><a href="https://docs.x.com/x-api/posts/search/introduction" target="_blank" rel="noopener noreferrer">Official X search documentation ↗</a></details>
       </div>
       <div id="panel-bricks" role="region" aria-label="Brick Word" hidden>
         <div class="broadcast"><span>CH 03 / MAKE SOMETHING</span><span>READY TO BUILD</span></div>
@@ -77,8 +88,9 @@
 </main>
 <p class="caption">A retro-inspired idea notebook • Generic project concepts • Stored only on this device</p>
 <script src="app.js?v=20261029-nightly"></script>
-<script src="projects.js?v=1"></script>
+<script src="projects.js?v=2-radar"></script>
 <script src="navigation.js?v=1"></script>
 <script src="channels.js?v=3-directory"></script>
 <script src="brickword.js?v=1"></script>
+<script src="news.js?v=1"></script>
 </body></html>

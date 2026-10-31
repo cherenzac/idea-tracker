@@ -26,7 +26,7 @@ Then visit `http://localhost:8080`. Use a local server for consistent browser st
 
 The public repository contains code and fictional examples only. Ideas you type are stored in your browser's localStorage, not sent to GitHub or another server. There is no synchronization or account isolation: people using the same browser profile and origin can access that storage. Clearing site data removes it. Export JSON to make your own backup. Avoid sensitive information on a shared device. Exported files contain the ideas you entered; share them thoughtfully.
 
-Do not add passwords, API keys, private notes, or personal information to this repository. The notebook has no runtime dependencies or automatic external network requests. The optional X preview described below is loaded only on request. External inspiration links open third-party websites with their own privacy practices and age requirements; no idea content is included in those links.
+Do not add passwords, API keys, private notes, or personal information to this repository. The notebook itself has no runtime dependencies or external network requests. AI Agent Radar requests Algolia when its panel is visible; the optional X preview described below is loaded only on request. External inspiration links open third-party websites with their own privacy practices and age requirements; no idea content is included in those links.
 
 ## Saved-data upgrades
 
@@ -51,15 +51,13 @@ node test-channels.js
 
 The tests exercise initial rendering, create/edit/cancel, filtering, deletion and reload persistence using a minimal DOM harness. They are not a substitute for visual browser testing.
 
-## Live AI News channel (incremental preview)
+## AI Agent Radar
 
-Keyboard-accessible TV tabs preserve the notebook and add a **setup-pending** news screen. No X account is connected, no headlines are seeded, and no scheduled refresh is running. Visitors can explicitly request an official X public-profile widget; a direct profile link remains available when embeds are unavailable. No private following feed is exposed. Switching tabs does not erase edits or stored ideas.
+Real recent Hacker News stories via the public Algolia search API, default topic **AI agents**, adjustable query and presets. Automatically checks on opening the news panel, and every five minutes while visible; pause/resume and manual refresh available. No server-side/background job runs after closing the page. Last successful check, actual HN submission dates, empty and stale/error states are shown. These are not original article publication dates or independent validation of community claims. Requests disclose only the search topic and normal network metadata to Algolia (credentials omitted); notebook data stays local. Upstream indexing and availability may lag.
 
-The optional widget is a third-party runtime dependency loaded only after the visitor submits a public handle. This is the exception to the notebook's no-external-request behavior: X receives normal browser request information and may use cookies. `dnt: true` is passed to the official widget but is not a promise of zero tracking. No notebook data is included. Clearing the preview removes its content; reload to unload the script. No handle or OAuth credential is persisted. No automatic reload or freshness timestamp is claimed.
+This is explicitly **not an X topic feed**. A latest-X-search outbound link follows the current query; the optional profile widget remains opt-in. Actual embedded X search requires authorized API access, server-side secrets and separately approved costs. No X API is connected, billed or scraped. No key belongs in public JavaScript.
 
-A reliable 4–5-hour refresh needs a legitimate backend/scheduler, official X API access, an approved public source list and budget, with secrets kept outside public code. An authenticated personal following feed would need a private interface and scoped OAuth. Do not put API tokens in static JavaScript or GitHub commits.
-
-Official references: [embeds](https://help.x.com/en/using-x/embed-x-feed), [API pricing](https://docs.x.com/x-api/getting-started/pricing), [timelines](https://docs.x.com/x-api/posts/timelines/introduction).
+Tests: `node test-news.js` checks URL safety, parsing, ordering, empty results, stale errors and request races. Browser/network integration checks are also required.
 
 ## Brick Word studio
 
@@ -77,4 +75,4 @@ Navigation history stores only project IDs in `ideavision.recent-projects.v1`, i
 
 Add real destinations to `projects.js`: unique stable `id`, `title`, truthful `description`, `category`, `status`, `tags`, and either an existing `panel` ID or a public HTTPS `url`. External sites open only after a deliberate link click, in a new tab with `noopener noreferrer`; never iframe arbitrary sites or put credentials/private endpoints in this public registry. For larger standalone builds, prefer a separate path/page in this same repository and register its public URL rather than loading all application code in the shell. Do not add placeholder applications to inflate counts. Keep notebook concepts separate from deployed projects.
 
-Preserve all existing user storage, forms and working projects; inspect latest main and concurrent changes before committing. Add one useful, safe, tested increment per nightly run, not a synthetic commit merely to maintain a streak. Run `node test.js`, `node test-channels.js`, `node test-brickword.js`, `node test-navigation.js` and browser checks for new UI. The navigation suite includes 50 fixture destinations (test-only, not published as working projects), recent cap, search, stale-ID cleanup and unsafe URL rejection. Verify the exact commit's Pages deployment before reporting it live. No paid APIs, credentials or unrelated publication without scoped approval. The website itself does not schedule builds.
+Preserve all existing user storage, forms and working projects; inspect latest main and concurrent changes before committing. Add one useful, safe, tested increment per nightly run, not a synthetic commit merely to maintain a streak. Run `node test.js`, `node test-channels.js`, `node test-brickword.js`, `node test-navigation.js`, `node test-news.js` and browser checks for new UI. The navigation suite includes 50 fixture destinations (test-only, not published as working projects), recent cap, search, stale-ID cleanup and unsafe URL rejection. Verify the exact commit's Pages deployment before reporting it live. No paid APIs, credentials or unrelated publication without scoped approval. The website itself does not schedule builds.
