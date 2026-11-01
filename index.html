@@ -1,6 +1,6 @@
 <!doctype html>
 <html lang="en">
-<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>IdeaVision — Tune into your next idea</title><link rel="stylesheet" href="style.css?v=6-radar"></head>
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>IdeaVision — Tune into your next idea</title><link rel="stylesheet" href="style.css?v=7-pomodoro"></head>
 <body>
 <main class="television">
   <header><span class="brand">◈ IDEA<span>VISION</span></span><span class="model">CREATIVE SIGNAL / MODEL 01</span></header>
@@ -67,6 +67,28 @@
         </details>
         <details class="news-plan"><summary>Connect a real X topic feed</summary><p>Automatic X search needs approved developer access, a server-side credential store and an API budget. No X API is connected or billed here. Never put a secret key in this public page or repository.</p><a href="https://docs.x.com/x-api/posts/search/introduction" target="_blank" rel="noopener noreferrer">Official X search documentation ↗</a></details>
       </div>
+      <div id="panel-pomodoro" role="region" aria-label="Pomodoro Focus" hidden>
+        <div class="broadcast"><span>CH 04 / FIND YOUR FOCUS</span><span>LOCAL TIMER</span></div>
+        <h1>One thing.<br><em>One interval.</em></h1>
+        <p class="intro">Focus, rest, repeat. Start with five 30-minute focus rounds, 10-minute short breaks and a 30-minute long break after round four.</p>
+        <section class="pomodoro-display" aria-label="Timer">
+          <h2 id="pomodoro-phase">Focus · round 1 of 5</h2>
+          <p id="pomodoro-time" role="timer" aria-live="off" aria-label="Time remaining">30:00</p>
+          <div class="buttons"><button id="pomodoro-start" type="button">Start</button><button id="pomodoro-pause" type="button" disabled>Pause</button><button id="pomodoro-reset" type="button">Reset session</button></div>
+          <p id="pomodoro-status" role="status" aria-live="polite"></p>
+        </section>
+        <form id="pomodoro-form">
+          <h2>Make it your rhythm</h2>
+          <p class="intro">Fields are draft settings until you choose Apply. The session plan below always shows the applied settings.</p>
+          <div class="form-row"><label>Focus (minutes)<input id="pomodoro-work" type="number" min="1" max="180" step="1" required value="30"></label><label>Short break (minutes)<input id="pomodoro-short" type="number" min="1" max="180" step="1" required value="10"></label></div>
+          <div class="form-row"><label>Long break (minutes)<input id="pomodoro-long" type="number" min="1" max="180" step="1" required value="30"></label><label>Total focus rounds<input id="pomodoro-rounds" type="number" min="1" max="20" step="1" required value="5"></label></div>
+          <label>Long break every N focus rounds<input id="pomodoro-longEvery" type="number" min="1" max="20" step="1" required value="4"></label>
+          <button type="submit">Apply settings &amp; reset</button>
+          <p id="pomodoro-settings-status" role="status" aria-live="polite"></p>
+        </form>
+        <h2>Your session</h2><p id="pomodoro-plan" class="intro"></p>
+        <p class="intro">Intervals advance automatically; the session ends after the last focus round with no extra break. Keep this page open: refresh or closing it resets this timer and its settings. Switching projects keeps it running. A sleeping or throttled browser may update late; it catches up to elapsed time when active. No alarm, notifications or background service. Notebook data is unchanged.</p>
+      </div>
       <div id="panel-bricks" role="region" aria-label="Brick Word" hidden>
         <div class="broadcast"><span>CH 03 / MAKE SOMETHING</span><span>READY TO BUILD</span></div>
         <h1>Small bricks.<br><em>Big words.</em></h1>
@@ -88,9 +110,11 @@
 </main>
 <p class="caption">A retro-inspired idea notebook • Generic project concepts • Stored only on this device</p>
 <script src="app.js?v=20261029-nightly"></script>
-<script src="projects.js?v=2-radar"></script>
+<script src="projects.js?v=3-pomodoro"></script>
 <script src="navigation.js?v=1"></script>
 <script src="channels.js?v=3-directory"></script>
 <script src="brickword.js?v=1"></script>
 <script src="news.js?v=1"></script>
+<script src="pomodoro.js?v=1"></script>
 </body></html>
+
