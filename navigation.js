@@ -10,7 +10,7 @@
  function remember(id){recent=recentIds([id,...recent],projects);try{localStorage.setItem(KEY,JSON.stringify(recent));}catch{el('navigation-status').textContent='Recent projects cannot be saved in this browser; navigation still works.';}renderRecent();}
  function activate(project,record=true){
   if(!project.panel){remember(project.id);return;}
-  projects.filter(p=>p.panel).forEach(p=>{el(p.panel).hidden=p.id!==project.id;});current=project.id;el('export').hidden=current!=='ideas';
+  projects.filter(p=>p.panel).forEach(p=>{el(p.panel).hidden=p.id!==project.id;});current=project.id;document.querySelector('.explore-tab')?.setAttribute('aria-current',current==='explore'?'page':'false');el('export').hidden=current!=='ideas';
   if(record)remember(current);else renderRecent();
   el('project-picker').value=current;
  }
@@ -23,3 +23,4 @@
  function fromHash(){let id;try{id=decodeURIComponent(location.hash.replace(/^#project=/,''));}catch{id='ideas';}const p=projects.find(p=>p.id===id&&p.panel)||projects.find(p=>p.id==='ideas');if(p)activate(p);}
  root.addEventListener('hashchange',fromHash);el('project-count').textContent=projects.length+' PROJECTS';renderDirectory();fromHash();
 })(typeof window!=='undefined'?window:globalThis);
+

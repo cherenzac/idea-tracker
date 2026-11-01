@@ -1,13 +1,14 @@
 <!doctype html>
 <html lang="en">
-<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>IdeaVision — Tune into your next idea</title><link rel="stylesheet" href="style.css?v=7-pomodoro"></head>
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>IdeaVision — Tune into your next idea</title><link rel="stylesheet" href="style.css?v=8-explore"></head>
 <body>
 <main class="television">
-  <header><span class="brand">◈ IDEA<span>VISION</span></span><span class="model">CREATIVE SIGNAL / MODEL 01</span></header>
+  <header><span class="brand">◈ IDEA<span>VISION</span></span><span class="model">GOOD IDEAS. BRIGHTER SIGNAL.</span></header>
   <div class="console">
     <section class="screen" aria-label="IdeaVision television">
       <nav class="launcher" aria-label="Project navigation">
         <div class="launcher-top"><span class="launcher-label">YOUR CREATIVE CHANNELS</span><span id="project-count"></span></div>
+        <a class="explore-tab" href="#project=explore">✦ Explore Projects <span>50 sparks to build</span><b>↗</b></a>
         <p class="recent-label">Recently opened <span>· last five on this device</span></p>
         <div id="recent-projects" class="channels"></div>
         <details id="project-browser"><summary>Browse all projects</summary>
@@ -19,7 +20,7 @@
       </nav>
       <div id="panel-ideas" role="region" aria-label="TV Ideas notebook">
       <div class="broadcast"><span><i></i> ON AIR</span><span id="count">CH 01</span></div>
-      <h1 id="heading">Big ideas.<br><em>Small screen.</em></h1>
+      <h1 id="heading">Big ideas.<br><em>Room to grow.</em></h1>
       <p class="intro">Playful AI project ideas for home, family, and friends.</p>
       <div class="toolbar"><label class="search"><span class="sr-only">Search ideas</span><input id="search" type="search" placeholder="Find a signal…"></label><label><span class="sr-only">Filter by status</span><select id="filter"><option value="all">All channels</option><option>New</option><option>Exploring</option><option>Built</option></select></label></div>
       <p class="intro">These are project concepts—not working AI features. The notebook itself runs locally.</p>
@@ -45,6 +46,18 @@
       </form>
       <p id="message" role="status" aria-live="polite"></p>
       <footer>Your browser. Your ideas. No accounts, no uploads.</footer>
+      </div>
+      <div id="panel-explore" role="region" aria-label="Explore Projects" hidden>
+        <div class="broadcast"><span>CH 05 / THE POSSIBILITY CHANNEL</span><span>50 PROJECT CONCEPTS</span></div>
+        <div class="explore-hero"><div><h1>What will you<br><em>make next?</em></h1><p class="intro">Small experiments. Big curiosity. Pick a spark, remix it, and make it yours.</p></div><div class="signal-art" aria-hidden="true"><span>✦</span><b>PLAY<br>CREATE<br>REPEAT</b></div></div>
+        <p class="concept-note"><strong>Idea library, not 50 built apps.</strong> Each concept links to a real project or official building resource for inspiration. Our working tools are in Browse all projects above.</p>
+        <div class="explore-toolbar"><label>Find your next spark<input type="search" id="explore-search" placeholder="Try music, AI, space, focus…"></label><label>Build level<select id="explore-level"><option value="all">Any level</option><option>Beginner</option><option>Intermediate</option><option>Advanced</option></select></label></div>
+        <div id="explore-categories" class="explore-categories" role="group" aria-label="Project categories"></div>
+        <div class="explore-actions"><label class="saved-toggle"><input id="explore-saved" type="checkbox"> My saved sparks</label><button id="explore-surprise" type="button">✧ Surprise me</button><button id="explore-clear" type="button">Clear filters</button></div>
+        <p id="explore-count" role="status" aria-live="polite"></p><p id="explore-message" role="status" aria-live="polite"></p>
+        <div id="explore-grid" class="explore-grid"></div>
+        <div class="explore-pagination"><button id="explore-prev" type="button">← Previous</button><span id="explore-page"></span><button id="explore-next" type="button">Next sparks →</button></div>
+        <p class="intro explore-footnote">Save buttons remember favorites on this browser only. Inspiration links open other websites; no saved ideas are sent. Some concepts need APIs, models, hardware or paid services: check requirements before building. Difficulty and time are rough planning estimates, not promises. Use fictional data for experiments.</p>
       </div>
       <div id="panel-news" role="region" aria-label="AI Agent Radar" hidden>
         <div class="broadcast"><span>CH 02 / AGENT RADAR</span><span id="agent-news-source">HACKER NEWS</span></div>
@@ -108,13 +121,15 @@
   </div>
   <div class="bottom"><span>SAVE YOUR SPARKS.</span><button id="export" type="button">↓ Export ideas</button></div>
 </main>
-<p class="caption">A retro-inspired idea notebook • Generic project concepts • Stored only on this device</p>
+<p class="caption">An old-school screen for new-school ideas. Made to explore, built to play.</p>
 <script src="app.js?v=20261029-nightly"></script>
-<script src="projects.js?v=3-pomodoro"></script>
-<script src="navigation.js?v=1"></script>
+<script src="projects.js?v=4-explore"></script>
+<script src="navigation.js?v=2-explore"></script>
 <script src="channels.js?v=3-directory"></script>
 <script src="brickword.js?v=1"></script>
 <script src="news.js?v=1"></script>
 <script src="pomodoro.js?v=1"></script>
+<script src="explore-data.js?v=1"></script>
+<script src="explore.js?v=1"></script>
 </body></html>
 
