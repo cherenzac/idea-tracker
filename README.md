@@ -14,7 +14,7 @@ Then visit `http://localhost:8080`. Use a local server for consistent browser st
 
 ## Features
 
-- Eleven generic home/family AI project concepts (not implemented AI features)
+- Twelve generic home/family AI project concepts (not implemented AI features)
 - Five official external inspiration links, clearly attributed to their creators
 - Add, edit, and delete ideas (deletion asks for confirmation)
 - New, Exploring, and Built statuses
@@ -30,9 +30,9 @@ Do not add passwords, API keys, private notes, or personal information to this r
 
 ## Saved-data upgrades
 
-This version uses `ideavision.ideas.v3`. Returning v2 visitors receive one new concept, **Toybox Tales**, while keeping all existing entries, edits and deletions. The prior v2 data is left unchanged as a backup. The addition happens once; deleting the new idea stays deleted on reload. Earlier v1 data still migrates while retaining personal and edited entries. Invalid saved data is never overwritten.
+This version uses `ideavision.ideas.v4`. Returning v3 visitors receive one new concept, **Riddle Repair Shop**, while keeping all existing entries, edits and deletions. Previous storage remains unchanged as a backup. The addition happens once; deleting it stays deleted on reload. Returning v2 visitors receive only Toybox Tales and Riddle Repair Shop; v1 migration retains personal and edited entries. Invalid saved data is never overwritten.
 
-Toybox Tales is a project concept, not a working AI generator: choose three pretend toys and imagine a short, adult-reviewed puppet-show script. It requires no names, photos or recordings.
+Riddle Repair Shop is an **AI project concept**, not a working AI service: revise ambiguous clues in fictional riddles without spoiling their answers. Adult review and fictional inputs keep the concept suitable for families. No model, API, personal data collection or network request is added. Toybox Tales remains a puppet-show concept, not an implemented generator.
 
 ## Development and attribution
 
@@ -67,7 +67,7 @@ Additional checks: `node --check brickword.js && node test-brickword.js`. Existi
 
 ## Scalable project navigation
 
-The launcher shows the last **five actually opened projects**, with a searchable **Browse all projects** directory and a native jump dropdown. It starts with four real destinations; the eleven notebook concepts remain concepts, not invented deployed applications. Search supports multiple words across titles, descriptions, categories, statuses and tags. Directory height is bounded so 50+ projects do not make a 50-tab strip. Internal project URLs use `#project=bricks` (or `ideas`/`news`), support refresh and browser Back/Forward, and switching keeps unsaved form state.
+The launcher shows the last **five actually opened projects**, with a searchable **Browse all projects** directory and a native jump dropdown. It starts with four real destinations; the twelve notebook concepts remain concepts, not invented deployed applications. Search supports multiple words across titles, descriptions, categories, statuses and tags. Directory height is bounded so 50+ projects do not make a 50-tab strip. Internal project URLs use `#project=bricks` (or `ideas`/`news`), support refresh and browser Back/Forward, and switching keeps unsaved form state.
 
 Navigation history stores only project IDs in `ideavision.recent-projects.v1`, independently of existing notebook storage. Unavailable storage degrades gracefully. Clear browser site data to clear recents (export your notebook first). Nothing is uploaded.
 
@@ -93,3 +93,4 @@ The **Explore Projects** channel contains exactly 50 original concepts inspired 
 Favorites use a separate `ideavision.saved-sparks.v1` localStorage key. They never alter the existing notebook. Storage failure is visible and falls back to in-memory use; no ideas/favorites are uploaded. The screen is wider with a mint chassis, pale reading surface and violet/coral accents, retaining decorative dials and the existing working tools. Respect reduced-motion preferences. The image-search reference informed colors and proportions only; no third-party image was copied.
 
 Additional checks: `node --check explore.js && node test-explore.js`. This suite verifies 50 unique sourced concepts, safe source URLs, filters, pagination, favorites, surprise/empty states and storage failure. Run every existing suite after UI changes.
+

@@ -1,5 +1,6 @@
 'use strict';
-const KEY = 'ideavision.ideas.v3';
+const KEY = 'ideavision.ideas.v4';
+const V3_KEY = 'ideavision.ideas.v3';
 const PREVIOUS_KEY = 'ideavision.ideas.v2';
 const LEGACY_KEY = 'ideavision.ideas.v1';
 const legacySeeds = [
@@ -14,7 +15,15 @@ const nightlyIdea = {
  icon: '✦',
  status: 'New'
 };
+const newNightlyIdea = {
+ id: 'family-2026-11-02',
+ title: 'Riddle Repair Shop',
+ description: 'An AI project concept: spot ambiguous clues in a made-up riddle and suggest fairer wording without revealing the answer. A grown-up reviews each revision; use fictional objects, not personal details. No AI service is connected.',
+ icon: '◉',
+ status: 'New'
+};
 const seeds = [
+ newNightlyIdea,
  nightlyIdea,
  {
   "id": "family-v2-1",
@@ -101,12 +110,18 @@ try {
   if (!validIdeas(parsed)) throw new Error('Invalid saved data');
   ideas = parsed;
  } else {
+  const v3 = localStorage.getItem(V3_KEY);
+  if (v3 !== null) {
+   const parsed = JSON.parse(v3);
+   if (!validIdeas(parsed)) throw new Error('Invalid v3 data');
+   ideas = parsed.some(x => x.id === newNightlyIdea.id) ? parsed : [{...newNightlyIdea}, ...parsed];
+  } else {
   const previous = localStorage.getItem(PREVIOUS_KEY);
   if (previous !== null) {
    const parsed = JSON.parse(previous);
    if (!validIdeas(parsed)) throw new Error('Invalid previous data');
    // Carry forward every edit and deletion; add only this release's new idea once.
-   ideas = parsed.some(x => x.id === nightlyIdea.id) ? parsed : [{...nightlyIdea}, ...parsed];
+   ideas = [newNightlyIdea, nightlyIdea].filter(seed => !parsed.some(x => x.id === seed.id)).map(x => ({...x})).concat(parsed);
   } else {
    const legacy = localStorage.getItem(LEGACY_KEY);
    if (legacy !== null) {
@@ -116,6 +131,7 @@ try {
     const personal = parsed.filter(x => !legacySeeds.some(seed => ['id','title','description','icon','status'].every(key => x[key] === seed[key])));
     ideas = [...personal, ...seeds.filter(seed => !personal.some(x => x.id === seed.id)).map(x => ({...x}))];
    }
+  }
   }
   // A separate versioned key keeps the old data as a backup and prevents reseeding on reload.
   localStorage.setItem(KEY, JSON.stringify(ideas));
@@ -168,3 +184,4 @@ $('export').addEventListener('click',()=>{
  const link=document.createElement('a');link.href=url;link.download='ideavision-ideas.json';link.click();setTimeout(()=>URL.revokeObjectURL(url),1000);
 });
 render();
+
