@@ -93,3 +93,11 @@ The **Explore Projects** channel contains exactly 50 original concepts inspired 
 Favorites use a separate `ideavision.saved-sparks.v1` localStorage key. They never alter the existing notebook. Storage failure is visible and falls back to in-memory use; no ideas/favorites are uploaded. The screen is wider with a mint chassis, pale reading surface and violet/coral accents, retaining decorative dials and the existing working tools. Respect reduced-motion preferences. The image-search reference informed colors and proportions only; no third-party image was copied.
 
 Additional checks: `node --check explore.js && node test-explore.js`. This suite verifies 50 unique sourced concepts, safe source URLs, filters, pagination, favorites, surprise/empty states and storage failure. Run every existing suite after UI changes.
+
+## Personalized Store
+
+A standalone, buildless shopping shortlist at `personalized-store/index.html`, linked from the launcher. Six real products/categories include a book, visual timer, paper task cards, earplugs, sensory bracelets and a paper tablet. Official source links were checked November 2, 2026; prices and availability are deliberately not copied or invented. This is a curated prototype, not a merchant, medical recommendation, or ADHD treatment. There is no checkout, affiliate tracking, analytics, account, or payment handling. Illustrations are original CSS category art, not product photos.
+
+Search, category filters and a saved-only view are functional. Shortlist IDs use the independent `personalized-store.shortlist.v1` browser-local key; no data is uploaded or synced. Shared browser profiles can access it. Unreadable storage is left untouched and changes stay in memory until explicitly cleared; clear confirms and removes only this project's key. External links open on deliberate clicks and third-party privacy terms apply. Keyboard labels, visible focus, reduced-motion support and responsive cards are included.
+
+Run `node --check personalized-store/store.js && node --check personalized-store/products.js && node test-store.js` alongside every existing test suite. AI-assisted implementation.
