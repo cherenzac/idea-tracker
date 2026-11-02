@@ -10,4 +10,4 @@ export const initialRoles=[
 export function isReady(role){return role.stage==='Submission-ready'&&!role.hold&&!!role.evidence&&role.gates.length>0&&role.gates.every(g=>g.passed);}
 export function counts(roles){return {research:roles.filter(r=>r.stage==='Research').length,ready:roles.filter(isReady).length,blocked:roles.filter(r=>r.stage==='Blocked'||r.hold).length,submitted:roles.filter(r=>r.stage==='Submitted').length};}
 export function filterRoles(roles,query='',stage='All'){const q=query.toLowerCase().trim();return roles.filter(r=>(stage==='All'||r.stage===stage)&&`${r.company} ${r.title} ${r.area}`.toLowerCase().includes(q));}
-export function toggleHold(role){const hold=!role.hold;return {...role,hold,stage:hold?'Blocked':'Research'};}
+export function toggleHold(role){const hold=!role.hold;return {...role,hold,stage:role.stage==='Submitted'?'Submitted':hold?'Blocked':'Research'};}
