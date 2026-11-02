@@ -8,3 +8,5 @@ test('hold release returns to research',()=>assert.equal(toggleHold(initialRoles
 test('filters combine search and stage',()=>assert.equal(filterRoles(initialRoles,'platform','Submission-ready').length,1));
 test('counts do not include research as ready',()=>assert.deepEqual(counts(initialRoles),{research:1,ready:1,blocked:1,submitted:1}));
 test('hold changes are immutable',()=>{toggleHold(initialRoles[0]);assert.equal(initialRoles[0].hold,false);});
+
+test('holding and releasing submitted roles preserves history',()=>assert.equal(toggleHold(toggleHold(initialRoles[4])).stage,'Submitted'));
