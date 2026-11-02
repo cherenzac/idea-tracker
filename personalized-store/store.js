@@ -1,0 +1,21 @@
+'use strict';
+(function(root){
+ const KEY='personalized-store.shortlist.v1';
+ function safeUrl(value){try{const u=new URL(value);return u.protocol==='https:'&&!u.username&&!u.password;}catch{return false;}}
+ function cleanSaved(value,products){return Array.isArray(value)?[...new Set(value)].filter(id=>products.some(p=>p.id===id)):[];}
+ function filterProducts(products,query,category,saved,onlySaved){const words=query.trim().toLowerCase().split(/\s+/);return products.filter(p=>(category==='all'||p.category===category)&&(!onlySaved||saved.includes(p.id))&&words.every(w=>[p.title,p.brand,p.category,p.description,p.note].join(' ').toLowerCase().includes(w)));}
+ if(typeof module!=='undefined'){module.exports={KEY,safeUrl,cleanSaved,filterProducts};return;}
+ const products=root.StoreProducts||[],el=id=>document.getElementById(id);let saved=[],storageBlocked=false;
+ try{const raw=localStorage.getItem(KEY);if(raw!==null){const data=JSON.parse(raw);if(!Array.isArray(data))throw Error('invalid');saved=cleanSaved(data,products);}}catch{storageBlocked=true;el('storage-status').textContent='Saved data is unavailable or unreadable. Changes stay in this tab; existing stored data is left untouched.';}
+ function persist(){if(storageBlocked)return;try{localStorage.setItem(KEY,JSON.stringify(saved));}catch{storageBlocked=true;el('storage-status').textContent='Your shortlist could not be saved. It will stay here only until this page closes.';}}
+ function element(tag,className,text){const node=document.createElement(tag);if(className)node.className=className;if(text)node.textContent=text;return node;}
+ function render(){
+  const visible=filterProducts(products,el('search').value,el('category').value,saved,el('saved-only').checked);
+  el('products').replaceChildren();el('saved-count').textContent=String(saved.length);el('result-count').textContent=visible.length+' of '+products.length+' picks'+(el('saved-only').checked?' in your shortlist':' on the shelf');
+  for(const p of visible){const article=element('article','product');const art=element('div','art '+p.art);art.setAttribute('aria-hidden','true');art.append(element('div','art-figure',p.art==='book'?'ADHD\n2.0':''));const body=element('div','product-body');body.append(element('span','category',p.category),element('h3','',p.title),element('p','maker',p.brand),element('p','description',p.description),element('p','product-note',p.note));const actions=element('div','product-actions');if(safeUrl(p.url)){const link=element('a','','View official details ↗');link.href=p.url;link.target='_blank';link.rel='noopener noreferrer';link.setAttribute('aria-label','View '+p.title+' official details (new tab)');actions.append(link);}const button=element('button','save',saved.includes(p.id)?'Saved ✓':'Save +');button.type='button';button.id='save-'+p.id;button.setAttribute('aria-pressed',String(saved.includes(p.id)));button.setAttribute('aria-label',(saved.includes(p.id)?'Remove ':'Save ')+p.title+' '+(saved.includes(p.id)?'from':'to')+' shortlist');button.addEventListener('click',()=>{saved=saved.includes(p.id)?saved.filter(id=>id!==p.id):[...saved,p.id];persist();render();(document.getElementById('save-'+p.id)||el('saved-only')).focus();});actions.append(button);body.append(actions);article.append(art,body);el('products').append(article);}
+  if(!visible.length)el('products').append(element('p','empty',el('saved-only').checked?'Nothing here yet. Uncheck “My shortlist” or reset filters to explore the shelf.':'No matching picks. Try another word or reset filters.'));
+ }
+ el('search').addEventListener('input',render);el('category').addEventListener('change',render);el('saved-only').addEventListener('change',render);
+ el('reset').addEventListener('click',()=>{el('search').value='';el('category').value='all';el('saved-only').checked=false;render();el('search').focus();});
+ el('clear-saved').addEventListener('click',()=>{if(!root.confirm('Clear your saved shortlist in this browser? Your other projects stay unchanged.'))return;saved=[];try{localStorage.removeItem(KEY);storageBlocked=false;el('storage-status').textContent='Shortlist cleared.';}catch{el('storage-status').textContent='Cleared in this tab, but browser storage could not be cleared.';}render();});render();
+})(typeof window!=='undefined'?window:globalThis);
