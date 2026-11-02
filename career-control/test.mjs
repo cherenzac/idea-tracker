@@ -1,0 +1,10 @@
+import test from 'node:test';import assert from 'node:assert/strict';import{initialRoles,isReady,counts,filterRoles,toggleHold}from'./model.mjs';
+test('only fully gated demo roles count ready',()=>assert.equal(counts(initialRoles).ready,1));
+test('hold overrides readiness',()=>assert.equal(isReady({...initialRoles[0],hold:true}),false));
+test('missing evidence blocks readiness',()=>assert.equal(isReady({...initialRoles[0],evidence:null}),false));
+test('an unresolved gate blocks readiness',()=>assert.equal(isReady({...initialRoles[0],gates:[{passed:false}]}),false));
+test('empty gates never pass',()=>assert.equal(isReady({...initialRoles[0],gates:[]}),false));
+test('hold release returns to research',()=>assert.equal(toggleHold(initialRoles[2]).stage,'Research'));
+test('filters combine search and stage',()=>assert.equal(filterRoles(initialRoles,'platform','Submission-ready').length,1));
+test('counts do not include research as ready',()=>assert.deepEqual(counts(initialRoles),{research:1,ready:1,blocked:1,submitted:1}));
+test('hold changes are immutable',()=>{toggleHold(initialRoles[0]);assert.equal(initialRoles[0].hold,false);});
