@@ -14,9 +14,9 @@ Then visit `http://localhost:8080`. Use a local server for consistent browser st
 
 ## Features
 
-- Twelve generic home/family AI project concepts (not implemented AI features)
+- Thirteen generic home/family AI project concepts (not implemented AI features)
 - Five official external inspiration links, clearly attributed to their creators
-- Add, edit, and delete ideas (deletion asks for confirmation)
+- Add, edit, and delete ideas (deletion asks for confirmation), with Undo last delete
 - New, Exploring, and Built statuses
 - Search, status filters, and JSON export
 - Responsive old-school TV styling and labeled keyboard-accessible controls
@@ -30,9 +30,13 @@ Do not add passwords, API keys, private notes, or personal information to this r
 
 ## Saved-data upgrades
 
-This version uses `ideavision.ideas.v4`. Returning v3 visitors receive one new concept, **Riddle Repair Shop**, while keeping all existing entries, edits and deletions. Previous storage remains unchanged as a backup. The addition happens once; deleting it stays deleted on reload. Returning v2 visitors receive only Toybox Tales and Riddle Repair Shop; v1 migration retains personal and edited entries. Invalid saved data is never overwritten.
+This version uses `ideavision.ideas.v5`. Returning v4 visitors receive one new concept, **Board Game Balance Lab**, while keeping all existing entries, edits and deletions. Previous storage remains unchanged as a backup. The addition happens once; deleting it stays deleted on reload. Returning v3 visitors receive only Board Game Balance Lab and Riddle Repair Shop; v2 visitors also receive Toybox Tales. The v1 migration retains personal and edited entries. The newest available saved version takes priority; invalid data is never overwritten or silently replaced by older data.
 
-Riddle Repair Shop is an **AI project concept**, not a working AI service: revise ambiguous clues in fictional riddles without spoiling their answers. Adult review and fictional inputs keep the concept suitable for families. No model, API, personal data collection or network request is added. Toybox Tales remains a puppet-show concept, not an implemented generator.
+Board Game Balance Lab is an **AI project concept**, not a working AI service: compare fictional rules for a homemade board game and explore fairer turn orders or scoring, with adult review and pretend-play testing. No model, API, player profiles or network request is added. Riddle Repair Shop and Toybox Tales also remain concepts, not implemented generators.
+
+### Undo a notebook deletion
+
+After confirming a deletion, choose **Undo last delete** above the idea cards to restore that entry and its fields. Only the latest confirmed deletion is available to undo, until the page is reloaded or closed. Canceling a later deletion keeps the previous undo available. Other additions, edits, and unsaved form text are retained. Search and status filters remain active, so a restored idea may still be hidden by a filter. Restoring saves to browser storage when available; a storage failure is reported and keeps the restored idea in memory for export. This is not a multi-tab sync or backup recovery system.
 
 ## Development and attribution
 
@@ -47,6 +51,7 @@ node --check app.js
 node test.js
 node --check channels.js
 node test-channels.js
+node test-undo.js
 ```
 
 The tests exercise initial rendering, create/edit/cancel, filtering, deletion and reload persistence using a minimal DOM harness. They are not a substitute for visual browser testing.
@@ -67,7 +72,7 @@ Additional checks: `node --check brickword.js && node test-brickword.js`. Existi
 
 ## Scalable project navigation
 
-The launcher shows the last **five actually opened projects**, with a searchable **Browse all projects** directory and a native jump dropdown. It starts with four real destinations; the twelve notebook concepts remain concepts, not invented deployed applications. Search supports multiple words across titles, descriptions, categories, statuses and tags. Directory height is bounded so 50+ projects do not make a 50-tab strip. Internal project URLs use `#project=bricks` (or `ideas`/`news`), support refresh and browser Back/Forward, and switching keeps unsaved form state.
+The launcher shows the last **five actually opened projects**, with a searchable **Browse all projects** directory and a native jump dropdown. It starts with five real destinations; the thirteen notebook concepts remain concepts, not invented deployed applications. Search supports multiple words across titles, descriptions, categories, statuses and tags. Directory height is bounded so 50+ projects do not make a 50-tab strip. Internal project URLs use `#project=bricks` (or `ideas`/`news`), support refresh and browser Back/Forward, and switching keeps unsaved form state.
 
 Navigation history stores only project IDs in `ideavision.recent-projects.v1`, independently of existing notebook storage. Unavailable storage degrades gracefully. Clear browser site data to clear recents (export your notebook first). Nothing is uploaded.
 
@@ -92,5 +97,6 @@ The **Explore Projects** channel contains exactly 50 original concepts inspired 
 
 Favorites use a separate `ideavision.saved-sparks.v1` localStorage key. They never alter the existing notebook. Storage failure is visible and falls back to in-memory use; no ideas/favorites are uploaded. The screen is wider with a mint chassis, pale reading surface and violet/coral accents, retaining decorative dials and the existing working tools. Respect reduced-motion preferences. The image-search reference informed colors and proportions only; no third-party image was copied.
 
-Additional checks: `node --check explore.js && node test-explore.js`. This suite verifies 50 unique sourced concepts, safe source URLs, filters, pagination, favorites, surprise/empty states and storage failure. Run every existing suite after UI changes.
+Additional checks: `node --check explore.js && node test-explore.js`. This suite verifies 50 unique sourced concepts, safe source URLs, filters, pagination, favorites, surprise/empty states and storage failure. Run every existing suite after UI changes. `node test-undo.js` covers confirmed/canceled deletion, repeated undo, multiple deletions, active filters, unsaved edits, reload expiry and unavailable storage.
+
 

@@ -1,6 +1,6 @@
 <!doctype html>
 <html lang="en">
-<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>IdeaVision — Tune into your next idea</title><link rel="stylesheet" href="style.css?v=8-explore"></head>
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>IdeaVision — Tune into your next idea</title><link rel="stylesheet" href="style.css?v=9-undo"></head>
 <body>
 <main class="television">
   <header><span class="brand">◈ IDEA<span>VISION</span></span><span class="model">GOOD IDEAS. BRIGHTER SIGNAL.</span></header>
@@ -24,6 +24,8 @@
       <p class="intro">Playful AI project ideas for home, family, and friends.</p>
       <div class="toolbar"><label class="search"><span class="sr-only">Search ideas</span><input id="search" type="search" placeholder="Find a signal…"></label><label><span class="sr-only">Filter by status</span><select id="filter"><option value="all">All channels</option><option>New</option><option>Exploring</option><option>Built</option></select></label></div>
       <p class="intro">These are project concepts—not working AI features. The notebook itself runs locally.</p>
+      <p id="delete-note" class="intro" role="status" aria-live="polite"></p>
+      <button id="undo-delete" type="button" hidden>Undo last delete</button>
       <div id="ideas" class="ideas"></div>
       <p id="empty" hidden>No signals here. Add an idea or change your filter.</p>
       <section class="inspiration" aria-labelledby="inspiration-heading">
@@ -122,7 +124,7 @@
   <div class="bottom"><span>SAVE YOUR SPARKS.</span><button id="export" type="button">↓ Export ideas</button></div>
 </main>
 <p class="caption">An old-school screen for new-school ideas. Made to explore, built to play.</p>
-<script src="app.js?v=20261102-nightly"></script>
+<script src="app.js?v=20261103-undo"></script>
 <script src="projects.js?v=4-explore"></script>
 <script src="navigation.js?v=2-explore"></script>
 <script src="channels.js?v=3-directory"></script>
@@ -132,5 +134,6 @@
 <script src="explore-data.js?v=1"></script>
 <script src="explore.js?v=1"></script>
 </body></html>
+
 
 

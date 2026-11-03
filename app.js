@@ -1,5 +1,6 @@
 'use strict';
-const KEY = 'ideavision.ideas.v4';
+const KEY = 'ideavision.ideas.v5';
+const V4_KEY = 'ideavision.ideas.v4';
 const V3_KEY = 'ideavision.ideas.v3';
 const PREVIOUS_KEY = 'ideavision.ideas.v2';
 const LEGACY_KEY = 'ideavision.ideas.v1';
@@ -22,7 +23,15 @@ const newNightlyIdea = {
  icon: '◉',
  status: 'New'
 };
+const latestNightlyIdea = {
+ id: 'family-2026-11-03',
+ title: 'Board Game Balance Lab',
+ description: 'An AI project concept: compare fictional rules for a homemade board game and suggest fairer turn orders or scoring. A grown-up tests each suggestion through pretend play. No player profiles, tracking or AI service are connected.',
+ icon: '◉',
+ status: 'New'
+};
 const seeds = [
+ latestNightlyIdea,
  newNightlyIdea,
  nightlyIdea,
  {
@@ -99,6 +108,7 @@ const seeds = [
 const $ = id => document.getElementById(id);
 let ideas = seeds.map(x => ({...x}));
 let editing = null;
+let lastDeleted = null;
 let storageReady = true;
 function validIdeas(value) {
  return Array.isArray(value) && value.every(x => x && typeof x.id === 'string' && typeof x.title === 'string' && typeof x.description === 'string' && ['New','Exploring','Built'].includes(x.status) && ['✦','◉','⚡','♧'].includes(x.icon));
@@ -110,19 +120,24 @@ try {
   if (!validIdeas(parsed)) throw new Error('Invalid saved data');
   ideas = parsed;
  } else {
-  const v3 = localStorage.getItem(V3_KEY);
-  if (v3 !== null) {
-   const parsed = JSON.parse(v3);
-   if (!validIdeas(parsed)) throw new Error('Invalid v3 data');
-   ideas = parsed.some(x => x.id === newNightlyIdea.id) ? parsed : [{...newNightlyIdea}, ...parsed];
-  } else {
-  const previous = localStorage.getItem(PREVIOUS_KEY);
-  if (previous !== null) {
+  // Read the newest available version; never fall back past malformed saved data.
+  const upgrades = [
+   [V4_KEY, [latestNightlyIdea]],
+   [V3_KEY, [latestNightlyIdea, newNightlyIdea]],
+   [PREVIOUS_KEY, [latestNightlyIdea, newNightlyIdea, nightlyIdea]]
+  ];
+  let upgraded = false;
+  for (const [key, additions] of upgrades) {
+   const previous = localStorage.getItem(key);
+   if (previous === null) continue;
    const parsed = JSON.parse(previous);
    if (!validIdeas(parsed)) throw new Error('Invalid previous data');
-   // Carry forward every edit and deletion; add only this release's new idea once.
-   ideas = [newNightlyIdea, nightlyIdea].filter(seed => !parsed.some(x => x.id === seed.id)).map(x => ({...x})).concat(parsed);
-  } else {
+   // Carry forward every record, edit and deletion; add only later releases once.
+   ideas = additions.filter(seed => !parsed.some(x => x.id === seed.id)).map(x => ({...x})).concat(parsed);
+   upgraded = true;
+   break;
+  }
+  if (!upgraded) {
    const legacy = localStorage.getItem(LEGACY_KEY);
    if (legacy !== null) {
     const parsed = JSON.parse(legacy);
@@ -131,7 +146,6 @@ try {
     const personal = parsed.filter(x => !legacySeeds.some(seed => ['id','title','description','icon','status'].every(key => x[key] === seed[key])));
     ideas = [...personal, ...seeds.filter(seed => !personal.some(x => x.id === seed.id)).map(x => ({...x}))];
    }
-  }
   }
   // A separate versioned key keeps the old data as a backup and prevents reseeding on reload.
   localStorage.setItem(KEY, JSON.stringify(ideas));
@@ -143,6 +157,35 @@ function persist() {
  catch {storageReady = false; return false;}
 }
 function announce(action) { $('message').textContent = persist() ? action + ' Saved in this browser.' : action + ' Not saved to browser storage — export your ideas before leaving.'; }
+function deleteIdea(id) {
+ const index = ideas.findIndex(x => x.id === id);
+ if (index < 0 || !confirm(`Delete “${ideas[index].title}”?`)) return;
+ lastDeleted = {idea: ideas[index], index, nextId: ideas[index + 1]?.id, previousId: ideas[index - 1]?.id};
+ ideas = ideas.filter(x => x.id !== id);
+ if (editing === id) resetForm();
+ $('undo-delete').hidden = false;
+ $('delete-note').textContent = `Deleted “${lastDeleted.idea.title}”. You can undo this last deletion until you reload or delete another idea.`;
+ announce('Idea deleted.');
+ render();
+ $('undo-delete').focus();
+}
+function undoDelete() {
+ if (!lastDeleted) return;
+ const {idea, index, nextId, previousId} = lastDeleted;
+ // Do not overwrite another entry if the ID is already present.
+ if (!ideas.some(x => x.id === idea.id)) {
+  const nextIndex = ideas.findIndex(x => x.id === nextId);
+  const previousIndex = ideas.findIndex(x => x.id === previousId);
+  const restoreIndex = nextIndex >= 0 ? nextIndex : previousIndex >= 0 ? previousIndex + 1 : Math.min(index, ideas.length);
+  ideas.splice(restoreIndex, 0, idea);
+ }
+ lastDeleted = null;
+ $('undo-delete').hidden = true;
+ $('delete-note').textContent = 'Last deleted idea restored. Search and status filters still apply.';
+ announce('Idea restored.');
+ render();
+ $('search').focus();
+}
 function resetForm() {editing = null; $('form').reset(); $('form-heading').textContent = 'Broadcast a new idea'; $('save').textContent = '+ Add idea'; $('cancel').hidden = true;}
 function editIdea(id) {
  const idea = ideas.find(x=>x.id===id); if (!idea) return;
@@ -166,7 +209,7 @@ function render() {
   const actions=document.createElement('div');
   const edit=document.createElement('button'); edit.type='button'; edit.textContent='Edit'; edit.setAttribute('aria-label',`Edit ${idea.title}`); edit.onclick=()=>editIdea(idea.id);
   const remove=document.createElement('button'); remove.type='button'; remove.textContent='Delete'; remove.setAttribute('aria-label',`Delete ${idea.title}`);
-  remove.onclick=()=> {if(!confirm(`Delete “${idea.title}”?`))return; ideas=ideas.filter(x=>x.id!==idea.id); if(editing===idea.id)resetForm(); announce('Idea deleted.'); render();};
+  remove.onclick=()=>deleteIdea(idea.id);
   actions.append(edit,remove); bottom.append(badge,actions); content.append(title,text,bottom); card.append(icon,content); $('ideas').append(card);
  }
 }
@@ -178,10 +221,12 @@ $('form').addEventListener('submit',event=>{
 });
 $('title').addEventListener('input',()=> $('title').setCustomValidity(''));
 $('cancel').addEventListener('click',resetForm);
+$('undo-delete').addEventListener('click',undoDelete);
 $('search').addEventListener('input',render); $('filter').addEventListener('change',render);
 $('export').addEventListener('click',()=>{
  const url=URL.createObjectURL(new Blob([JSON.stringify(ideas,null,2)],{type:'application/json'}));
  const link=document.createElement('a');link.href=url;link.download='ideavision-ideas.json';link.click();setTimeout(()=>URL.revokeObjectURL(url),1000);
 });
 render();
+
 
