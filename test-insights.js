@@ -66,4 +66,6 @@ const source=card.children[4].children[0];assert.equal(source.href,'https://exam
 app=boot([]);assert.equal(app.elements['insight-empty'].hidden,false);
 const html=fs.readFileSync('./daily-insights/index.html','utf8');
 assert.match(html,/<meta name="viewport"/);assert.match(html,/<noscript>/);assert.match(html,/No account, tracking or uploads/);
+const home=fs.readFileSync('./index.html','utf8');
+assert.match(home,/<a class="daily-insights-link" href="daily-insights\/" target="_blank" rel="noopener noreferrer"/);
 console.log('PASS: published metadata, original/source labels, URL safety, dates, sorting, search/topic filters, pagination, permalink paging, empty/error states and text-only rendering.');
