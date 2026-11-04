@@ -6,6 +6,7 @@ const api=require('./daily-insights/insights-app');
 const published=require('./daily-insights/insights');
 assert.equal(api.validateEntries(published).length,published.length);
 assert.ok(published.length>=1);
+assert.equal(new Set(published.map(entry=>entry.date)).size,published.length,'Publish at most one insight per date.');
 const originalEntry=published.find(entry=>entry.id==='2026-11-03-evidence-and-authority');
 assert.ok(originalEntry);assert.equal(originalEntry.date,'2026-11-03');
 assert.equal(originalEntry.kind,'original');assert.equal(new Set(published.map(x=>x.id)).size,published.length);
@@ -65,6 +66,8 @@ assert.equal(card.children[2].textContent,'<img src=x onerror=alert(1)>');assert
 const source=card.children[4].children[0];assert.equal(source.href,'https://example.com/note');assert.equal(source.rel,'noopener noreferrer');assert.equal(source.target,'_blank');
 app=boot([]);assert.equal(app.elements['insight-empty'].hidden,false);
 const html=fs.readFileSync('./daily-insights/index.html','utf8');
+const latestDate=api.validateEntries(published)[0].date.replaceAll('-','');
+assert.ok(html.includes(`insights.js?v=${latestDate}`),'Refresh the entry asset version for the latest publication date.');
 assert.match(html,/<meta name="viewport"/);assert.match(html,/<noscript>/);assert.match(html,/No account, tracking or uploads/);
 const home=fs.readFileSync('./index.html','utf8');
 assert.match(home,/<a class="daily-insights-link" href="daily-insights\/" target="_blank" rel="noopener noreferrer"/);
