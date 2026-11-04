@@ -14,11 +14,11 @@ Then visit `http://localhost:8080`. Use a local server for consistent browser st
 
 ## Features
 
-- Thirteen generic home/family AI project concepts (not implemented AI features)
+- Fourteen generic home/family AI project concepts (not implemented AI features)
 - Five official external inspiration links, clearly attributed to their creators
 - Add, edit, and delete ideas (deletion asks for confirmation), with Undo last delete
 - New, Exploring, and Built statuses
-- Search, status filters, and JSON export
+- Multiple-word search, status filters, live match counts, Clear filters, and JSON export
 - Responsive old-school TV styling and labeled keyboard-accessible controls
 - Browser-local persistence with a visible warning if storage fails
 
@@ -30,9 +30,15 @@ Do not add passwords, API keys, private notes, or personal information to this r
 
 ## Saved-data upgrades
 
-This version uses `ideavision.ideas.v5`. Returning v4 visitors receive one new concept, **Board Game Balance Lab**, while keeping all existing entries, edits and deletions. Previous storage remains unchanged as a backup. The addition happens once; deleting it stays deleted on reload. Returning v3 visitors receive only Board Game Balance Lab and Riddle Repair Shop; v2 visitors also receive Toybox Tales. The v1 migration retains personal and edited entries. The newest available saved version takes priority; invalid data is never overwritten or silently replaced by older data.
+This version uses `ideavision.ideas.v6`. Returning v5 visitors receive one new concept, **Robot Route Coach**, while keeping all existing entries, edits and deletions. Previous storage remains unchanged as a backup. The addition happens once; deleting it stays deleted on reload. Returning v4 visitors also receive Board Game Balance Lab; v3 visitors also receive Riddle Repair Shop; v2 visitors also receive Toybox Tales. The v1 migration retains personal and edited entries. The newest available saved version takes priority; invalid data is never overwritten or silently replaced by older data.
 
-Board Game Balance Lab is an **AI project concept**, not a working AI service: compare fictional rules for a homemade board game and explore fairer turn orders or scoring, with adult review and pretend-play testing. No model, API, player profiles or network request is added. Riddle Repair Shop and Toybox Tales also remain concepts, not implemented generators.
+Robot Route Coach is an **AI project concept**, not a working AI service: explain arrow instructions and obstacles on a pretend toy-robot grid, with adult review and fictional maps. No location data, robot hardware connection, model or API is added. The existing notebook concepts also remain concepts, not implemented generators.
+
+### Find a saved idea
+
+Notebook search matches every space-separated search term in any order across an idea's title, description and status, ignoring letter case. The status dropdown applies at the same time. Matching is literal substring matching, not AI or semantic search. A live result count distinguishes the visible matches from your total saved ideas; an empty notebook has a different message from no matching results. **Clear filters** resets only the search and status dropdown, then focuses search. It does not change saved records, unsaved form text, the current edit or the last-deletion undo. Search terms and filters are not saved or sent anywhere.
+
+Run `node test-notebook-search.js` for multiple terms, whitespace/case, cross-field and status matching, empty states, result counts, repeated clearing, draft/edit/undo preservation and zero storage writes.
 
 ### Undo a notebook deletion
 
@@ -72,7 +78,7 @@ Additional checks: `node --check brickword.js && node test-brickword.js`. Existi
 
 ## Scalable project navigation
 
-The launcher shows the last **five actually opened projects**, with a searchable **Browse all projects** directory and a native jump dropdown. It starts with six real destinations; the thirteen notebook concepts remain concepts, not invented deployed applications. Search supports multiple words across titles, descriptions, categories, statuses and tags. Directory height is bounded so 50+ projects do not make a 50-tab strip. Internal project URLs use `#project=bricks` (or `ideas`/`news`), support refresh and browser Back/Forward, and switching keeps unsaved form state.
+The launcher shows the last **five actually opened projects**, with a searchable **Browse all projects** directory and a native jump dropdown. It starts with six real destinations; the fourteen notebook concepts remain concepts, not invented deployed applications. Search supports multiple words across titles, descriptions, categories, statuses and tags. Directory height is bounded so 50+ projects do not make a 50-tab strip. Internal project URLs use `#project=bricks` (or `ideas`/`news`), support refresh and browser Back/Forward, and switching keeps unsaved form state.
 
 Navigation history stores only project IDs in `ideavision.recent-projects.v1`, independently of existing notebook storage. Unavailable storage degrades gracefully. Clear browser site data to clear recents (export your notebook first). Nothing is uploaded.
 
@@ -114,3 +120,4 @@ Append an object to `daily-insights/insights.js`: a unique stable `YYYY-MM-DD-sl
 Update the `insights.js` cache version in the journal HTML when entries change. Keep older entries, use a real commit, run all tests, then verify the exact Pages deployment and rendered article. The page does not schedule future publications; any authorized recurring publishing is managed separately.
 
 Run `node test-insights.js` plus every existing `test*.js` suite and JavaScript syntax checks. The journal suite validates entry metadata, attribution and URL safety, UTC date labels, filtering, pagination, empty states, text-only rendering and source links. Test browser layout and navigation after changes.
+

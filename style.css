@@ -47,3 +47,7 @@ aside{color:#def3e9;padding:12px 0}.tuning{font-size:9px;margin:8px 0}.dial{widt
 #undo-delete{margin-bottom:14px}
 
 .daily-insights-link{display:inline-block;margin:4px 0 10px;color:var(--accent);font-size:12px;font-weight:700;text-underline-offset:4px}
+
+
+/* Notebook search controls stay distinct from the editable idea form. */
+#clear-filters{white-space:nowrap;align-self:stretch}#clear-filters:disabled{cursor:default;opacity:.5}#search-help{margin-top:-8px}#search-results{font-weight:600}

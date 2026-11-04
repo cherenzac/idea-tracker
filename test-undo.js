@@ -2,7 +2,7 @@
 const assert = require('node:assert/strict');
 const vm = require('node:vm');
 const fs = require('node:fs');
-const KEY = 'ideavision.ideas.v5';
+const KEY = 'ideavision.ideas.v6';
 const original = [
  {id:'a',title:'First',description:'Original description',icon:'◉',status:'Built',extra:'Preserve me'},
  {id:'b',title:'Second',description:'Second description',icon:'✦',status:'New'},
@@ -16,7 +16,7 @@ function boot(storage, options = {}) {
   addEventListener(k,fn){this.handlers[k]=fn;} focus(){focused=this.id;} setCustomValidity(){} reportValidity(){}
   reset(){els.title.value='';els.description.value='';els.icon.value='✦';els.status.value='New';} click(){}
  }
- const ids=['title','description','icon','status','message','form','form-heading','save','cancel','search','filter','ideas','empty','count','export','undo-delete','delete-note'];
+ const ids=['title','description','icon','status','message','form','form-heading','save','cancel','search','filter','ideas','empty','count','export','undo-delete','delete-note','clear-filters','search-results'];
  const els = Object.fromEntries(ids.map(id=>[id,new Element(id)]));
  els.filter.value='all';els.icon.value='✦';els.status.value='New';
  const context = vm.createContext({document:{getElementById:id=>els[id],createElement:()=>new Element()},
@@ -67,6 +67,7 @@ storage.set(KEY,JSON.stringify(original));app=boot(storage,{writeFails:true});
 app.run("deleteIdea('a')");app.undo();assert.equal(app.els.ideas.children.length,3);
 assert.equal(storage.get(KEY),JSON.stringify(original));assert.match(app.els.message.textContent,/Not saved/);
 storage.set(KEY,'broken');app=boot(storage);app.run("deleteIdea('family-2026-11-03')");app.undo();
-assert.equal(storage.get(KEY),'broken');assert.equal(app.els.ideas.children.length,13);
+assert.equal(storage.get(KEY),'broken');assert.equal(app.els.ideas.children.length,14);
 assert.match(app.els.message.textContent,/Not saved/);
 console.log('PASS: delete/undo UI, original fields/order, repeated calls, cancellation, latest-only recovery, reload expiry, filters, unsaved edits, additions, storage errors and corrupt-data preservation.');
+

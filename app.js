@@ -1,5 +1,6 @@
 'use strict';
-const KEY = 'ideavision.ideas.v5';
+const KEY = 'ideavision.ideas.v6';
+const V5_KEY = 'ideavision.ideas.v5';
 const V4_KEY = 'ideavision.ideas.v4';
 const V3_KEY = 'ideavision.ideas.v3';
 const PREVIOUS_KEY = 'ideavision.ideas.v2';
@@ -30,7 +31,15 @@ const latestNightlyIdea = {
  icon: '◉',
  status: 'New'
 };
+const routeNightlyIdea = {
+ id: 'family-2026-11-04',
+ title: 'Robot Route Coach',
+ description: 'An AI project concept: trace arrow instructions across a pretend grid, explain where a toy robot would meet an obstacle, and suggest a clearer route. A grown-up checks each explanation. Use fictional maps; no location data, robot connection or AI service is included.',
+ icon: '◉',
+ status: 'New'
+};
 const seeds = [
+ routeNightlyIdea,
  latestNightlyIdea,
  newNightlyIdea,
  nightlyIdea,
@@ -122,9 +131,10 @@ try {
  } else {
   // Read the newest available version; never fall back past malformed saved data.
   const upgrades = [
-   [V4_KEY, [latestNightlyIdea]],
-   [V3_KEY, [latestNightlyIdea, newNightlyIdea]],
-   [PREVIOUS_KEY, [latestNightlyIdea, newNightlyIdea, nightlyIdea]]
+   [V5_KEY, [routeNightlyIdea]],
+   [V4_KEY, [routeNightlyIdea, latestNightlyIdea]],
+   [V3_KEY, [routeNightlyIdea, latestNightlyIdea, newNightlyIdea]],
+   [PREVIOUS_KEY, [routeNightlyIdea, latestNightlyIdea, newNightlyIdea, nightlyIdea]]
   ];
   let upgraded = false;
   for (const [key, additions] of upgrades) {
@@ -194,10 +204,16 @@ function editIdea(id) {
  $('form-heading').textContent = 'Fine-tune your idea'; $('save').textContent = 'Save changes'; $('cancel').hidden = false; $('title').focus();
 }
 function render() {
- const query = $('search').value.trim().toLowerCase();
- const filtered = ideas.filter(x => ($('filter').value === 'all' || x.status === $('filter').value) && (x.title+' '+x.description).toLowerCase().includes(query));
+ const terms = $('search').value.trim().toLowerCase().split(/\s+/).filter(Boolean);
+ const filtered = ideas.filter(idea => {
+  const text = `${idea.title} ${idea.description} ${idea.status}`.toLowerCase();
+  return ($('filter').value === 'all' || idea.status === $('filter').value) && terms.every(term => text.includes(term));
+ });
  $('ideas').replaceChildren(); $('empty').hidden = filtered.length !== 0;
  $('count').textContent = `${ideas.length} SIGNAL${ideas.length === 1 ? '' : 'S'}`;
+ $('search-results').textContent = `Showing ${filtered.length} of ${ideas.length} ${ideas.length === 1 ? 'idea' : 'ideas'}.`;
+ $('empty').textContent = ideas.length ? 'No ideas match. Try other words or clear the filters.' : 'Your notebook is empty. Add an idea to start.';
+ $('clear-filters').disabled = $('search').value.length === 0 && $('filter').value === 'all';
  for (const idea of filtered) {
   const card = document.createElement('article'); card.className='card';
   const icon=document.createElement('span'); icon.className='idea-icon'; icon.textContent=idea.icon; icon.setAttribute('aria-hidden','true');
@@ -223,10 +239,14 @@ $('title').addEventListener('input',()=> $('title').setCustomValidity(''));
 $('cancel').addEventListener('click',resetForm);
 $('undo-delete').addEventListener('click',undoDelete);
 $('search').addEventListener('input',render); $('filter').addEventListener('change',render);
+$('clear-filters').addEventListener('click',()=>{
+ $('search').value=''; $('filter').value='all'; render(); $('search').focus();
+});
 $('export').addEventListener('click',()=>{
  const url=URL.createObjectURL(new Blob([JSON.stringify(ideas,null,2)],{type:'application/json'}));
  const link=document.createElement('a');link.href=url;link.download='ideavision-ideas.json';link.click();setTimeout(()=>URL.revokeObjectURL(url),1000);
 });
 render();
+
 
 
