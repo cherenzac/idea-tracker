@@ -17,6 +17,14 @@
    summary: 'Include questions the source material cannot answer in RAG evaluations, so the system is tested on when to ask for better evidence as well as when to respond.',
    topics: ['AI', 'RAG'],
    kind: 'original'
+  },
+  {
+   id: '2026-11-05-a-timeout-is-not-a-rollback',
+   date: '2026-11-05',
+   title: 'A timeout is not a rollback',
+   summary: 'Treat a timed-out tool call as an unknown outcome, not proof that nothing happened. Check for completion before retrying, and reuse an idempotency key when the tool supports one.',
+   topics: ['MCP', 'Agent harnesses'],
+   kind: 'original'
   }
  ];
  if (typeof module !== 'undefined') module.exports = entries;
