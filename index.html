@@ -1,6 +1,6 @@
 <!doctype html>
 <html lang="en">
-<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>IdeaVision — Tune into your next idea</title><link rel="stylesheet" href="style.css?v=11-search"></head>
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>IdeaVision — Tune into your next idea</title><link rel="stylesheet" href="style.css?v=20261105-sort"></head>
 <body>
 <main class="television">
   <header><span class="brand">◈ IDEA<span>VISION</span></span><span class="model">GOOD IDEAS. BRIGHTER SIGNAL.</span></header>
@@ -25,6 +25,7 @@
       <p class="intro">Playful AI project ideas for home, family, and friends.</p>
       <div class="toolbar"><label class="search"><span class="sr-only">Search ideas</span><input id="search" type="search" placeholder="Find a signal…" aria-describedby="search-help"></label><label><span class="sr-only">Filter by status</span><select id="filter"><option value="all">All channels</option><option>New</option><option>Exploring</option><option>Built</option></select></label><button id="clear-filters" type="button" disabled>Clear filters</button></div>
       <p id="search-help" class="intro">Find words in any order across titles, descriptions and statuses.</p>
+      <div class="notebook-view"><label for="idea-sort">View order</label><select id="idea-sort" aria-describedby="sort-help"><option value="saved">Saved order</option><option value="title">Title A–Z</option><option value="status">Status: New → Built</option></select><span id="sort-help">Changes the view only. Saved order stays intact.</span></div>
       <p id="search-results" class="intro" role="status" aria-live="polite"></p>
       <p class="intro">These are project concepts—not working AI features. The notebook itself runs locally.</p>
       <p id="delete-note" class="intro" role="status" aria-live="polite"></p>
@@ -127,7 +128,7 @@
   <div class="bottom"><span>SAVE YOUR SPARKS.</span><button id="export" type="button">↓ Export ideas</button></div>
 </main>
 <p class="caption">An old-school screen for new-school ideas. Made to explore, built to play.</p>
-<script src="app.js?v=20261104-search"></script>
+<script src="app.js?v=20261105-sort"></script>
 <script src="projects.js?v=5-daily-insights"></script>
 <script src="navigation.js?v=2-explore"></script>
 <script src="channels.js?v=3-directory"></script>

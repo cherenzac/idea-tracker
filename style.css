@@ -51,3 +51,4 @@ aside{color:#def3e9;padding:12px 0}.tuning{font-size:9px;margin:8px 0}.dial{widt
 
 /* Notebook search controls stay distinct from the editable idea form. */
 #clear-filters{white-space:nowrap;align-self:stretch}#clear-filters:disabled{cursor:default;opacity:.5}#search-help{margin-top:-8px}#search-results{font-weight:600}
+.notebook-view{display:flex;align-items:center;flex-wrap:wrap;gap:10px;font-size:12px;color:#645b72;margin:16px 0}.notebook-view label{font-weight:650}.notebook-view select{width:auto;max-width:100%;min-width:170px}.notebook-view span{flex:1;min-width:180px;line-height:1.5}@media(max-width:700px){.notebook-view span{flex-basis:100%;min-width:0}}

@@ -2,7 +2,7 @@
 const assert=require('node:assert/strict');
 const vm=require('node:vm');
 const fs=require('node:fs');
-const KEY='ideavision.ideas.v6';
+const KEY='ideavision.ideas.v7';
 const records=[
  {id:'a',title:'Paper Café',description:'A robot made from folded paper.',icon:'✦',status:'Built'},
  {id:'b',title:'Robot Route Coach',description:'Pretend arrows cross a toy grid.',icon:'◉',status:'New'},
@@ -17,8 +17,8 @@ function boot(value=JSON.stringify(records)){
   addEventListener(k,fn){this.handlers[k]=fn;}focus(){focused=this.id;}setCustomValidity(){}reportValidity(){}
   reset(){els.title.value='';els.description.value='';els.icon.value='✦';els.status.value='New';}click(){}
  }
- for(const id of ['title','description','icon','status','message','form','form-heading','save','cancel','search','filter','ideas','empty','count','export','undo-delete','delete-note','clear-filters','search-results'])els[id]=new Element(id);
- els.filter.value='all';els.icon.value='✦';els.status.value='New';
+ for(const id of ['title','description','icon','status','message','form','form-heading','save','cancel','search','filter','ideas','empty','count','export','undo-delete','delete-note','clear-filters','search-results','idea-sort'])els[id]=new Element(id);
+ els['idea-sort'].value='saved';els.filter.value='all';els.icon.value='✦';els.status.value='New';
  const context=vm.createContext({document:{getElementById:id=>els[id],createElement:()=>new Element()},localStorage:{getItem:k=>storage.get(k)??null,setItem:(k,v)=>{writes++;storage.set(k,v);}},crypto:require('node:crypto').webcrypto,confirm:()=>true,URL,Blob,setTimeout});
  vm.runInContext(fs.readFileSync('./app.js','utf8'),context);
  return {els,storage,writes:()=>writes,focused:()=>focused,run:s=>vm.runInContext(s,context),search:q=>{els.search.value=q;els.search.handlers.input();},filter:status=>{els.filter.value=status;els.filter.handlers.change();},clear:()=>els['clear-filters'].handlers.click(),submit:()=>els.form.handlers.submit({preventDefault(){}})};

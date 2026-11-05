@@ -14,11 +14,11 @@ Then visit `http://localhost:8080`. Use a local server for consistent browser st
 
 ## Features
 
-- Fourteen generic home/family AI project concepts (not implemented AI features)
+- Fifteen generic home/family AI project concepts (not implemented AI features)
 - Five official external inspiration links, clearly attributed to their creators
 - Add, edit, and delete ideas (deletion asks for confirmation), with Undo last delete
 - New, Exploring, and Built statuses
-- Multiple-word search, status filters, live match counts, Clear filters, and JSON export
+- Multiple-word search, status filters, live match counts, Clear filters, view-only title/status sorting, and JSON export
 - Responsive old-school TV styling and labeled keyboard-accessible controls
 - Browser-local persistence with a visible warning if storage fails
 
@@ -30,15 +30,21 @@ Do not add passwords, API keys, private notes, or personal information to this r
 
 ## Saved-data upgrades
 
-This version uses `ideavision.ideas.v6`. Returning v5 visitors receive one new concept, **Robot Route Coach**, while keeping all existing entries, edits and deletions. Previous storage remains unchanged as a backup. The addition happens once; deleting it stays deleted on reload. Returning v4 visitors also receive Board Game Balance Lab; v3 visitors also receive Riddle Repair Shop; v2 visitors also receive Toybox Tales. The v1 migration retains personal and edited entries. The newest available saved version takes priority; invalid data is never overwritten or silently replaced by older data.
+This version uses `ideavision.ideas.v7`. Returning v6 visitors receive one new concept, **Make-Believe Museum**, while keeping all existing entries, edits and deletions. Previous storage remains unchanged as a backup. The addition happens once; deleting it stays deleted on reload. Returning v5 visitors also receive Robot Route Coach; v4 visitors also receive Board Game Balance Lab; v3 visitors also receive Riddle Repair Shop; v2 visitors also receive Toybox Tales. The v1 migration retains personal and edited entries. The newest available saved version takes priority; invalid data is never overwritten or silently replaced by older data.
 
-Robot Route Coach is an **AI project concept**, not a working AI service: explain arrow instructions and obstacles on a pretend toy-robot grid, with adult review and fictional maps. No location data, robot hardware connection, model or API is added. The existing notebook concepts also remain concepts, not implemented generators.
+Make-Believe Museum is an **AI project concept**, not a working AI service: write exhibit labels and visitor questions for invented objects, with adult review and imagined details marked as fiction. No personal collections, names, photos, uploads, model or API are added. The existing notebook concepts also remain concepts, not implemented generators.
 
 ### Find a saved idea
 
 Notebook search matches every space-separated search term in any order across an idea's title, description and status, ignoring letter case. The status dropdown applies at the same time. Matching is literal substring matching, not AI or semantic search. A live result count distinguishes the visible matches from your total saved ideas; an empty notebook has a different message from no matching results. **Clear filters** resets only the search and status dropdown, then focuses search. It does not change saved records, unsaved form text, the current edit or the last-deletion undo. Search terms and filters are not saved or sent anywhere.
 
 Run `node test-notebook-search.js` for multiple terms, whitespace/case, cross-field and status matching, empty states, result counts, repeated clearing, draft/edit/undo preservation and zero storage writes.
+
+### Change the view order
+
+**View order** offers Saved order, Title A–Z (case-insensitive, with numbers in natural order), and Status (New, Exploring, Built). Equal titles or statuses keep their saved relative order. Sorting affects only the visible cards; it does not change notebook storage, JSON export order, unsaved form text, the current edit or deletion recovery. Search and status filtering work with any view order. Clear filters leaves the selected order alone; reload returns to Saved order. The choice is not saved or sent anywhere.
+
+Run `node test-notebook-sort.js` for sorting, stable ties, filtering, draft/edit/undo preservation, export order, reload and zero storage writes.
 
 ### Undo a notebook deletion
 
@@ -78,7 +84,7 @@ Additional checks: `node --check brickword.js && node test-brickword.js`. Existi
 
 ## Scalable project navigation
 
-The launcher shows the last **five actually opened projects**, with a searchable **Browse all projects** directory and a native jump dropdown. It starts with six real destinations; the fourteen notebook concepts remain concepts, not invented deployed applications. Search supports multiple words across titles, descriptions, categories, statuses and tags. Directory height is bounded so 50+ projects do not make a 50-tab strip. Internal project URLs use `#project=bricks` (or `ideas`/`news`), support refresh and browser Back/Forward, and switching keeps unsaved form state.
+The launcher shows the last **five actually opened projects**, with a searchable **Browse all projects** directory and a native jump dropdown. It starts with six real destinations; the fifteen notebook concepts remain concepts, not invented deployed applications. Search supports multiple words across titles, descriptions, categories, statuses and tags. Directory height is bounded so 50+ projects do not make a 50-tab strip. Internal project URLs use `#project=bricks` (or `ideas`/`news`), support refresh and browser Back/Forward, and switching keeps unsaved form state.
 
 Navigation history stores only project IDs in `ideavision.recent-projects.v1`, independently of existing notebook storage. Unavailable storage degrades gracefully. Clear browser site data to clear recents (export your notebook first). Nothing is uploaded.
 

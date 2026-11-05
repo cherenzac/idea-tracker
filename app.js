@@ -1,5 +1,6 @@
 'use strict';
-const KEY = 'ideavision.ideas.v6';
+const KEY = 'ideavision.ideas.v7';
+const V6_KEY = 'ideavision.ideas.v6';
 const V5_KEY = 'ideavision.ideas.v5';
 const V4_KEY = 'ideavision.ideas.v4';
 const V3_KEY = 'ideavision.ideas.v3';
@@ -38,7 +39,15 @@ const routeNightlyIdea = {
  icon: '◉',
  status: 'New'
 };
+const museumNightlyIdea = {
+ id: 'family-2026-11-05',
+ title: 'Make-Believe Museum',
+ description: 'An AI project concept: turn made-up objects into short museum labels and playful visitor questions, keeping imagined details clearly marked as fiction. A grown-up reviews every label. Use invented collections; no names, photos, uploads or AI service are included.',
+ icon: '◉',
+ status: 'New'
+};
 const seeds = [
+ museumNightlyIdea,
  routeNightlyIdea,
  latestNightlyIdea,
  newNightlyIdea,
@@ -131,10 +140,11 @@ try {
  } else {
   // Read the newest available version; never fall back past malformed saved data.
   const upgrades = [
-   [V5_KEY, [routeNightlyIdea]],
-   [V4_KEY, [routeNightlyIdea, latestNightlyIdea]],
-   [V3_KEY, [routeNightlyIdea, latestNightlyIdea, newNightlyIdea]],
-   [PREVIOUS_KEY, [routeNightlyIdea, latestNightlyIdea, newNightlyIdea, nightlyIdea]]
+   [V6_KEY, [museumNightlyIdea]],
+   [V5_KEY, [museumNightlyIdea, routeNightlyIdea]],
+   [V4_KEY, [museumNightlyIdea, routeNightlyIdea, latestNightlyIdea]],
+   [V3_KEY, [museumNightlyIdea, routeNightlyIdea, latestNightlyIdea, newNightlyIdea]],
+   [PREVIOUS_KEY, [museumNightlyIdea, routeNightlyIdea, latestNightlyIdea, newNightlyIdea, nightlyIdea]]
   ];
   let upgraded = false;
   for (const [key, additions] of upgrades) {
@@ -153,7 +163,8 @@ try {
     const parsed = JSON.parse(legacy);
     if (!validIdeas(parsed)) throw new Error('Invalid legacy data');
     // Replace only untouched original examples, never personal or edited entries.
-    const personal = parsed.filter(x => !legacySeeds.some(seed => ['id','title','description','icon','status'].every(key => x[key] === seed[key])));
+    const personal = parsed.filter(x => !legacySeeds.some(seed => Object.keys(x).length === Object.keys(seed).length
+     && ['id','title','description','icon','status'].every(key => x[key] === seed[key])));
     ideas = [...personal, ...seeds.filter(seed => !personal.some(x => x.id === seed.id)).map(x => ({...x}))];
    }
   }
@@ -209,6 +220,13 @@ function render() {
   const text = `${idea.title} ${idea.description} ${idea.status}`.toLowerCase();
   return ($('filter').value === 'all' || idea.status === $('filter').value) && terms.every(term => text.includes(term));
  });
+ // Sort only the filtered copy, never the saved notebook or its undo positions.
+ const order = $('idea-sort').value;
+ if (order === 'title') filtered.sort((a,b) => a.title.localeCompare(b.title, 'en', {sensitivity:'base', numeric:true}));
+ if (order === 'status') {
+  const stages = ['New', 'Exploring', 'Built'];
+  filtered.sort((a,b) => stages.indexOf(a.status) - stages.indexOf(b.status));
+ }
  $('ideas').replaceChildren(); $('empty').hidden = filtered.length !== 0;
  $('count').textContent = `${ideas.length} SIGNAL${ideas.length === 1 ? '' : 'S'}`;
  $('search-results').textContent = `Showing ${filtered.length} of ${ideas.length} ${ideas.length === 1 ? 'idea' : 'ideas'}.`;
@@ -239,6 +257,7 @@ $('title').addEventListener('input',()=> $('title').setCustomValidity(''));
 $('cancel').addEventListener('click',resetForm);
 $('undo-delete').addEventListener('click',undoDelete);
 $('search').addEventListener('input',render); $('filter').addEventListener('change',render);
+$('idea-sort').addEventListener('change',render);
 $('clear-filters').addEventListener('click',()=>{
  $('search').value=''; $('filter').value='all'; render(); $('search').focus();
 });
