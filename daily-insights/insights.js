@@ -25,6 +25,14 @@
    summary: 'Treat a timed-out tool call as an unknown outcome, not proof that nothing happened. Check for completion before retrying, and reuse an idempotency key when the tool supports one.',
    topics: ['MCP', 'Agent harnesses'],
    kind: 'original'
+  },
+  {
+   id: '2026-11-06-tool-schemas-are-not-semantics',
+   date: '2026-11-06',
+   title: 'Tool schemas are not semantics',
+   summary: 'A valid MCP tool call can still carry the wrong units, time zone or resource scope. Make those meanings explicit in the tool contract, then test plausible but incorrect inputs rather than only malformed JSON.',
+   topics: ['MCP', 'Agent harnesses'],
+   kind: 'original'
   }
  ];
  if (typeof module !== 'undefined') module.exports = entries;
