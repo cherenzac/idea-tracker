@@ -1,5 +1,6 @@
 'use strict';
-const KEY = 'ideavision.ideas.v7';
+const KEY = 'ideavision.ideas.v8';
+const V7_KEY = 'ideavision.ideas.v7';
 const V6_KEY = 'ideavision.ideas.v6';
 const V5_KEY = 'ideavision.ideas.v5';
 const V4_KEY = 'ideavision.ideas.v4';
@@ -46,7 +47,15 @@ const museumNightlyIdea = {
  icon: '◉',
  status: 'New'
 };
+const comicNightlyIdea = {
+ id: 'family-2026-11-06',
+ title: 'Comic Continuity Coach',
+ description: 'An AI project concept: compare short descriptions of invented comic panels, spot objects or settings that change unexpectedly, and suggest a clearer sequence. A grown-up reviews each suggestion. Use fictional characters and text only; no photos, uploads or AI service are included.',
+ icon: '✦',
+ status: 'New'
+};
 const seeds = [
+ comicNightlyIdea,
  museumNightlyIdea,
  routeNightlyIdea,
  latestNightlyIdea,
@@ -126,6 +135,7 @@ const seeds = [
 const $ = id => document.getElementById(id);
 let ideas = seeds.map(x => ({...x}));
 let editing = null;
+let draftBaseline;
 let lastDeleted = null;
 let storageReady = true;
 function validIdeas(value) {
@@ -140,11 +150,12 @@ try {
  } else {
   // Read the newest available version; never fall back past malformed saved data.
   const upgrades = [
-   [V6_KEY, [museumNightlyIdea]],
-   [V5_KEY, [museumNightlyIdea, routeNightlyIdea]],
-   [V4_KEY, [museumNightlyIdea, routeNightlyIdea, latestNightlyIdea]],
-   [V3_KEY, [museumNightlyIdea, routeNightlyIdea, latestNightlyIdea, newNightlyIdea]],
-   [PREVIOUS_KEY, [museumNightlyIdea, routeNightlyIdea, latestNightlyIdea, newNightlyIdea, nightlyIdea]]
+   [V7_KEY, [comicNightlyIdea]],
+   [V6_KEY, [comicNightlyIdea, museumNightlyIdea]],
+   [V5_KEY, [comicNightlyIdea, museumNightlyIdea, routeNightlyIdea]],
+   [V4_KEY, [comicNightlyIdea, museumNightlyIdea, routeNightlyIdea, latestNightlyIdea]],
+   [V3_KEY, [comicNightlyIdea, museumNightlyIdea, routeNightlyIdea, latestNightlyIdea, newNightlyIdea]],
+   [PREVIOUS_KEY, [comicNightlyIdea, museumNightlyIdea, routeNightlyIdea, latestNightlyIdea, newNightlyIdea, nightlyIdea]]
   ];
   let upgraded = false;
   for (const [key, additions] of upgrades) {
@@ -180,7 +191,9 @@ function persist() {
 function announce(action) { $('message').textContent = persist() ? action + ' Saved in this browser.' : action + ' Not saved to browser storage — export your ideas before leaving.'; }
 function deleteIdea(id) {
  const index = ideas.findIndex(x => x.id === id);
- if (index < 0 || !confirm(`Delete “${ideas[index].title}”?`)) return;
+ if (index < 0) return;
+ const draftWarning = editing === id && hasUnsavedDraft() ? ' Its unsaved form changes will also be discarded.' : '';
+ if (!confirm(`Delete “${ideas[index].title}”?${draftWarning}`)) return;
  lastDeleted = {idea: ideas[index], index, nextId: ideas[index + 1]?.id, previousId: ideas[index - 1]?.id};
  ideas = ideas.filter(x => x.id !== id);
  if (editing === id) resetForm();
@@ -207,11 +220,24 @@ function undoDelete() {
  render();
  $('search').focus();
 }
-function resetForm() {editing = null; $('form').reset(); $('form-heading').textContent = 'Broadcast a new idea'; $('save').textContent = '+ Add idea'; $('cancel').hidden = true;}
+function formSnapshot() { return JSON.stringify(['title','description','icon','status'].map(key => $(key).value)); }
+function hasUnsavedDraft() { return formSnapshot() !== draftBaseline; }
+function mayDiscardDraft() {
+ return !hasUnsavedDraft() || confirm('Discard your unsaved form changes? Saved ideas will stay unchanged.');
+}
+function resetForm() {
+ editing = null; $('form').reset(); $('title').setCustomValidity('');
+ $('form-heading').textContent = 'Broadcast a new idea'; $('save').textContent = '+ Add idea'; $('cancel').hidden = true;
+ draftBaseline = formSnapshot();
+}
 function editIdea(id) {
  const idea = ideas.find(x=>x.id===id); if (!idea) return;
+ // Repeated Edit clicks on the same card should never replace its live draft.
+ if (editing === id) { $('title').focus(); return; }
+ if (!mayDiscardDraft()) return;
  editing = id;
  for (const key of ['title','description','icon','status']) $(key).value = idea[key];
+ $('title').setCustomValidity(''); draftBaseline = formSnapshot();
  $('form-heading').textContent = 'Fine-tune your idea'; $('save').textContent = 'Save changes'; $('cancel').hidden = false; $('title').focus();
 }
 function render() {
@@ -254,7 +280,7 @@ $('form').addEventListener('submit',event=>{
  announce(editing?'Idea updated.':'Idea added.'); resetForm(); render();
 });
 $('title').addEventListener('input',()=> $('title').setCustomValidity(''));
-$('cancel').addEventListener('click',resetForm);
+$('cancel').addEventListener('click',()=>{if (mayDiscardDraft()) resetForm();});
 $('undo-delete').addEventListener('click',undoDelete);
 $('search').addEventListener('input',render); $('filter').addEventListener('change',render);
 $('idea-sort').addEventListener('change',render);
@@ -265,6 +291,7 @@ $('export').addEventListener('click',()=>{
  const url=URL.createObjectURL(new Blob([JSON.stringify(ideas,null,2)],{type:'application/json'}));
  const link=document.createElement('a');link.href=url;link.download='ideavision-ideas.json';link.click();setTimeout(()=>URL.revokeObjectURL(url),1000);
 });
+draftBaseline = formSnapshot();
 render();
 
 

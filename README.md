@@ -14,9 +14,10 @@ Then visit `http://localhost:8080`. Use a local server for consistent browser st
 
 ## Features
 
-- Fifteen generic home/family AI project concepts (not implemented AI features)
+- Sixteen generic home/family AI project concepts (not implemented AI features)
 - Five official external inspiration links, clearly attributed to their creators
 - Add, edit, and delete ideas (deletion asks for confirmation), with Undo last delete
+- Confirmation before replacing or canceling an unsaved form draft
 - New, Exploring, and Built statuses
 - Multiple-word search, status filters, live match counts, Clear filters, view-only title/status sorting, and JSON export
 - Responsive old-school TV styling and labeled keyboard-accessible controls
@@ -30,9 +31,9 @@ Do not add passwords, API keys, private notes, or personal information to this r
 
 ## Saved-data upgrades
 
-This version uses `ideavision.ideas.v7`. Returning v6 visitors receive one new concept, **Make-Believe Museum**, while keeping all existing entries, edits and deletions. Previous storage remains unchanged as a backup. The addition happens once; deleting it stays deleted on reload. Returning v5 visitors also receive Robot Route Coach; v4 visitors also receive Board Game Balance Lab; v3 visitors also receive Riddle Repair Shop; v2 visitors also receive Toybox Tales. The v1 migration retains personal and edited entries. The newest available saved version takes priority; invalid data is never overwritten or silently replaced by older data.
+This version uses `ideavision.ideas.v8`. Returning v7 visitors receive one new concept, **Comic Continuity Coach**, while keeping all existing entries, edits and deletions. Previous storage remains unchanged as a backup. The addition happens once; deleting it stays deleted on reload. Returning v6 visitors also receive Make-Believe Museum; v5 visitors also receive Robot Route Coach; v4 visitors also receive Board Game Balance Lab; v3 visitors also receive Riddle Repair Shop; v2 visitors also receive Toybox Tales. The v1 migration retains personal and edited entries. The newest available saved version takes priority; invalid data is never overwritten or silently replaced by older data.
 
-Make-Believe Museum is an **AI project concept**, not a working AI service: write exhibit labels and visitor questions for invented objects, with adult review and imagined details marked as fiction. No personal collections, names, photos, uploads, model or API are added. The existing notebook concepts also remain concepts, not implemented generators.
+Comic Continuity Coach is an **AI project concept**, not a working AI service: compare text descriptions of invented comic panels for unexpected changes in objects or settings, with adult review. No real people, photos, uploads, model or API are added. The existing notebook concepts also remain concepts, not implemented generators.
 
 ### Find a saved idea
 
@@ -45,6 +46,14 @@ Run `node test-notebook-search.js` for multiple terms, whitespace/case, cross-fi
 **View order** offers Saved order, Title A–Z (case-insensitive, with numbers in natural order), and Status (New, Exploring, Built). Equal titles or statuses keep their saved relative order. Sorting affects only the visible cards; it does not change notebook storage, JSON export order, unsaved form text, the current edit or deletion recovery. Search and status filtering work with any view order. Clear filters leaves the selected order alone; reload returns to Saved order. The choice is not saved or sent anywhere.
 
 Run `node test-notebook-sort.js` for sorting, stable ties, filtering, draft/edit/undo preservation, export order, reload and zero storage writes.
+
+### Protect an unsaved form draft
+
+Choosing a different idea to edit or canceling an edit asks for confirmation when any form field has changed. Canceling the prompt keeps the draft and its original edit target. Clicking Edit again on the same card simply focuses the current draft. Unchanged forms switch without a prompt. Deleting the idea being edited includes an extra warning when its form has unsaved changes; deleting another idea leaves the draft alone.
+
+The guard does not save draft text or upload it. Search, filters, sorting and switching project panels keep the live form as before. **Save before reloading or closing the tab:** this is not an autosave or browser-navigation recovery feature. JSON export contains notebook records, not unsaved form fields.
+
+Run `node test-notebook-drafts.js` for accepted/canceled switches and cancel-edit prompts, all four fields, repeated Edit clicks, save/reset behavior, delete warnings and undo preservation.
 
 ### Undo a notebook deletion
 
@@ -84,7 +93,7 @@ Additional checks: `node --check brickword.js && node test-brickword.js`. Existi
 
 ## Scalable project navigation
 
-The launcher shows the last **five actually opened projects**, with a searchable **Browse all projects** directory and a native jump dropdown. It starts with six real destinations; the fifteen notebook concepts remain concepts, not invented deployed applications. Search supports multiple words across titles, descriptions, categories, statuses and tags. Directory height is bounded so 50+ projects do not make a 50-tab strip. Internal project URLs use `#project=bricks` (or `ideas`/`news`), support refresh and browser Back/Forward, and switching keeps unsaved form state.
+The launcher shows the last **five actually opened projects**, with a searchable **Browse all projects** directory and a native jump dropdown. It starts with six real destinations; the sixteen notebook concepts remain concepts, not invented deployed applications. Search supports multiple words across titles, descriptions, categories, statuses and tags. Directory height is bounded so 50+ projects do not make a 50-tab strip. Internal project URLs use `#project=bricks` (or `ideas`/`news`), support refresh and browser Back/Forward, and switching keeps unsaved form state.
 
 Navigation history stores only project IDs in `ideavision.recent-projects.v1`, independently of existing notebook storage. Unavailable storage degrades gracefully. Clear browser site data to clear recents (export your notebook first). Nothing is uploaded.
 

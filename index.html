@@ -45,6 +45,7 @@
       </section>
       <form id="form">
         <h2 id="form-heading">Broadcast a new idea</h2>
+        <p class="intro" id="draft-help">Switching ideas or canceling an edit asks before discarding changed form fields. Drafts are not autosaved: save before reloading or closing this tab.</p>
         <label>Idea title<input id="title" required maxlength="100" placeholder="What if we built…"></label>
         <label>The spark<textarea id="description" maxlength="500" rows="2" placeholder="A sentence or two about the idea"></textarea></label>
         <div class="form-row"><label>Channel<select id="icon"><option value="✦">✦ Creative</option><option value="◉">◉ Learning</option><option value="⚡">⚡ Tools</option><option value="♧">♧ Everyday</option></select></label><label>Status<select id="status"><option>New</option><option>Exploring</option><option>Built</option></select></label></div>
@@ -128,7 +129,7 @@
   <div class="bottom"><span>SAVE YOUR SPARKS.</span><button id="export" type="button">↓ Export ideas</button></div>
 </main>
 <p class="caption">An old-school screen for new-school ideas. Made to explore, built to play.</p>
-<script src="app.js?v=20261105-sort"></script>
+<script src="app.js?v=20261106-drafts"></script>
 <script src="projects.js?v=5-daily-insights"></script>
 <script src="navigation.js?v=2-explore"></script>
 <script src="channels.js?v=3-directory"></script>
