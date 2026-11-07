@@ -33,6 +33,15 @@
    summary: 'A valid MCP tool call can still carry the wrong units, time zone or resource scope. Make those meanings explicit in the tool contract, then test plausible but incorrect inputs rather than only malformed JSON.',
    topics: ['MCP', 'Agent harnesses'],
    kind: 'original'
+  },
+  {
+   id: '2026-11-07-define-the-exit-before-the-loop',
+   date: '2026-11-07',
+   title: 'Define the exit before the loop',
+   summary: 'An agent loop needs a stopping rule as much as a success criterion: set an iteration budget and decide what partial result or blocker to return when it runs out, so persistence does not become silent, unbounded work.',
+   topics: ['Agent governance', 'Agent harnesses'],
+   kind: 'source',
+   source: {name: 'Anthropic: Building effective agents (December 19, 2024)', url: 'https://www.anthropic.com/research/building-effective-agents'}
   }
  ];
  if (typeof module !== 'undefined') module.exports = entries;
