@@ -2,6 +2,7 @@
 // Public project registry. Add only real, verified destinations; never keys or private URLs.
 (function(root){
  const projects=[
+  {id:'vacations',title:'Vacation Atlas',description:'Source-linked hotel highlights, vacation experiences and a private-on-this-device shortlist. Search curated stays or save an unresearched hotel note.',category:'Travel',status:'Ready',url:'https://cherenzac.github.io/idea-tracker/vacations/',tags:['vacation','travel','hotels','experiences','shortlist']},
   {id:'daily-insights',title:'Daily Insights',description:'A dated notebook of short original and source-attributed thoughts on AI, MCP, RAG, governance and agent harnesses.',category:'Journal',status:'Ready',url:'https://cherenzac.github.io/idea-tracker/daily-insights/',tags:['daily','insights','blog','ai','mcp','rag','governance','harness']},
   {id:'explore',title:'Explore Projects',description:'50 sourced project concepts to browse, filter and save. Ideas to build, not finished applications.',category:'Inspiration',status:'Ready',panel:'panel-explore',tags:['explore','50','ideas','concepts','inspiration']},
   {id:'ideas',title:'TV Ideas',description:'Your private-on-this-device idea notebook. Concepts are not built apps.',category:'Notebook',status:'Ready',panel:'panel-ideas',tags:['ideas','concepts','notes']},
@@ -11,5 +12,6 @@
  ];
  if(typeof module!=='undefined')module.exports=projects;else root.IdeaVisionProjects=projects;
 })(typeof window!=='undefined'?window:globalThis);
+
 
 

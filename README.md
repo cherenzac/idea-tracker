@@ -93,7 +93,7 @@ Additional checks: `node --check brickword.js && node test-brickword.js`. Existi
 
 ## Scalable project navigation
 
-The launcher shows the last **five actually opened projects**, with a searchable **Browse all projects** directory and a native jump dropdown. It starts with six real destinations; the seventeen notebook concepts remain concepts, not invented deployed applications. Search supports multiple words across titles, descriptions, categories, statuses and tags. Directory height is bounded so 50+ projects do not make a 50-tab strip. Internal project URLs use `#project=bricks` (or `ideas`/`news`), support refresh and browser Back/Forward, and switching keeps unsaved form state.
+The launcher shows the last **five actually opened projects**, with a searchable **Browse all projects** directory and a native jump dropdown. It starts with seven real destinations; the seventeen notebook concepts remain concepts, not invented deployed applications. Search supports multiple words across titles, descriptions, categories, statuses and tags. Directory height is bounded so 50+ projects do not make a 50-tab strip. Internal project URLs use `#project=bricks` (or `ideas`/`news`), support refresh and browser Back/Forward, and switching keeps unsaved form state.
 
 Navigation history stores only project IDs in `ideavision.recent-projects.v1`, independently of existing notebook storage. Unavailable storage degrades gracefully. Clear browser site data to clear recents (export your notebook first). Nothing is uploaded.
 
@@ -137,3 +137,14 @@ Update the `insights.js` cache version in the journal HTML when entries change. 
 Run `node test-insights.js` plus every existing `test*.js` suite and JavaScript syntax checks. The journal suite validates entry metadata, attribution and URL safety, UTC date labels, filtering, pagination, empty states, text-only rendering and source links. Test browser layout and navigation after changes.
 
 
+
+
+## Vacation Atlas
+
+A standalone travel notebook at `vacations/`, linked from the launcher and project directory. Six editorial hotel selections offer source-linked factual descriptions, associated experiences, and separately labeled planning perspectives. They are not an objective ranking or firsthand guest reviews. Source dates are shown; verify current facilities, policies, transport, prices and availability directly before booking.
+
+Type a hotel name, destination or style to search the curated collection, filter by region, expand details and save a local shortlist. An unlisted hotel can be saved with your own notes as **unresearched**. External research links open only on deliberate click. The page does not fetch hotel reviews, enrich unknown names automatically, contact an AI service, book stays or run a background research job.
+
+Shortlists and custom notes stay in this browser under their own storage key, separate from ideas and other projects. Shared-browser users can see them; avoid private travel or personal details. Storage errors are visible. No analytics, credentials or external images are embedded. The landscape artwork is decorative, not a photograph of a hotel.
+
+Run `node test-vacations.js` and all existing test suites after changes.
