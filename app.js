@@ -1,5 +1,6 @@
 'use strict';
-const KEY = 'ideavision.ideas.v8';
+const KEY = 'ideavision.ideas.v9';
+const V8_KEY = 'ideavision.ideas.v8';
 const V7_KEY = 'ideavision.ideas.v7';
 const V6_KEY = 'ideavision.ideas.v6';
 const V5_KEY = 'ideavision.ideas.v5';
@@ -54,7 +55,15 @@ const comicNightlyIdea = {
  icon: '✦',
  status: 'New'
 };
+const patternNightlyIdea = {
+ id: 'family-2026-11-07',
+ title: 'Pattern Parade',
+ description: 'An AI project concept: compare possible rules for a made-up sequence of shapes or colors, show why more than one next item could fit, and invite a new example to test each rule. A grown-up checks the reasoning. Use pretend sequences; no profiles, uploads or AI service are included.',
+ icon: '◉',
+ status: 'New'
+};
 const seeds = [
+ patternNightlyIdea,
  comicNightlyIdea,
  museumNightlyIdea,
  routeNightlyIdea,
@@ -150,12 +159,13 @@ try {
  } else {
   // Read the newest available version; never fall back past malformed saved data.
   const upgrades = [
-   [V7_KEY, [comicNightlyIdea]],
-   [V6_KEY, [comicNightlyIdea, museumNightlyIdea]],
-   [V5_KEY, [comicNightlyIdea, museumNightlyIdea, routeNightlyIdea]],
-   [V4_KEY, [comicNightlyIdea, museumNightlyIdea, routeNightlyIdea, latestNightlyIdea]],
-   [V3_KEY, [comicNightlyIdea, museumNightlyIdea, routeNightlyIdea, latestNightlyIdea, newNightlyIdea]],
-   [PREVIOUS_KEY, [comicNightlyIdea, museumNightlyIdea, routeNightlyIdea, latestNightlyIdea, newNightlyIdea, nightlyIdea]]
+   [V8_KEY, [patternNightlyIdea]],
+   [V7_KEY, [patternNightlyIdea, comicNightlyIdea]],
+   [V6_KEY, [patternNightlyIdea, comicNightlyIdea, museumNightlyIdea]],
+   [V5_KEY, [patternNightlyIdea, comicNightlyIdea, museumNightlyIdea, routeNightlyIdea]],
+   [V4_KEY, [patternNightlyIdea, comicNightlyIdea, museumNightlyIdea, routeNightlyIdea, latestNightlyIdea]],
+   [V3_KEY, [patternNightlyIdea, comicNightlyIdea, museumNightlyIdea, routeNightlyIdea, latestNightlyIdea, newNightlyIdea]],
+   [PREVIOUS_KEY, [patternNightlyIdea, comicNightlyIdea, museumNightlyIdea, routeNightlyIdea, latestNightlyIdea, newNightlyIdea, nightlyIdea]]
   ];
   let upgraded = false;
   for (const [key, additions] of upgrades) {
@@ -293,6 +303,7 @@ $('export').addEventListener('click',()=>{
 });
 draftBaseline = formSnapshot();
 render();
+
 
 
 

@@ -2,7 +2,7 @@
 const assert=require('node:assert/strict');
 const vm=require('node:vm');
 const fs=require('node:fs');
-const KEY='ideavision.ideas.v8';
+const KEY='ideavision.ideas.v9';
 const records=[
  {id:'a',title:'Paper Café',description:'A robot made from folded paper.',icon:'✦',status:'Built'},
  {id:'b',title:'Robot Route Coach',description:'Pretend arrows cross a toy grid.',icon:'◉',status:'New'},
@@ -59,3 +59,4 @@ const html=fs.readFileSync('./index.html','utf8');
 for(const id of ['search-help','search-results','clear-filters'])assert.equal((html.match(new RegExp(`id="${id}"`,'g'))||[]).length,1);
 assert.match(html,/aria-describedby="search-help"/);assert.match(html,/id="search-results"[^>]*aria-live="polite"/);
 console.log('PASS: multi-term/case/whitespace/cross-field/status search, counts, distinct empty states, clear/repeat/focus, drafts, edit target, undo and zero storage writes.');
+

@@ -2,7 +2,7 @@
 const assert=require('node:assert/strict');
 const vm=require('node:vm');
 const fs=require('node:fs');
-const KEY='ideavision.ideas.v8';
+const KEY='ideavision.ideas.v9';
 const records=[
  {id:'ten',title:'Item 10',description:'Paper project',icon:'✦',status:'Built',extra:'Keep me'},
  {id:'a',title:'alpha',description:'Paper project',icon:'◉',status:'Built'},
@@ -84,3 +84,4 @@ function boot(value=JSON.stringify(records),options={}){
  assert.match(html,/id="idea-sort" aria-describedby="sort-help"/);assert.match(html,/<option value="saved">Saved order/);
  console.log('PASS: title/status/saved order, natural numbers, stable ties, filters, repeated sorting, edit identity, drafts, undo, export order, reload and zero storage writes.');
 })().catch(error=>{console.error(error);process.exitCode=1;});
+

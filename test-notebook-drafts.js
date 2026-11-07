@@ -2,7 +2,7 @@
 const assert=require('node:assert/strict');
 const fs=require('node:fs');
 const vm=require('node:vm');
-const KEY='ideavision.ideas.v8';
+const KEY='ideavision.ideas.v9';
 const original=[
  {id:'a',title:'Alpha',description:'First idea',icon:'✦',status:'New',extra:{note:'Keep me'}},
  {id:'b',title:'Beta',description:'Second idea',icon:'◉',status:'Exploring'},
@@ -80,3 +80,4 @@ app=boot('broken');e=app.els;e.title.value='In-memory draft';app.answers.push(fa
 assert.equal(e.title.value,'In-memory draft');assert.equal(app.storage.get(KEY),'broken');assert.equal(app.writes(),0);
 const html=fs.readFileSync('./index.html','utf8');assert.match(html,/id="draft-help"/);assert.match(html,/Drafts are not autosaved/);
 console.log('PASS: new/edit draft guards, four fields, accepted/canceled switches and cancel-edit prompts, repeat Edit, edit identity, save/reset, validation, delete warning, undo and zero guard writes.');
+
