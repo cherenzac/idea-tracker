@@ -1,5 +1,6 @@
 'use strict';
-const KEY = 'ideavision.ideas.v9';
+const KEY = 'ideavision.ideas.v10';
+const V9_KEY = 'ideavision.ideas.v9';
 const V8_KEY = 'ideavision.ideas.v8';
 const V7_KEY = 'ideavision.ideas.v7';
 const V6_KEY = 'ideavision.ideas.v6';
@@ -62,7 +63,15 @@ const patternNightlyIdea = {
  icon: '◉',
  status: 'New'
 };
+const soundNightlyIdea = {
+ id: 'family-2026-11-08',
+ title: 'Foley Forest',
+ description: 'An AI project concept: suggest a short sound-effects plan for an invented forest story using gentle, everyday sounds, then explain how each choice supports the scene. A grown-up checks volume, materials and suitability before play. Text-only planning; no recordings, microphones, voice cloning or AI service are included.',
+ icon: '✦',
+ status: 'New'
+};
 const seeds = [
+ soundNightlyIdea,
  patternNightlyIdea,
  comicNightlyIdea,
  museumNightlyIdea,
@@ -159,13 +168,14 @@ try {
  } else {
   // Read the newest available version; never fall back past malformed saved data.
   const upgrades = [
-   [V8_KEY, [patternNightlyIdea]],
-   [V7_KEY, [patternNightlyIdea, comicNightlyIdea]],
-   [V6_KEY, [patternNightlyIdea, comicNightlyIdea, museumNightlyIdea]],
-   [V5_KEY, [patternNightlyIdea, comicNightlyIdea, museumNightlyIdea, routeNightlyIdea]],
-   [V4_KEY, [patternNightlyIdea, comicNightlyIdea, museumNightlyIdea, routeNightlyIdea, latestNightlyIdea]],
-   [V3_KEY, [patternNightlyIdea, comicNightlyIdea, museumNightlyIdea, routeNightlyIdea, latestNightlyIdea, newNightlyIdea]],
-   [PREVIOUS_KEY, [patternNightlyIdea, comicNightlyIdea, museumNightlyIdea, routeNightlyIdea, latestNightlyIdea, newNightlyIdea, nightlyIdea]]
+   [V9_KEY, [soundNightlyIdea]],
+   [V8_KEY, [soundNightlyIdea, patternNightlyIdea]],
+   [V7_KEY, [soundNightlyIdea, patternNightlyIdea, comicNightlyIdea]],
+   [V6_KEY, [soundNightlyIdea, patternNightlyIdea, comicNightlyIdea, museumNightlyIdea]],
+   [V5_KEY, [soundNightlyIdea, patternNightlyIdea, comicNightlyIdea, museumNightlyIdea, routeNightlyIdea]],
+   [V4_KEY, [soundNightlyIdea, patternNightlyIdea, comicNightlyIdea, museumNightlyIdea, routeNightlyIdea, latestNightlyIdea]],
+   [V3_KEY, [soundNightlyIdea, patternNightlyIdea, comicNightlyIdea, museumNightlyIdea, routeNightlyIdea, latestNightlyIdea, newNightlyIdea]],
+   [PREVIOUS_KEY, [soundNightlyIdea, patternNightlyIdea, comicNightlyIdea, museumNightlyIdea, routeNightlyIdea, latestNightlyIdea, newNightlyIdea, nightlyIdea]]
   ];
   let upgraded = false;
   for (const [key, additions] of upgrades) {
