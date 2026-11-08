@@ -42,6 +42,14 @@
    topics: ['Agent governance', 'Agent harnesses'],
    kind: 'source',
    source: {name: 'Anthropic: Building effective agents (December 19, 2024)', url: 'https://www.anthropic.com/research/building-effective-agents'}
+  },
+  {
+   id: '2026-11-08-test-revocation-not-just-access',
+   date: '2026-11-08',
+   title: 'Test revocation, not just access',
+   summary: 'Test what happens when permission disappears halfway through an agent task: cached context and queued tool calls should not preserve authority that has been withdrawn. A harness needs a safe stopping path, not just a successful sign-in path.',
+   topics: ['Agent governance', 'Agent harnesses'],
+   kind: 'original'
   }
  ];
  if (typeof module !== 'undefined') module.exports = entries;
