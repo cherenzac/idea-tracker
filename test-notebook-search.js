@@ -2,7 +2,7 @@
 const assert=require('node:assert/strict');
 const vm=require('node:vm');
 const fs=require('node:fs');
-const KEY='ideavision.ideas.v10';
+const KEY='ideavision.ideas.v11';
 const records=[
  {id:'a',title:'Paper Café',description:'A robot made from folded paper.',icon:'✦',status:'Built'},
  {id:'b',title:'Robot Route Coach',description:'Pretend arrows cross a toy grid.',icon:'◉',status:'New'},
