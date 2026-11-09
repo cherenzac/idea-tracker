@@ -50,6 +50,14 @@
    summary: 'Test what happens when permission disappears halfway through an agent task: cached context and queued tool calls should not preserve authority that has been withdrawn. A harness needs a safe stopping path, not just a successful sign-in path.',
    topics: ['Agent governance', 'Agent harnesses'],
    kind: 'original'
+  },
+  {
+   id: '2026-11-09-preserve-disagreement-in-retrieval',
+   date: '2026-11-09',
+   title: 'Preserve disagreement in retrieval',
+   summary: 'When retrieved sources disagree, a fluent summary can hide the most useful signal. Keep each claim tied to its source and date, show the conflict, and ask what evidence would resolve it. Evaluate whether the answer preserves uncertainty rather than rewarding a confident blend.',
+   topics: ['AI', 'RAG'],
+   kind: 'original'
   }
  ];
  if (typeof module !== 'undefined') module.exports = entries;
