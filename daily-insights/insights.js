@@ -66,6 +66,14 @@
    summary: 'Store when an agent learned a fact and what would make it stale, then test whether it refreshes that fact before a consequential action, so a useful memory does not quietly become an outdated assumption.',
    topics: ['AI', 'Agent harnesses'],
    kind: 'original'
+  },
+  {
+   id: '2026-11-11-test-the-sequence-not-just-the-answer',
+   date: '2026-11-11',
+   title: 'Test the sequence, not just the answer',
+   summary: 'A correct final answer can hide an unnecessary write, a skipped approval or a leaked tool argument. Evaluate the action sequence as well as the response, so an agent earns credit for reaching the result through an acceptable path.',
+   topics: ['Agent governance', 'Agent harnesses'],
+   kind: 'original'
   }
  ];
  if (typeof module !== 'undefined') module.exports = entries;
