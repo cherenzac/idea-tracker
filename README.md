@@ -14,7 +14,7 @@ Then visit `http://localhost:8080`. Use a local server for consistent browser st
 
 ## Features
 
-- Twenty generic home/family AI project concepts (not implemented AI features)
+- Twenty-one generic home/family AI project concepts (not implemented AI features)
 - Five official external inspiration links, clearly attributed to their creators
 - Add, edit, and delete ideas (deletion asks for confirmation), with Undo last delete
 - Confirmation before replacing or canceling an unsaved form draft
@@ -31,9 +31,9 @@ Do not add passwords, API keys, private notes, or personal information to this r
 
 ## Saved-data upgrades
 
-This version uses `ideavision.ideas.v12`. Returning v11 visitors receive one new concept, **Creature Habitat Lab**, while keeping all existing entries, edits and deletions. Previous storage remains unchanged as a backup. The addition happens once; deleting it stays deleted on reload. Returning v10 visitors also receive Paper Bridge Lab; v9 visitors also receive Foley Forest; v8 visitors also receive Pattern Parade; v7 visitors also receive Comic Continuity Coach; v6 visitors also receive Make-Believe Museum; v5 visitors also receive Robot Route Coach; v4 visitors also receive Board Game Balance Lab; v3 visitors also receive Riddle Repair Shop; v2 visitors also receive Toybox Tales. The v1 migration retains personal and edited entries. The newest available saved version takes priority; invalid data is never overwritten or silently replaced by older data.
+This version uses `ideavision.ideas.v13`. Returning v12 visitors receive one new concept, **Token Town Market**, while keeping all existing entries, edits and deletions. Previous storage remains unchanged as a backup. The addition happens once; deleting it stays deleted on reload. Returning v11 visitors also receive Creature Habitat Lab; v10 visitors also receive Paper Bridge Lab; v9 visitors also receive Foley Forest; v8 visitors also receive Pattern Parade; v7 visitors also receive Comic Continuity Coach; v6 visitors also receive Make-Believe Museum; v5 visitors also receive Robot Route Coach; v4 visitors also receive Board Game Balance Lab; v3 visitors also receive Riddle Repair Shop; v2 visitors also receive Toybox Tales. The v1 migration retains personal and edited entries. The newest available saved version takes priority; invalid data is never overwritten or silently replaced by older data.
 
-Creature Habitat Lab is an **AI project concept**, not a working AI service: match invented creatures to pretend habitats, explain the fit and explore contradictions when conditions change, with adult review. Imaginary biology is not real animal-care advice. No real people, photos, uploads, model or API are added. The existing notebook concepts also remain concepts, not implemented generators.
+Token Town Market is an **AI project concept**, not a working AI service: compare imaginary shopping baskets using pretend tokens, explain totals and suggest swaps, with adult arithmetic checks. It does not use real budgets, process purchases or provide financial advice. No real people, photos, uploads, model or API are added. The existing notebook concepts also remain concepts, not implemented generators.
 
 ### Find a saved idea
 
