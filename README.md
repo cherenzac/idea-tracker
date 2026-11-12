@@ -31,7 +31,7 @@ Do not add passwords, API keys, private notes, or personal information to this r
 
 ## Saved-data upgrades
 
-This version uses `ideavision.ideas.v13`. Returning v12 visitors receive one new concept, **Token Town Market**, while keeping all existing entries, edits and deletions. Previous storage remains unchanged as a backup. The addition happens once; deleting it stays deleted on reload. Returning v11 visitors also receive Creature Habitat Lab; v10 visitors also receive Paper Bridge Lab; v9 visitors also receive Foley Forest; v8 visitors also receive Pattern Parade; v7 visitors also receive Comic Continuity Coach; v6 visitors also receive Make-Believe Museum; v5 visitors also receive Robot Route Coach; v4 visitors also receive Board Game Balance Lab; v3 visitors also receive Riddle Repair Shop; v2 visitors also receive Toybox Tales. The v1 migration retains personal and edited entries. The newest available saved version takes priority; invalid data is never overwritten or silently replaced by older data.
+This version uses `ideavision.ideas.v14`. Returning v13 visitors receive one new concept, **Fact or Fable Studio**, while keeping all existing entries, edits and deletions. Previous storage remains unchanged as a backup. The addition happens once; deleting it stays deleted on reload. Returning v12 visitors also receive Token Town Market; v11 visitors also receive Creature Habitat Lab; v10 visitors also receive Paper Bridge Lab; v9 visitors also receive Foley Forest; v8 visitors also receive Pattern Parade; v7 visitors also receive Comic Continuity Coach; v6 visitors also receive Make-Believe Museum; v5 visitors also receive Robot Route Coach; v4 visitors also receive Board Game Balance Lab; v3 visitors also receive Riddle Repair Shop; v2 visitors also receive Toybox Tales. The v1 migration retains personal and edited entries. The newest available saved version takes priority; invalid data is never overwritten or silently replaced by older data.
 
 Token Town Market is an **AI project concept**, not a working AI service: compare imaginary shopping baskets using pretend tokens, explain totals and suggest swaps, with adult arithmetic checks. It does not use real budgets, process purchases or provide financial advice. No real people, photos, uploads, model or API are added. The existing notebook concepts also remain concepts, not implemented generators.
 
@@ -148,3 +148,11 @@ Type a hotel name, destination or style to search the curated collection, filter
 Shortlists and custom notes stay in this browser under their own storage key, separate from ideas and other projects. Shared-browser users can see them; avoid private travel or personal details. Storage errors are visible. No analytics, credentials or external images are embedded. The landscape artwork is decorative, not a photograph of a hotel.
 
 Run `node test-vacations.js` and all existing test suites after changes.
+
+## Nightly update: November 12, 2026 UTC
+
+Added **Fact or Fable Studio**, a family-friendly AI concept about matching invented claims to evidence and recognizing missing information. This is a notebook concept, not a working AI service. The v14 migration keeps existing records and backups, introduces only missing newer concepts, and respects later deletions.
+
+This scheduled run belongs to November 11 in America/Los_Angeles. The November 12–December 12 website-improvement trial has not started in that time zone; its single new standalone project page remains pending. Existing project destinations are unchanged.
+
+Verification for this update: all 13 `test*.js` suites and all JavaScript syntax checks passed, including v1–v13 migration, edited/new records, deletion persistence, corrupt storage and failed-write handling. Local browser preview was blocked by Chromium socket permissions and the cloud browser's file-protocol restriction. No CSS or layout structure changed; deployed-page verification is recorded separately.
