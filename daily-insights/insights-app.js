@@ -48,11 +48,12 @@
    $('insight-list').replaceChildren();
    for (const entry of view.entries) {
     const article=make('article',undefined,'insight-card');article.id='insight-'+entry.id;
+    article.setAttribute('tabindex','-1');article.setAttribute('aria-labelledby',article.id+'-title');
     const meta=make('div',undefined,'entry-meta');
     const time=make('time',formatDate(entry.date));time.setAttribute('datetime',entry.date);
     const attribution=make('span',entry.kind==='original'?'Original insight · AI-assisted':'Source-inspired insight');
     meta.append(time,attribution);
-    const heading=make('h2',entry.title);
+    const heading=make('h2',entry.title);heading.id=article.id+'-title';
     const summary=make('p',entry.summary,'entry-summary');
     const topics=make('ul',undefined,'entry-topics');topics.setAttribute('aria-label','Topics');
     for(const topic of entry.topics)topics.append(make('li',topic));
@@ -83,7 +84,8 @@
    const index=all.findIndex(entry=>entry.id===id);
    if(index<0)return;
    $('insight-search').value='';$('insight-topic').value='all';currentPage=Math.floor(index/PAGE_SIZE)+1;render();
-   $('insight-'+id)?.scrollIntoView({block:'start'});
+   const target=$('insight-'+id);
+   target?.focus({preventScroll:true});target?.scrollIntoView({block:'start'});
   }
   $('insight-warning').hidden=Array.isArray(input)&&input.length===all.length;
   $('insight-updated').textContent=all.length ? 'Latest note · '+formatDate(all[0].date) : 'The first note is still to come';

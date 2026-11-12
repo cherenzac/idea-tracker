@@ -126,7 +126,7 @@ Additional checks: `node --check explore.js && node test-explore.js`. This suite
 
 A public, blog-style journal at `daily-insights/`, linked from the main launcher. The journal opens in a new tab so notebook drafts and running timers stay open. Each dated entry is a short perspective on AI, MCP, RAG, agent governance or harness design. The first note is an original, AI-assisted design perspective: keep retrieved evidence, tool permissions and human approvals separate. It is not attributed to the user's conversations or X account.
 
-Search supports multiple words; topic filters, ten-entry pagination and direct article fragments work without accounts or localStorage. The notebook and every existing project retain their own data unchanged. No external feed, private-conversation reader, X integration, analytics or publishing scheduler is built into this page.
+Search supports multiple words; topic filters, ten-entry pagination and direct article fragments work without accounts or localStorage. Opening an article fragment clears filters, reveals its page and moves keyboard focus to the labeled article, so keyboard and screen-reader navigation follows the visible destination. The notebook and every existing project retain their own data unchanged. No external feed, private-conversation reader, X integration, analytics or publishing scheduler is built into this page.
 
 ### Adding a daily entry
 

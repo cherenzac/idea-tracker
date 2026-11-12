@@ -74,6 +74,14 @@
    summary: 'A correct final answer can hide an unnecessary write, a skipped approval or a leaked tool argument. Evaluate the action sequence as well as the response, so an agent earns credit for reaching the result through an acceptable path.',
    topics: ['Agent governance', 'Agent harnesses'],
    kind: 'original'
+  },
+  {
+   id: '2026-11-12-measure-the-cost-of-correctness',
+   date: '2026-11-12',
+   title: 'Measure the cost of correctness',
+   summary: 'Compare agent runs that reach the same correct result by their tool calls, latency and human interruptions, so a harness is rewarded for using just enough work rather than making every task an exhaustive investigation.',
+   topics: ['AI', 'Agent harnesses'],
+   kind: 'original'
   }
  ];
  if (typeof module !== 'undefined') module.exports = entries;
