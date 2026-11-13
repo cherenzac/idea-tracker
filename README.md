@@ -14,7 +14,7 @@ Then visit `http://localhost:8080`. Use a local server for consistent browser st
 
 ## Features
 
-- Twenty-one generic home/family AI project concepts (not implemented AI features)
+- Twenty-three generic home/family AI project concepts (not implemented AI features)
 - Five official external inspiration links, clearly attributed to their creators
 - Add, edit, and delete ideas (deletion asks for confirmation), with Undo last delete
 - Confirmation before replacing or canceling an unsaved form draft
@@ -31,7 +31,7 @@ Do not add passwords, API keys, private notes, or personal information to this r
 
 ## Saved-data upgrades
 
-This version uses `ideavision.ideas.v14`. Returning v13 visitors receive one new concept, **Fact or Fable Studio**, while keeping all existing entries, edits and deletions. Previous storage remains unchanged as a backup. The addition happens once; deleting it stays deleted on reload. Returning v12 visitors also receive Token Town Market; v11 visitors also receive Creature Habitat Lab; v10 visitors also receive Paper Bridge Lab; v9 visitors also receive Foley Forest; v8 visitors also receive Pattern Parade; v7 visitors also receive Comic Continuity Coach; v6 visitors also receive Make-Believe Museum; v5 visitors also receive Robot Route Coach; v4 visitors also receive Board Game Balance Lab; v3 visitors also receive Riddle Repair Shop; v2 visitors also receive Toybox Tales. The v1 migration retains personal and edited entries. The newest available saved version takes priority; invalid data is never overwritten or silently replaced by older data.
+This version uses `ideavision.ideas.v15`. Returning v14 visitors receive one new concept, **Story Viewfinder**, while keeping all existing entries, edits and deletions. Previous storage remains unchanged as a backup. The addition happens once; deleting it stays deleted on reload. Returning v13 visitors also receive Fact or Fable Studio; v12 visitors also receive Token Town Market; v11 visitors also receive Creature Habitat Lab; v10 visitors also receive Paper Bridge Lab; v9 visitors also receive Foley Forest; v8 visitors also receive Pattern Parade; v7 visitors also receive Comic Continuity Coach; v6 visitors also receive Make-Believe Museum; v5 visitors also receive Robot Route Coach; v4 visitors also receive Board Game Balance Lab; v3 visitors also receive Riddle Repair Shop; v2 visitors also receive Toybox Tales. The v1 migration retains personal and edited entries. The newest available saved version takes priority; invalid data is never overwritten or silently replaced by older data.
 
 Token Town Market is an **AI project concept**, not a working AI service: compare imaginary shopping baskets using pretend tokens, explain totals and suggest swaps, with adult arithmetic checks. It does not use real budgets, process purchases or provide financial advice. No real people, photos, uploads, model or API are added. The existing notebook concepts also remain concepts, not implemented generators.
 
@@ -93,7 +93,7 @@ Additional checks: `node --check brickword.js && node test-brickword.js`. Existi
 
 ## Scalable project navigation
 
-The launcher shows the last **five actually opened projects**, with a searchable **Browse all projects** directory and a native jump dropdown. It starts with seven real destinations; the nineteen notebook concepts remain concepts, not invented deployed applications. Search supports multiple words across titles, descriptions, categories, statuses and tags. Directory height is bounded so 50+ projects do not make a 50-tab strip. Internal project URLs use `#project=bricks` (or `ideas`/`news`), support refresh and browser Back/Forward, and switching keeps unsaved form state.
+The launcher shows the last **five actually opened projects**, with a searchable **Browse all projects** directory and a native jump dropdown. It has eight real destinations; the twenty-three notebook concepts remain concepts, not invented deployed applications. Search supports multiple words across titles, descriptions, categories, statuses and tags. Directory height is bounded so 50+ projects do not make a 50-tab strip. Internal project URLs use `#project=bricks` (or `ideas`/`news`), support refresh and browser Back/Forward, and switching keeps unsaved form state.
 
 Navigation history stores only project IDs in `ideavision.recent-projects.v1`, independently of existing notebook storage. Unavailable storage degrades gracefully. Clear browser site data to clear recents (export your notebook first). Nothing is uploaded.
 
@@ -156,3 +156,15 @@ Added **Fact or Fable Studio**, a family-friendly AI concept about matching inve
 This scheduled run belongs to November 11 in America/Los_Angeles. The November 12–December 12 website-improvement trial has not started in that time zone; its single new standalone project page remains pending. Existing project destinations are unchanged.
 
 Verification for this update: all 13 `test*.js` suites and all JavaScript syntax checks passed, including v1–v13 migration, edited/new records, deletion persistence, corrupt storage and failed-write handling. Local browser preview was blocked by Chromium socket permissions and the cloud browser's file-protocol restriction. No CSS or layout structure changed; deployed-page verification is recorded separately.
+
+
+## November 13 nightly update
+
+Added **Story Viewfinder**, a family-friendly concept about comparing fictional viewpoints and distinguishing observations from guesses. It is not a working AI service or a tool for profiling real people. The v15 migration preserves records, edited concepts, prior deletions and older backups. Regression tests cover v2–v14 upgrades, malformed data, current-version priority and failed storage writes.
+
+
+## Website-improvement trial: sole new standalone page
+
+**Fair Test Studio** (`fair-test.html`, registry ID `fair-test`) is the one new standalone page for the November 12–December 12 trial. Public URL: https://cherenzac.github.io/idea-tracker/fair-test.html. Future trial sessions should improve this page rather than add another standalone project. It organizes a question, one changed variable, controls, observations and an optional prediction into a downloadable text worksheet. A reviewed paper example, clear/replace confirmation and stale-output invalidation are included. It is deterministic, not AI, a simulator or a safety checker. No storage, uploads, accounts or external requests; reload loses the worksheet, so download first. Existing notebook storage and other projects are unchanged.
+
+Run `node test-fair-test.js` plus every existing suite and JavaScript syntax check. The completion commit and live deployment evidence are recorded in the run report after publication.

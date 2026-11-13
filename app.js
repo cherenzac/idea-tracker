@@ -1,5 +1,6 @@
 'use strict';
-const KEY = 'ideavision.ideas.v14';
+const KEY = 'ideavision.ideas.v15';
+const V14_KEY = 'ideavision.ideas.v14';
 const V13_KEY = 'ideavision.ideas.v13';
 const V12_KEY = 'ideavision.ideas.v12';
 const V11_KEY = 'ideavision.ideas.v11';
@@ -102,7 +103,15 @@ const evidenceNightlyIdea = {
  icon: '◉',
  status: 'New'
 };
+const viewpointNightlyIdea = {
+ id: 'family-2026-11-13',
+ title: 'Story Viewfinder',
+ description: 'An AI project concept: retell one invented event from two fictional characters’ viewpoints, separate what each observed from what they guessed, and suggest a question that could clear up a misunderstanding. A grown-up reviews the stories. Use make-believe characters only; no personal experiences, profiles, uploads or AI service are included.',
+ icon: '✦',
+ status: 'New'
+};
 const seeds = [
+ viewpointNightlyIdea,
  evidenceNightlyIdea,
  marketNightlyIdea,
  habitatNightlyIdea,
@@ -204,18 +213,19 @@ try {
  } else {
   // Read the newest available version; never fall back past malformed saved data.
   const upgrades = [
-   [V13_KEY, [evidenceNightlyIdea]],
-   [V12_KEY, [evidenceNightlyIdea, marketNightlyIdea]],
-   [V11_KEY, [evidenceNightlyIdea, marketNightlyIdea, habitatNightlyIdea]],
-   [V10_KEY, [evidenceNightlyIdea, marketNightlyIdea, habitatNightlyIdea, bridgeNightlyIdea]],
-   [V9_KEY, [evidenceNightlyIdea, marketNightlyIdea, habitatNightlyIdea, bridgeNightlyIdea, soundNightlyIdea]],
-   [V8_KEY, [evidenceNightlyIdea, marketNightlyIdea, habitatNightlyIdea, bridgeNightlyIdea, soundNightlyIdea, patternNightlyIdea]],
-   [V7_KEY, [evidenceNightlyIdea, marketNightlyIdea, habitatNightlyIdea, bridgeNightlyIdea, soundNightlyIdea, patternNightlyIdea, comicNightlyIdea]],
-   [V6_KEY, [evidenceNightlyIdea, marketNightlyIdea, habitatNightlyIdea, bridgeNightlyIdea, soundNightlyIdea, patternNightlyIdea, comicNightlyIdea, museumNightlyIdea]],
-   [V5_KEY, [evidenceNightlyIdea, marketNightlyIdea, habitatNightlyIdea, bridgeNightlyIdea, soundNightlyIdea, patternNightlyIdea, comicNightlyIdea, museumNightlyIdea, routeNightlyIdea]],
-   [V4_KEY, [evidenceNightlyIdea, marketNightlyIdea, habitatNightlyIdea, bridgeNightlyIdea, soundNightlyIdea, patternNightlyIdea, comicNightlyIdea, museumNightlyIdea, routeNightlyIdea, latestNightlyIdea]],
-   [V3_KEY, [evidenceNightlyIdea, marketNightlyIdea, habitatNightlyIdea, bridgeNightlyIdea, soundNightlyIdea, patternNightlyIdea, comicNightlyIdea, museumNightlyIdea, routeNightlyIdea, latestNightlyIdea, newNightlyIdea]],
-   [PREVIOUS_KEY, [evidenceNightlyIdea, marketNightlyIdea, habitatNightlyIdea, bridgeNightlyIdea, soundNightlyIdea, patternNightlyIdea, comicNightlyIdea, museumNightlyIdea, routeNightlyIdea, latestNightlyIdea, newNightlyIdea, nightlyIdea]]
+   [V14_KEY, [viewpointNightlyIdea]],
+   [V13_KEY, [viewpointNightlyIdea, evidenceNightlyIdea]],
+   [V12_KEY, [viewpointNightlyIdea, evidenceNightlyIdea, marketNightlyIdea]],
+   [V11_KEY, [viewpointNightlyIdea, evidenceNightlyIdea, marketNightlyIdea, habitatNightlyIdea]],
+   [V10_KEY, [viewpointNightlyIdea, evidenceNightlyIdea, marketNightlyIdea, habitatNightlyIdea, bridgeNightlyIdea]],
+   [V9_KEY, [viewpointNightlyIdea, evidenceNightlyIdea, marketNightlyIdea, habitatNightlyIdea, bridgeNightlyIdea, soundNightlyIdea]],
+   [V8_KEY, [viewpointNightlyIdea, evidenceNightlyIdea, marketNightlyIdea, habitatNightlyIdea, bridgeNightlyIdea, soundNightlyIdea, patternNightlyIdea]],
+   [V7_KEY, [viewpointNightlyIdea, evidenceNightlyIdea, marketNightlyIdea, habitatNightlyIdea, bridgeNightlyIdea, soundNightlyIdea, patternNightlyIdea, comicNightlyIdea]],
+   [V6_KEY, [viewpointNightlyIdea, evidenceNightlyIdea, marketNightlyIdea, habitatNightlyIdea, bridgeNightlyIdea, soundNightlyIdea, patternNightlyIdea, comicNightlyIdea, museumNightlyIdea]],
+   [V5_KEY, [viewpointNightlyIdea, evidenceNightlyIdea, marketNightlyIdea, habitatNightlyIdea, bridgeNightlyIdea, soundNightlyIdea, patternNightlyIdea, comicNightlyIdea, museumNightlyIdea, routeNightlyIdea]],
+   [V4_KEY, [viewpointNightlyIdea, evidenceNightlyIdea, marketNightlyIdea, habitatNightlyIdea, bridgeNightlyIdea, soundNightlyIdea, patternNightlyIdea, comicNightlyIdea, museumNightlyIdea, routeNightlyIdea, latestNightlyIdea]],
+   [V3_KEY, [viewpointNightlyIdea, evidenceNightlyIdea, marketNightlyIdea, habitatNightlyIdea, bridgeNightlyIdea, soundNightlyIdea, patternNightlyIdea, comicNightlyIdea, museumNightlyIdea, routeNightlyIdea, latestNightlyIdea, newNightlyIdea]],
+   [PREVIOUS_KEY, [viewpointNightlyIdea, evidenceNightlyIdea, marketNightlyIdea, habitatNightlyIdea, bridgeNightlyIdea, soundNightlyIdea, patternNightlyIdea, comicNightlyIdea, museumNightlyIdea, routeNightlyIdea, latestNightlyIdea, newNightlyIdea, nightlyIdea]]
   ];
   let upgraded = false;
   for (const [key, additions] of upgrades) {
