@@ -53,10 +53,10 @@ e['insight-clear'].handlers.click();assert.equal(e['insight-list'].children.leng
 e['insight-search'].value='agent';e['insight-search'].handlers.input();assert.equal(e['insight-list'].children.length,1);
 e['insight-search'].value='absent';e['insight-search'].handlers.input();assert.equal(e['insight-count'].textContent,'0 of 1 insights match');
 app=boot(fixture);e=app.elements;assert.equal(e['insight-pagination'].hidden,false);
-e['insight-next'].handlers.click();assert.equal(e['insight-page'].textContent,'Page 2 of 3');
-e['insight-next'].handlers.click();assert.equal(e['insight-list'].children.length,5);assert.equal(e['insight-next'].disabled,true);
-e['insight-prev'].handlers.click();assert.equal(e['insight-page'].textContent,'Page 2 of 3');
-e['insight-search'].value='Fixture 25';e['insight-search'].handlers.input();assert.equal(e['insight-page'].textContent,'Page 1 of 1');
+e['insight-next'].handlers.click();assert.equal(e['insight-page'].textContent,'Page 2 of 3');assert.equal(app.focused(),'insight-2026-10-15-fixture');assert.equal(app.scrolled(),'insight-2026-10-15-fixture');
+e['insight-next'].handlers.click();assert.equal(e['insight-list'].children.length,5);assert.equal(e['insight-next'].disabled,true);assert.equal(app.focused(),'insight-2026-10-05-fixture');
+e['insight-prev'].handlers.click();assert.equal(e['insight-page'].textContent,'Page 2 of 3');assert.equal(app.focused(),'insight-2026-10-15-fixture');assert.equal(app.scrolled(),'insight-2026-10-15-fixture');
+e['insight-search'].value='Fixture 25';e['insight-search'].handlers.input();assert.equal(e['insight-page'].textContent,'Page 1 of 1');assert.equal(app.focused(),'insight-2026-10-15-fixture','Filtering must not move focus to an article.');
 app=boot(fixture,'#insight-2026-10-01-fixture');e=app.elements;
 assert.equal(e['insight-page'].textContent,'Page 3 of 3');assert.equal(app.scrolled(),'insight-2026-10-01-fixture');assert.equal(app.focused(),'insight-2026-10-01-fixture');
 assert.equal(e['insight-2026-10-01-fixture'].attrs.tabindex,'-1');

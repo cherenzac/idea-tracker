@@ -168,3 +168,7 @@ Added **Story Viewfinder**, a family-friendly concept about comparing fictional 
 **Fair Test Studio** (`fair-test.html`, registry ID `fair-test`) is the one new standalone page for the November 12–December 12 trial. Public URL: https://cherenzac.github.io/idea-tracker/fair-test.html. Future trial sessions should improve this page rather than add another standalone project. It organizes a question, one changed variable, controls, observations and an optional prediction into a downloadable text worksheet. A reviewed paper example, clear/replace confirmation and stale-output invalidation are included. It is deterministic, not AI, a simulator or a safety checker. No storage, uploads, accounts or external requests; reload loses the worksheet, so download first. Existing notebook storage and other projects are unchanged.
 
 Run `node test-fair-test.js` plus every existing suite and JavaScript syntax check. The completion commit and live deployment evidence are recorded in the run report after publication.
+
+### Insight archive page navigation
+
+Choosing Older or Newer moves keyboard focus and the viewport to the first article on the selected page. Search and topic changes do not move focus. Article permalinks retain their existing navigation behavior. This is view-only and writes no saved data. Covered by `node test-insights.js`.

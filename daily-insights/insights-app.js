@@ -76,8 +76,13 @@
   $('insight-search').addEventListener('input',resetPage);
   $('insight-topic').addEventListener('change',resetPage);
   $('insight-clear').addEventListener('click',()=>{$('insight-search').value='';$('insight-topic').value='all';resetPage();$('insight-search').focus();});
-  $('insight-prev').addEventListener('click',()=>{currentPage--;render();});
-  $('insight-next').addEventListener('click',()=>{currentPage++;render();});
+  function turnPage(delta) {
+   currentPage+=delta;render();
+   const first=$('insight-list').children[0];
+   first?.focus({preventScroll:true});first?.scrollIntoView({block:'start'});
+  }
+  $('insight-prev').addEventListener('click',()=>turnPage(-1));
+  $('insight-next').addEventListener('click',()=>turnPage(1));
   // Shared article links must reach their page as the archive grows; clear active filters.
   function followAnchor() {
    const id=(root.location?.hash || '').replace(/^#insight-/,'');

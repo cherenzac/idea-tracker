@@ -82,6 +82,14 @@
    summary: 'Compare agent runs that reach the same correct result by their tool calls, latency and human interruptions, so a harness is rewarded for using just enough work rather than making every task an exhaustive investigation.',
    topics: ['AI', 'Agent harnesses'],
    kind: 'original'
+  },
+  {
+   id: '2026-11-13-make-handoffs-replayable',
+   date: '2026-11-13',
+   title: 'Make handoffs replayable',
+   summary: 'A useful agent handoff records the goal, evidence, actions already taken and unresolved decisions, not just a summary. Test whether a fresh worker can continue without repeating a side effect or silently turning an assumption into a fact.',
+   topics: ['Agent harnesses', 'Agent governance'],
+   kind: 'original'
   }
  ];
  if (typeof module !== 'undefined') module.exports = entries;
