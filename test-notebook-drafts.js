@@ -2,7 +2,7 @@
 const assert=require('node:assert/strict');
 const fs=require('node:fs');
 const vm=require('node:vm');
-const KEY='ideavision.ideas.v15';
+const KEY='ideavision.ideas.v16';
 const original=[
  {id:'a',title:'Alpha',description:'First idea',icon:'✦',status:'New',extra:{note:'Keep me'}},
  {id:'b',title:'Beta',description:'Second idea',icon:'◉',status:'Exploring'},

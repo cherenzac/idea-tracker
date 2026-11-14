@@ -2,7 +2,7 @@
 const assert = require('node:assert/strict');
 const vm = require('node:vm');
 const fs = require('node:fs');
-const KEY = 'ideavision.ideas.v15';
+const KEY = 'ideavision.ideas.v16';
 const original = [
  {id:'a',title:'First',description:'Original description',icon:'◉',status:'Built',extra:'Preserve me'},
  {id:'b',title:'Second',description:'Second description',icon:'✦',status:'New'},
@@ -67,7 +67,7 @@ storage.set(KEY,JSON.stringify(original));app=boot(storage,{writeFails:true});
 app.run("deleteIdea('a')");app.undo();assert.equal(app.els.ideas.children.length,3);
 assert.equal(storage.get(KEY),JSON.stringify(original));assert.match(app.els.message.textContent,/Not saved/);
 storage.set(KEY,'broken');app=boot(storage);app.run("deleteIdea('family-2026-11-03')");app.undo();
-assert.equal(storage.get(KEY),'broken');assert.equal(app.els.ideas.children.length,23);
+assert.equal(storage.get(KEY),'broken');assert.equal(app.els.ideas.children.length,24);
 assert.match(app.els.message.textContent,/Not saved/);
 console.log('PASS: delete/undo UI, original fields/order, repeated calls, cancellation, latest-only recovery, reload expiry, filters, unsaved edits, additions, storage errors and corrupt-data preservation.');
 

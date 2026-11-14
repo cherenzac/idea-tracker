@@ -14,7 +14,7 @@ Then visit `http://localhost:8080`. Use a local server for consistent browser st
 
 ## Features
 
-- Twenty-three generic home/family AI project concepts (not implemented AI features)
+- Twenty-four generic home/family AI project concepts (not implemented AI features)
 - Five official external inspiration links, clearly attributed to their creators
 - Add, edit, and delete ideas (deletion asks for confirmation), with Undo last delete
 - Confirmation before replacing or canceling an unsaved form draft
@@ -31,7 +31,7 @@ Do not add passwords, API keys, private notes, or personal information to this r
 
 ## Saved-data upgrades
 
-This version uses `ideavision.ideas.v15`. Returning v14 visitors receive one new concept, **Story Viewfinder**, while keeping all existing entries, edits and deletions. Previous storage remains unchanged as a backup. The addition happens once; deleting it stays deleted on reload. Returning v13 visitors also receive Fact or Fable Studio; v12 visitors also receive Token Town Market; v11 visitors also receive Creature Habitat Lab; v10 visitors also receive Paper Bridge Lab; v9 visitors also receive Foley Forest; v8 visitors also receive Pattern Parade; v7 visitors also receive Comic Continuity Coach; v6 visitors also receive Make-Believe Museum; v5 visitors also receive Robot Route Coach; v4 visitors also receive Board Game Balance Lab; v3 visitors also receive Riddle Repair Shop; v2 visitors also receive Toybox Tales. The v1 migration retains personal and edited entries. The newest available saved version takes priority; invalid data is never overwritten or silently replaced by older data.
+This version uses `ideavision.ideas.v16`. Returning v15 visitors receive one new concept, **Shadow Story Stage**, while keeping all existing entries, edits and deletions. Previous storage remains unchanged as a backup. The addition happens once; deleting it stays deleted on reload. Returning v14 visitors also receive Story Viewfinder; v13 visitors also receive Fact or Fable Studio; v12 visitors also receive Token Town Market; v11 visitors also receive Creature Habitat Lab; v10 visitors also receive Paper Bridge Lab; v9 visitors also receive Foley Forest; v8 visitors also receive Pattern Parade; v7 visitors also receive Comic Continuity Coach; v6 visitors also receive Make-Believe Museum; v5 visitors also receive Robot Route Coach; v4 visitors also receive Board Game Balance Lab; v3 visitors also receive Riddle Repair Shop; v2 visitors also receive Toybox Tales. The v1 migration retains personal and edited entries. The newest available saved version takes priority; invalid data is never overwritten or silently replaced by older data.
 
 Token Town Market is an **AI project concept**, not a working AI service: compare imaginary shopping baskets using pretend tokens, explain totals and suggest swaps, with adult arithmetic checks. It does not use real budgets, process purchases or provide financial advice. No real people, photos, uploads, model or API are added. The existing notebook concepts also remain concepts, not implemented generators.
 
@@ -172,3 +172,12 @@ Run `node test-fair-test.js` plus every existing suite and JavaScript syntax che
 ### Insight archive page navigation
 
 Choosing Older or Newer moves keyboard focus and the viewport to the first article on the selected page. Search and topic changes do not move focus. Article permalinks retain their existing navigation behavior. This is view-only and writes no saved data. Covered by `node test-insights.js`.
+
+## November 14 nightly update (November 13 Pacific)
+Added **Shadow Story Stage**, a text-only AI concept about invented silhouette puppet scenes, not an implemented AI service. The v16 migration preserves existing entries, edits, deletions and backups.
+
+Fair Test Studio now offers **Print plan** after building a valid worksheet. Print layout uses the complete text rather than a scrolling textarea, hides controls, and wraps long lines. Canceling printing keeps the worksheet; editing it clears stale print content until rebuilt. Printing does not save or upload data. Browser headers, footers and pagination remain controlled by the print dialog.
+
+The trial's sole standalone page was completed in commit `1b07b7631c9862c36460fae8cd363012e27cee4b`: https://cherenzac.github.io/idea-tracker/fair-test.html. This session improves that page, not a new project.
+
+Session verification: all 14 test*.js suites, all 28 JavaScript syntax checks and git diff whitespace checks passed. Browser visual/print-preview checks were attempted but Chromium could not launch: socket() failed with Operation not permitted. Print layout is therefore not visually verified in this environment; automated tests cover print snapshot, stale-output prevention and error handling.
