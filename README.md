@@ -181,3 +181,9 @@ Fair Test Studio now offers **Print plan** after building a valid worksheet. Pri
 The trial's sole standalone page was completed in commit `1b07b7631c9862c36460fae8cd363012e27cee4b`: https://cherenzac.github.io/idea-tracker/fair-test.html. This session improves that page, not a new project.
 
 Session verification: all 14 test*.js suites, all 28 JavaScript syntax checks and git diff whitespace checks passed. Browser visual/print-preview checks were attempted but Chromium could not launch: socket() failed with Operation not permitted. Print layout is therefore not visually verified in this environment; automated tests cover print snapshot, stale-output prevention and error handling.
+
+### November 14 morning insight update
+
+Added an original, AI-assisted note about separating retrieval tests from reasoning tests. Archive search now also matches the displayed English date (for example, `November 2026`), alongside ISO dates, titles, topics and text. Search still matches all terms and respects the topic filter; it does not write storage or change article links. Covered by `node test-insights.js`.
+
+Session checks: all 14 test*.js suites, all 28 JavaScript syntax checks and whitespace checks passed. Browser layout/navigation checks were attempted but Chromium could not launch because socket() was denied (Operation not permitted); visual behavior remains unverified. No layout, notebook data or project navigation code changed.

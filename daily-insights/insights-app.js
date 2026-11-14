@@ -29,7 +29,7 @@
  function filterEntries(entries, query = '', topic = 'all') {
   const words = query.trim().toLowerCase().split(/\s+/).filter(Boolean);
   return entries.filter(entry => (topic === 'all' || entry.topics.includes(topic))
-   && words.every(word => [entry.title,entry.summary,entry.date,...entry.topics,entry.source?.name || ''].join(' ').toLowerCase().includes(word)));
+   && words.every(word => [entry.title,entry.summary,entry.date,formatDate(entry.date),...entry.topics,entry.source?.name || ''].join(' ').toLowerCase().includes(word)));
  }
  function pageEntries(entries, requestedPage = 1) {
   const pages = Math.max(1, Math.ceil(entries.length / PAGE_SIZE));

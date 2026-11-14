@@ -90,6 +90,14 @@
    summary: 'A useful agent handoff records the goal, evidence, actions already taken and unresolved decisions, not just a summary. Test whether a fresh worker can continue without repeating a side effect or silently turning an assumption into a fact.',
    topics: ['Agent harnesses', 'Agent governance'],
    kind: 'original'
+  },
+  {
+   id: '2026-11-14-separate-retrieval-from-reasoning',
+   date: '2026-11-14',
+   title: 'Separate retrieval from reasoning',
+   summary: 'When a RAG answer fails, test the same question with a known relevant passage supplied directly. If the answer improves, investigate retrieval; if it still fails, investigate interpretation. Keep both tests so a fluent answer does not hide a weak evidence pipeline.',
+   topics: ['AI', 'RAG'],
+   kind: 'original'
   }
  ];
  if (typeof module !== 'undefined') module.exports = entries;
