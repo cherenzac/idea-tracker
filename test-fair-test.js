@@ -2,7 +2,7 @@
 const assert=require('node:assert/strict'),fs=require('node:fs'),vm=require('node:vm');
 const {fields,example,buildPlan}=require('./fair-test');
 assert.match(buildPlan(example),/Trial 3:/);assert.match(buildPlan({...example,prediction:''}),/No prediction recorded/);
-for(const field of fields){assert.throws(()=>buildPlan({...example,[field]:'x'.repeat(301)}));assert.throws(()=>buildPlan({...example,[field]:3}));if(field!=='prediction')assert.throws(()=>buildPlan({...example,[field]:'  '}));}
+for(const field of fields){assert.throws(()=>buildPlan({...example,[field]:'x'.repeat(301)}));assert.throws(()=>buildPlan({...example,[field]:3}));if(!['prediction','notes'].includes(field))assert.throws(()=>buildPlan({...example,[field]:'  '}));}
 assert.match(buildPlan({...example,question:'<script>literal</script>'}),/<script>literal<\/script>/);
 class El{constructor(){this.value='';this.hidden=false;this.handlers={};this.textContent='';}addEventListener(t,f){this.handlers[t]=f;}focus(){this.focused=true;}click(){this.clicked=true;}}
 const els=Object.fromEntries([...fields,'experiment-form','example','clear','feedback','plan','download','result-title','print','print-plan'].map(id=>[id,new El()]));let allow=true,downloads=[],revoked=[],prints=0;
@@ -23,3 +23,15 @@ els.question.value='Revised';els.question.handlers.input();assert.equal(els.prin
 submit();ctx.print=()=>{throw Error('blocked');};click('print');assert.match(els.feedback.textContent,/Printing unavailable/);
 assert.match(fs.readFileSync('fair-test.css','utf8'),/@media print/);
 console.log('PASS: print snapshot, cancel-safe feedback, stale-print prevention and unavailable-print fallback.');
+
+
+// Observations are optional, literal user text, never generated results.
+assert.match(buildPlan(example), /No observations recorded yet/);
+assert.match(buildPlan({...example, notes:'  Trial 1: 4; Trial 2: 3; <b>uncertain</b>  '}), /Trial 1: 4; Trial 2: 3; <b>uncertain<\/b>/);
+els.notes.value='Two trials gave different counts';els.notes.handlers.input();
+assert.equal(els.download.hidden,true);assert.equal(els.print.hidden,true);
+submit();assert.match(els.plan.value,/Two trials gave different counts/);
+assert.equal(els['print-plan'].textContent,els.plan.value);
+allow=false;click('example');assert.equal(els.notes.value,'Two trials gave different counts');
+allow=true;click('clear');assert.equal(els.notes.value,'');
+console.log('PASS: optional observations, literal text, rebuild and print inclusion, stale-output protection and cancel-safe clearing.');

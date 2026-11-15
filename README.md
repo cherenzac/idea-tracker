@@ -187,3 +187,13 @@ Session verification: all 14 test*.js suites, all 28 JavaScript syntax checks an
 Added an original, AI-assisted note about separating retrieval tests from reasoning tests. Archive search now also matches the displayed English date (for example, `November 2026`), alongside ISO dates, titles, topics and text. Search still matches all terms and respects the topic filter; it does not write storage or change article links. Covered by `node test-insights.js`.
 
 Session checks: all 14 test*.js suites, all 28 JavaScript syntax checks and whitespace checks passed. Browser layout/navigation checks were attempted but Chromium could not launch because socket() was denied (Operation not permitted); visual behavior remains unverified. No layout, notebook data or project navigation code changed.
+
+
+## November 15 nightly update (November 14 Pacific)
+
+Added **Puzzle Hint Ladder**, a distinct AI concept about learner-controlled, progressively stronger hints for fictional puzzles. It is a concept, not a working AI service. Notebook v17 adds it once while preserving existing records, edits, deletions and backups.
+
+Improved the trial’s existing Fair Test Studio with an optional observations field. After a real test, record results and rebuild the worksheet to include them in text downloads and printouts. Observations are entered by the visitor, never generated or inferred. Editing invalidates stale output; example replacement and clearing retain confirmation. No storage, accounts, collection or external service added. This is the nightly session for November 14 Pacific, following that day’s morning insight update; no additional standalone project was created.
+
+Verification: all 14 test*.js suites and all 28 JavaScript syntax checks passed. Tests include v1–v16 notebook migrations, edited IDs, deletion persistence, corrupt/failed storage, optional observations, literal text, output rebuild and print inclusion. Local browser layout/navigation attempt was blocked before launch by Chromium socket permissions (Operation not permitted); mobile and print preview are not visually verified. Exact remote commit and Pages deployment are checked separately after publication.
+
