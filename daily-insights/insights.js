@@ -98,6 +98,14 @@
    summary: 'When a RAG answer fails, test the same question with a known relevant passage supplied directly. If the answer improves, investigate retrieval; if it still fails, investigate interpretation. Keep both tests so a fluent answer does not hide a weak evidence pipeline.',
    topics: ['AI', 'RAG'],
    kind: 'original'
+  },
+  {
+   id: '2026-11-15-test-the-recovery-path',
+   date: '2026-11-15',
+   title: 'Test the recovery path',
+   summary: 'An agent evaluation should include a tool that returns a valid but incomplete result. Check whether the harness notices the missing work, preserves what succeeded and reports the remaining gap, rather than treating a successful status code as a completed task.',
+   topics: ['MCP', 'Agent harnesses'],
+   kind: 'original'
   }
  ];
  if (typeof module !== 'undefined') module.exports = entries;

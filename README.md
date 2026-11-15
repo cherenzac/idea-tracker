@@ -197,3 +197,10 @@ Improved the trial’s existing Fair Test Studio with an optional observations f
 
 Verification: all 14 test*.js suites and all 28 JavaScript syntax checks passed. Tests include v1–v16 notebook migrations, edited IDs, deletion persistence, corrupt/failed storage, optional observations, literal text, output rebuild and print inclusion. Local browser layout/navigation attempt was blocked before launch by Chromium socket permissions (Operation not permitted); mobile and print preview are not visually verified. Exact remote commit and Pages deployment are checked separately after publication.
 
+
+
+### Morning insight update · November 15, 2026
+
+Added an original AI-assisted note about evaluating recovery from incomplete tool results. The archive result count now shows the visible range when results span multiple pages, including after paging, filtering and shared-link navigation. This is a view-only accessibility aid; storage, notebook migrations and existing projects are unchanged. The nightly session's Puzzle Hint Ladder and Fair Test observations are preserved.
+
+Verification: all 14 test*.js suites, all 28 JavaScript syntax checks and whitespace checks passed. Local browser layout/navigation was attempted but Chromium could not launch: socket() failed with Operation not permitted. Visual checks remain blocked; pagination, filters, clear and shared-link behavior are covered by the DOM regression suite. Exact remote commit and Pages deployment are verified separately.

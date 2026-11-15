@@ -67,6 +67,11 @@
     article.append(meta,heading,summary,topics,footer);$('insight-list').append(article);
    }
    $('insight-count').textContent=filtered.length===all.length ? `${all.length} ${all.length===1?'insight':'insights'} in the archive` : `${filtered.length} of ${all.length} insights match`;
+   if (view.pages>1) {
+    const first=(view.page-1)*PAGE_SIZE+1;
+    const last=first+view.entries.length-1;
+    $('insight-count').textContent+=` · Showing ${first}–${last}`;
+   }
    $('insight-empty').hidden=filtered.length!==0;
    $('insight-page').textContent=`Page ${view.page} of ${view.pages}`;
    $('insight-prev').disabled=view.page<=1;$('insight-next').disabled=view.page>=view.pages;
