@@ -204,3 +204,12 @@ Verification: all 14 test*.js suites and all 28 JavaScript syntax checks passed.
 Added an original AI-assisted note about evaluating recovery from incomplete tool results. The archive result count now shows the visible range when results span multiple pages, including after paging, filtering and shared-link navigation. This is a view-only accessibility aid; storage, notebook migrations and existing projects are unchanged. The nightly session's Puzzle Hint Ladder and Fair Test observations are preserved.
 
 Verification: all 14 test*.js suites, all 28 JavaScript syntax checks and whitespace checks passed. Local browser layout/navigation was attempted but Chromium could not launch: socket() failed with Operation not permitted. Visual checks remain blocked; pagination, filters, clear and shared-link behavior are covered by the DOM regression suite. Exact remote commit and Pages deployment are verified separately.
+
+
+## November 16 nightly update (November 15 Pacific)
+
+Added **Shape Packing Studio**, a family-friendly AI concept about testing arrangements of fictional shapes and checking overlap or gaps by hand. It is not an implemented AI feature. Notebook v18 adds the concept once and preserves existing records, edited IDs, deletions and backups.
+
+Fair Test Studio now has **Select plan text** after building a valid worksheet. It selects the complete output and explains how to use the device's Copy command. It does not read or write the clipboard, claim that copying succeeded, request permissions or upload anything. Editing hides the control until the plan is rebuilt. This is an improvement to the trial's sole standalone page, not an additional project. The November 15 morning insight update is preserved; this is that day's second scheduled session.
+
+Verification: all 14 test*.js suites and all 28 JavaScript syntax checks passed, including v1–v17 migrations and full selection, repeat selection, stale-output protection and rebuilt output. Local browser launch was attempted but blocked by Chromium socket permissions (Operation not permitted). Mobile and print-preview visual checks remain unverified. Remote commit, exact Pages deployment and cloud desktop interaction are checked separately after publication.

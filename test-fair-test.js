@@ -4,8 +4,8 @@ const {fields,example,buildPlan}=require('./fair-test');
 assert.match(buildPlan(example),/Trial 3:/);assert.match(buildPlan({...example,prediction:''}),/No prediction recorded/);
 for(const field of fields){assert.throws(()=>buildPlan({...example,[field]:'x'.repeat(301)}));assert.throws(()=>buildPlan({...example,[field]:3}));if(!['prediction','notes'].includes(field))assert.throws(()=>buildPlan({...example,[field]:'  '}));}
 assert.match(buildPlan({...example,question:'<script>literal</script>'}),/<script>literal<\/script>/);
-class El{constructor(){this.value='';this.hidden=false;this.handlers={};this.textContent='';}addEventListener(t,f){this.handlers[t]=f;}focus(){this.focused=true;}click(){this.clicked=true;}}
-const els=Object.fromEntries([...fields,'experiment-form','example','clear','feedback','plan','download','result-title','print','print-plan'].map(id=>[id,new El()]));let allow=true,downloads=[],revoked=[],prints=0;
+class El{constructor(){this.value='';this.hidden=false;this.handlers={};this.textContent='';}addEventListener(t,f){this.handlers[t]=f;}focus(){this.focused=true;}select(){this.selectionStart=0;this.selectionEnd=this.value.length;}click(){this.clicked=true;}}
+const els=Object.fromEntries([...fields,'experiment-form','example','clear','feedback','plan','download','result-title','print','print-plan','select-plan'].map(id=>[id,new El()]));let allow=true,downloads=[],revoked=[],prints=0;
 const ctx={print:()=>{prints++;},document:{getElementById:id=>els[id],createElement:()=>{const e=new El();downloads.push(e);return e;}},confirm:()=>allow,URL:{createObjectURL:()=> 'blob:test',revokeObjectURL:u=>revoked.push(u)},Blob,setTimeout:fn=>fn()};
 vm.runInNewContext(fs.readFileSync('fair-test.js','utf8'),ctx);
 const click=id=>els[id].handlers.click();const submit=()=>els['experiment-form'].handlers.submit({preventDefault(){}});
@@ -35,3 +35,15 @@ assert.equal(els['print-plan'].textContent,els.plan.value);
 allow=false;click('example');assert.equal(els.notes.value,'Two trials gave different counts');
 allow=true;click('clear');assert.equal(els.notes.value,'');
 console.log('PASS: optional observations, literal text, rebuild and print inclusion, stale-output protection and cancel-safe clearing.');
+
+
+click('example');submit();click('select-plan');
+assert.equal(els.plan.focused,true);assert.equal(els.plan.selectionStart,0);
+assert.equal(els.plan.selectionEnd,els.plan.value.length);
+assert.match(els.feedback.textContent,/Nothing has been copied automatically/);
+els.notes.value='Updated';els.notes.handlers.input();
+assert.equal(els['select-plan'].hidden,true);
+const priorFeedback=els.feedback.textContent;click('select-plan');assert.equal(els.feedback.textContent,priorFeedback);
+submit();assert.equal(els['select-plan'].hidden,false);click('select-plan');click('select-plan');
+assert.equal(els.plan.selectionEnd,els.plan.value.length);
+console.log('PASS: select-plan focus/full text, honest copy instructions, hidden and inert stale output, rebuild and repeat selection.');
