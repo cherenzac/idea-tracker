@@ -56,7 +56,15 @@
     const heading=make('h2',entry.title);heading.id=article.id+'-title';
     const summary=make('p',entry.summary,'entry-summary');
     const topics=make('ul',undefined,'entry-topics');topics.setAttribute('aria-label','Topics');
-    for(const topic of entry.topics)topics.append(make('li',topic));
+    for(const topic of entry.topics) {
+     const item=make('li');const button=make('button',topic);
+     button.type='button';button.setAttribute('aria-label','Filter insights by '+topic);
+     button.addEventListener('click',()=>{
+      $('insight-topic').value=topic;resetPage();
+      $('insight-topic').focus({preventScroll:true});$('insight-topic').scrollIntoView({block:'center'});
+     });
+     item.append(button);topics.append(item);
+    }
     const footer=make('div',undefined,'entry-footer');
     if(entry.kind==='source') {
      const source=make('a','Source: '+entry.source.name+' ↗');source.href=safeSource(entry.source.url);

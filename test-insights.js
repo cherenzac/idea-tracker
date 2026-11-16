@@ -83,6 +83,21 @@ app=boot([{...sample,title:'<script>fake</script>',summary:'<img src=x onerror=a
 const card=e['insight-list'].children[0];assert.equal(card.children[1].textContent,'<script>fake</script>');
 assert.equal(card.children[2].textContent,'<img src=x onerror=alert(1)>');assert.equal(e['insight-warning'].hidden,false);
 const source=card.children[4].children[0];assert.equal(source.href,'https://example.com/note');assert.equal(source.rel,'noopener noreferrer');assert.equal(source.target,'_blank');
+// Topic chips are real buttons; retain the query, reset paging and focus the filter.
+app=boot([originalEntry,sample]);e=app.elements;
+let topicButton=e['insight-list'].children[0].children[3].children[1].children[0];
+assert.equal(topicButton.tagName,'button');assert.equal(topicButton.type,'button');
+assert.equal(topicButton.attrs['aria-label'],'Filter insights by RAG');
+e['insight-search'].value='permissions';e['insight-search'].handlers.input();
+topicButton=e['insight-list'].children[0].children[3].children[1].children[0];
+topicButton.handlers.click();assert.equal(e['insight-topic'].value,'RAG');
+assert.equal(e['insight-search'].value,'permissions');assert.equal(e['insight-list'].children.length,1);
+assert.equal(app.focused(),'insight-topic');assert.equal(app.scrolled(),'insight-topic');
+topicButton.handlers.click();assert.equal(e['insight-list'].children.length,1);
+e['insight-clear'].handlers.click();assert.equal(e['insight-list'].children.length,2);
+app=boot(fixture);e=app.elements;e['insight-next'].handlers.click();
+e['insight-list'].children[0].children[3].children[0].children[0].handlers.click();
+assert.equal(e['insight-page'].textContent,'Page 1 of 3');assert.equal(e['insight-topic'].value,'MCP');
 app=boot([]);assert.equal(app.elements['insight-empty'].hidden,false);
 const html=fs.readFileSync('./daily-insights/index.html','utf8');
 const latestDate=api.validateEntries(published)[0].date.replaceAll('-','');

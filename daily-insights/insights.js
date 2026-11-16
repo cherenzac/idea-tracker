@@ -106,6 +106,14 @@
    summary: 'An agent evaluation should include a tool that returns a valid but incomplete result. Check whether the harness notices the missing work, preserves what succeeded and reports the remaining gap, rather than treating a successful status code as a completed task.',
    topics: ['MCP', 'Agent harnesses'],
    kind: 'original'
+  },
+  {
+   id: '2026-11-16-shuffle-the-evidence',
+   date: '2026-11-16',
+   title: 'Shuffle the evidence',
+   summary: 'Run the same RAG question with the same passages in a different order. If the answer changes, inspect which evidence the model uses before adding more documents. A useful evaluation checks stability under harmless rearrangements, not only accuracy on one convenient ordering.',
+   topics: ['AI', 'RAG'],
+   kind: 'original'
   }
  ];
  if (typeof module !== 'undefined') module.exports = entries;
