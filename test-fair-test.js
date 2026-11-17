@@ -2,7 +2,7 @@
 const assert=require('node:assert/strict'),fs=require('node:fs'),vm=require('node:vm');
 const {fields,example,buildPlan}=require('./fair-test');
 assert.match(buildPlan(example),/Trial 3:/);assert.match(buildPlan({...example,prediction:''}),/No prediction recorded/);
-for(const field of fields){assert.throws(()=>buildPlan({...example,[field]:'x'.repeat(301)}));assert.throws(()=>buildPlan({...example,[field]:3}));if(!['prediction','notes'].includes(field))assert.throws(()=>buildPlan({...example,[field]:'  '}));}
+for(const field of fields){assert.throws(()=>buildPlan({...example,[field]:'x'.repeat(301)}));assert.throws(()=>buildPlan({...example,[field]:3}));if(['question','change','keep','measure'].includes(field))assert.throws(()=>buildPlan({...example,[field]:'  '}));}
 assert.match(buildPlan({...example,question:'<script>literal</script>'}),/<script>literal<\/script>/);
 class El{constructor(){this.value='';this.hidden=false;this.handlers={};this.textContent='';}addEventListener(t,f){this.handlers[t]=f;}focus(){this.focused=true;}select(){this.selectionStart=0;this.selectionEnd=this.value.length;}click(){this.clicked=true;}}
 const els=Object.fromEntries([...fields,'experiment-form','example','clear','feedback','plan','download','result-title','print','print-plan','select-plan'].map(id=>[id,new El()]));let allow=true,downloads=[],revoked=[],prints=0;
@@ -47,3 +47,13 @@ const priorFeedback=els.feedback.textContent;click('select-plan');assert.equal(e
 submit();assert.equal(els['select-plan'].hidden,false);click('select-plan');click('select-plan');
 assert.equal(els.plan.selectionEnd,els.plan.value.length);
 console.log('PASS: select-plan focus/full text, honest copy instructions, hidden and inert stale output, rebuild and repeat selection.');
+
+const scored={...example,'trial-1-expected':'5 squares','trial-1-observed':'6 squares','trial-1-verdict':'Pass'};
+assert.match(buildPlan(scored),/Expected: 5 squares/);assert.match(buildPlan(scored),/Observed: 6 squares/);assert.match(buildPlan(scored),/Outcome \(your judgment\): Pass/);
+for(const missing of ['rule','trial-1-expected','trial-1-observed'])assert.throws(()=>buildPlan({...scored,[missing]:''}),/To score/);
+assert.throws(()=>buildPlan({...scored,'trial-1-verdict':'Guaranteed'}),/listed/);
+for(const verdict of ['Fail','Unclear',''])assert.doesNotThrow(()=>buildPlan({...scored,'trial-1-verdict':verdict}));
+click('example');els['trial-1-expected'].value='5';els['trial-1-observed'].value='<b>6</b>';els['trial-1-verdict'].value='Pass';submit();assert.match(els.plan.value,/<b>6<\/b>/);
+els['trial-1-observed'].handlers.input();assert.equal(els.download.hidden,true);submit();assert.equal(els['print-plan'].textContent,els.plan.value);
+allow=false;click('clear');assert.equal(els['trial-1-verdict'].value,'Pass');allow=true;click('clear');for(const id of fields)assert.equal(els[id].value,'');
+console.log('PASS: human-scored trial validation, optional unscored records, literal observations, stale output, print inclusion and cancel-safe clearing.');

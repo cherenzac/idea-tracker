@@ -6,3 +6,5 @@
  #print-plan[hidden]{display:block!important;white-space:pre-wrap;overflow-wrap:anywhere;font:11pt/1.5 system-ui,sans-serif;color:black}
  @page{margin:18mm}
 }
+
+fieldset{min-width:0;border:1px solid #bbcbbd;border-radius:12px;margin:24px 0;padding:16px}legend{font-weight:700}fieldset p{font-size:.9rem;line-height:1.6}.trial{background:#f3f5ed}.trial label{margin-top:12px}select{font:inherit;width:100%;min-height:44px;padding:10px;border:1px solid #789287;border-radius:8px;background:white;color:#203b38}select:focus-visible{outline:3px solid #9a4b1b;outline-offset:4px}
