@@ -228,3 +228,10 @@ Added **Imaginary Language Lab**, a family-friendly AI concept for checking inve
 Fair Test Studio now has an optional success rule and three labeled trial records: expected result, observed result, and a human-selected Pass / Fail / Unclear outcome. Untested trials remain unscored. Scoring requires a rule and both expected and observed text; no automatic verdict is generated. All records are included in the plan, download and print snapshot, and any edit invalidates stale output. Example and clear actions retain their cancellation protection. Nothing is uploaded or persisted.
 
 Verification: all 14 test*.js suites, all 28 JavaScript syntax checks and git diff whitespace checks passed. Local Chromium visual QA was attempted but blocked before launch by socket permissions (Operation not permitted); desktop/mobile and print-preview appearance remain unverified locally. Remote commit and exact Pages deployment are checked separately.
+
+
+### Morning insight update · November 17, 2026
+
+Added **Check the boundary, not just the answer**, an original AI-assisted note about testing authority boundaries independently of final output. The archive now offers **Clear search only** when a query is present. It removes the query while retaining the selected topic, returns to the first result page and focuses search. Clear filters still resets both. No storage, notebook migration or other project changes.
+
+Verification: all 14 test suites, 28 JavaScript syntax checks and whitespace checks passed. Regression tests cover empty results, repeated clearing, topic retention, pagination reset and focus. Local mobile visual QA could not launch because the Playwright browser executable is absent; visual checks remain unverified here. Exact remote commit and Pages deployment are checked separately after publication.

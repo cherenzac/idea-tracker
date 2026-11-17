@@ -42,7 +42,7 @@ function boot(entries,hash=''){
   setAttribute(k,v){this.attrs[k]=v;}addEventListener(k,fn){this.handlers[k]=fn;}
   focus(){focused=this.id;}scrollIntoView(){scrolled=this.id;}
  }
- for(const id of ['insight-search','insight-topic','insight-list','insight-count','insight-empty','insight-page','insight-prev','insight-next','insight-pagination','insight-clear','insight-warning','insight-updated']){const e=new Element('div');e.id=id;}
+ for(const id of ['insight-clear-search','insight-search','insight-topic','insight-list','insight-count','insight-empty','insight-page','insight-prev','insight-next','insight-pagination','insight-clear','insight-warning','insight-updated']){const e=new Element('div');e.id=id;}
  elements['insight-topic'].value='all';
  const window={IdeaVisionInsights:entries,location:{hash},addEventListener:(event,fn)=>handlers[event]=fn};
  const doc={getElementById:id=>elements[id],createElement:tag=>new Element(tag)};
@@ -106,3 +106,22 @@ assert.match(html,/<meta name="viewport"/);assert.match(html,/<noscript>/);asser
 const home=fs.readFileSync('./index.html','utf8');
 assert.match(home,/<a class="daily-insights-link" href="daily-insights\/" target="_blank" rel="noopener noreferrer"/);
 console.log('PASS: published metadata, original/source labels, URL safety, dates, sorting, search/topic filters, pagination, permalink paging, empty/error states and text-only rendering.');
+
+// Clear only the query, preserving the topic and resetting pagination.
+app=boot(fixture);e=app.elements;
+assert.equal(e['insight-clear-search'].hidden,true);
+e['insight-topic'].value='MCP';e['insight-topic'].handlers.change();
+e['insight-search'].value='not present';e['insight-search'].handlers.input();
+assert.equal(e['insight-clear-search'].hidden,false);
+assert.equal(e['insight-list'].children.length,0);
+e['insight-clear-search'].handlers.click();
+assert.equal(e['insight-search'].value,'');assert.equal(e['insight-topic'].value,'MCP');
+assert.equal(e['insight-list'].children.length,10);assert.equal(e['insight-clear-search'].hidden,true);
+assert.equal(app.focused(),'insight-search');
+e['insight-next'].handlers.click();e['insight-clear-search'].handlers.click();
+assert.equal(e['insight-page'].textContent,'Page 1 of 3');
+e['insight-search'].value=' ';e['insight-search'].handlers.input();
+assert.equal(e['insight-clear-search'].hidden,false);
+e['insight-clear'].handlers.click();assert.equal(e['insight-clear-search'].hidden,true);
+assert.match(html,/id="insight-clear-search" type="button" hidden/);
+console.log('PASS: query-only clear, topic preservation, zero-result recovery, repeated clear, pagination reset and focus.');

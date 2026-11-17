@@ -81,12 +81,16 @@
     $('insight-count').textContent+=` · Showing ${first}–${last}`;
    }
    $('insight-empty').hidden=filtered.length!==0;
+   $('insight-clear-search').hidden=$('insight-search').value.length===0;
    $('insight-page').textContent=`Page ${view.page} of ${view.pages}`;
    $('insight-prev').disabled=view.page<=1;$('insight-next').disabled=view.page>=view.pages;
    $('insight-pagination').hidden=view.pages<=1;
   }
   function resetPage(){currentPage=1;render();}
   $('insight-search').addEventListener('input',resetPage);
+  $('insight-clear-search').addEventListener('click',()=>{
+   $('insight-search').value='';resetPage();$('insight-search').focus();
+  });
   $('insight-topic').addEventListener('change',resetPage);
   $('insight-clear').addEventListener('click',()=>{$('insight-search').value='';$('insight-topic').value='all';resetPage();$('insight-search').focus();});
   function turnPage(delta) {

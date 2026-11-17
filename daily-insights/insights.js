@@ -114,6 +114,14 @@
    summary: 'Run the same RAG question with the same passages in a different order. If the answer changes, inspect which evidence the model uses before adding more documents. A useful evaluation checks stability under harmless rearrangements, not only accuracy on one convenient ordering.',
    topics: ['AI', 'RAG'],
    kind: 'original'
+  },
+  {
+   id: '2026-11-17-check-the-boundary-not-just-the-answer',
+   date: '2026-11-17',
+   title: 'Check the boundary, not just the answer',
+   summary: 'Give an agent two similar tasks with different allowed actions and check whether its behavior changes with that boundary, because the same correct answer can come from either an authorized path or an unauthorized one.',
+   topics: ['Agent governance', 'AI'],
+   kind: 'original'
   }
  ];
  if (typeof module !== 'undefined') module.exports = entries;
