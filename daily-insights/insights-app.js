@@ -88,8 +88,12 @@
   }
   function resetPage(){currentPage=1;render();}
   $('insight-search').addEventListener('input',resetPage);
-  $('insight-clear-search').addEventListener('click',()=>{
+  function clearSearch(){
    $('insight-search').value='';resetPage();$('insight-search').focus();
+  }
+  $('insight-clear-search').addEventListener('click',clearSearch);
+  $('insight-search').addEventListener('keydown',event=>{
+   if(event.key==='Escape' && $('insight-search').value.length>0){event.preventDefault();clearSearch();}
   });
   $('insight-topic').addEventListener('change',resetPage);
   $('insight-clear').addEventListener('click',()=>{$('insight-search').value='';$('insight-topic').value='all';resetPage();$('insight-search').focus();});

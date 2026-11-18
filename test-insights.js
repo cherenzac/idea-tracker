@@ -125,3 +125,19 @@ assert.equal(e['insight-clear-search'].hidden,false);
 e['insight-clear'].handlers.click();assert.equal(e['insight-clear-search'].hidden,true);
 assert.match(html,/id="insight-clear-search" type="button" hidden/);
 console.log('PASS: query-only clear, topic preservation, zero-result recovery, repeated clear, pagination reset and focus.');
+
+// Escape clears a nonempty search without discarding its topic.
+app=boot(fixture);e=app.elements;let prevented=0;
+e['insight-topic'].value='MCP';e['insight-topic'].handlers.change();
+e['insight-search'].value='missing';e['insight-search'].handlers.input();
+e['insight-search'].handlers.keydown({key:'Enter',preventDefault(){prevented++;}});
+assert.equal(e['insight-search'].value,'missing');assert.equal(prevented,0);
+e['insight-search'].handlers.keydown({key:'Escape',preventDefault(){prevented++;}});
+assert.equal(e['insight-search'].value,'');assert.equal(e['insight-topic'].value,'MCP');
+assert.equal(e['insight-page'].textContent,'Page 1 of 3');assert.equal(app.focused(),'insight-search');
+assert.equal(prevented,1);assert.equal(e['insight-clear-search'].hidden,true);
+e['insight-next'].handlers.click();
+e['insight-search'].handlers.keydown({key:'Escape',preventDefault(){prevented++;}});
+assert.equal(prevented,1);assert.equal(e['insight-page'].textContent,'Page 2 of 3');
+assert.match(html,/aria-describedby="search-help"/);
+console.log('PASS: Escape search recovery, topic retention, focus, paging, unrelated keys and empty repeat.');

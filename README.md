@@ -244,3 +244,9 @@ Added **Instruction Gap Detective**, a family-friendly AI concept for finding mi
 Fair Test Studio now offers **Clear trial log only**. After confirmation it clears expectations, observations, human verdicts and notes while retaining the question, planned change, controls, measurement, prediction and success rule. Cancel leaves everything intact. A successful reset invalidates old exports and focuses the first expectation. Empty and repeated resets preserve the current plan. No new storage or network behavior is introduced.
 
 Verification: all 14 test*.js suites and all 28 JavaScript syntax checks passed, including v1–v19 migration tests and cancel/repeat/empty result-reset flows. Local Chromium QA was attempted but socket creation was denied (Operation not permitted), so local desktop/mobile visual checks remain unverified. Remote commit and exact Pages deployment are checked separately after publication.
+
+### Morning insight update · November 18, 2026
+
+Added **Trace repeated evidence**, an original AI-assisted note about checking whether apparently agreeing sources share one origin. Pressing Escape in the archive search now clears a nonempty query while retaining the topic and focusing search. Empty or repeated Escape leaves pagination alone. A visible hint describes the shortcut. No storage, notebook migrations, timers or other projects changed.
+
+Verification: all 14 test suites and 28 JavaScript syntax checks passed, including query recovery, topic preservation, focus, unrelated keys and repeated Escape. Browser layout and navigation checks could not run because the installed Playwright Chromium executable is missing; no cloud browser tool or alternate computer was available. Remote commit and exact Pages deployment are verified separately after publication.

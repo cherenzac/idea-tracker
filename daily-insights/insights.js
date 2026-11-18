@@ -122,6 +122,14 @@
    summary: 'Give an agent two similar tasks with different allowed actions and check whether its behavior changes with that boundary, because the same correct answer can come from either an authorized path or an unauthorized one.',
    topics: ['Agent governance', 'AI'],
    kind: 'original'
+  },
+  {
+   id: '2026-11-18-trace-repeated-evidence',
+   date: '2026-11-18',
+   title: 'Trace repeated evidence',
+   summary: 'Several retrieved pages can repeat one original claim, so track where evidence originated before treating agreement as corroboration and test whether an answer changes when copied passages are counted only once.',
+   topics: ['AI', 'RAG'],
+   kind: 'original'
   }
  ];
  if (typeof module !== 'undefined') module.exports = entries;
