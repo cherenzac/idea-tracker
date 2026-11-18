@@ -19,6 +19,15 @@
  $('experiment-form').addEventListener('submit',event=>{event.preventDefault();try{current=buildPlan(Object.fromEntries(fields.map(id=>[id,$(id).value])));$('plan').value=current;$('plan').hidden=false;$('download').hidden=false;$('select-plan').hidden=false;$('print').hidden=false;$('print-plan').textContent=current;$('result-title').textContent='Your fair-test plan';$('feedback').textContent='Plan built. Review it with a grown-up before trying anything.';}catch(error){invalidate();$('feedback').textContent=error.message;const missing=fields.find(id=>required.includes(id)&&!$(id).value.trim());if(missing)$(missing).focus();}});
  function hasText(){return fields.some(id=>$(id).value.trim());}
  $('example').addEventListener('click',()=>{if(hasText()&&!confirm('Replace this worksheet with the paper example?'))return;fields.forEach(id=>$(id).value=example[id]);invalidate();$('feedback').textContent='Paper example loaded. Review or edit it, then build your plan.';});
+ // A repeat run retains the original plan and success rule, never old results.
+ $('clear-results').addEventListener('click',()=>{
+  const resultFields=[...trialFields,'notes'];
+  if(!resultFields.some(id=>$(id).value.trim())){$('feedback').textContent='No trial results to clear. Your plan is unchanged.';return;}
+  if(!confirm('Clear all trial expectations, observations, outcomes and notes? Your plan and success rule will stay. Download the current plan first if you want to keep these results.'))return;
+  resultFields.forEach(id=>$(id).value='');invalidate();
+  $('feedback').textContent='Trial log and notes cleared. Your plan and success rule are unchanged. Build a fresh plan before testing again.';
+  $('trial-1-expected').focus();
+ });
  $('clear').addEventListener('click',()=>{if(hasText()&&!confirm('Clear this worksheet? Download any plan you want to keep first.'))return;fields.forEach(id=>$(id).value='');invalidate();$('feedback').textContent='Worksheet cleared.';$('question').focus();});
  $('select-plan').addEventListener('click',()=>{if(!current)return;$('plan').focus();$('plan').select();$('feedback').textContent='Plan text selected. Use your device’s Copy command, then paste it where you want. Nothing has been copied automatically.';});
  $('print').addEventListener('click',()=>{if(!current)return;try{root.print();$('feedback').textContent='Print dialog requested. Your worksheet stays here if you cancel.';}catch(error){$('feedback').textContent='Printing unavailable. Download or copy your plan instead.';}});

@@ -14,7 +14,7 @@ Then visit `http://localhost:8080`. Use a local server for consistent browser st
 
 ## Features
 
-- Twenty-four generic home/family AI project concepts (not implemented AI features)
+- Twenty-eight generic home/family AI project concepts (not implemented AI features)
 - Five official external inspiration links, clearly attributed to their creators
 - Add, edit, and delete ideas (deletion asks for confirmation), with Undo last delete
 - Confirmation before replacing or canceling an unsaved form draft
@@ -31,7 +31,7 @@ Do not add passwords, API keys, private notes, or personal information to this r
 
 ## Saved-data upgrades
 
-This version uses `ideavision.ideas.v19`. Returning v18 visitors receive one new concept, **Imaginary Language Lab**, while keeping all existing entries, edits and deletions. Previous storage remains unchanged as a backup. The addition happens once; deleting it stays deleted on reload. Returning v17 visitors also receive Shape Packing Studio; v16 visitors also receive Puzzle Hint Ladder; v15 visitors also receive Shadow Story Stage; v14 visitors also receive Story Viewfinder; v13 visitors also receive Fact or Fable Studio; v12 visitors also receive Token Town Market; v11 visitors also receive Creature Habitat Lab; v10 visitors also receive Paper Bridge Lab; v9 visitors also receive Foley Forest; v8 visitors also receive Pattern Parade; v7 visitors also receive Comic Continuity Coach; v6 visitors also receive Make-Believe Museum; v5 visitors also receive Robot Route Coach; v4 visitors also receive Board Game Balance Lab; v3 visitors also receive Riddle Repair Shop; v2 visitors also receive Toybox Tales. The v1 migration retains personal and edited entries. The newest available saved version takes priority; invalid data is never overwritten or silently replaced by older data.
+This version uses `ideavision.ideas.v20`. Returning v19 visitors receive one new concept, **Instruction Gap Detective**, while keeping all existing entries, edits and deletions. Previous storage remains unchanged as a backup. The addition happens once; deleting it stays deleted on reload. Returning v18 visitors also receive Imaginary Language Lab; v17 visitors also receive Shape Packing Studio; v16 visitors also receive Puzzle Hint Ladder; v15 visitors also receive Shadow Story Stage; v14 visitors also receive Story Viewfinder; v13 visitors also receive Fact or Fable Studio; v12 visitors also receive Token Town Market; v11 visitors also receive Creature Habitat Lab; v10 visitors also receive Paper Bridge Lab; v9 visitors also receive Foley Forest; v8 visitors also receive Pattern Parade; v7 visitors also receive Comic Continuity Coach; v6 visitors also receive Make-Believe Museum; v5 visitors also receive Robot Route Coach; v4 visitors also receive Board Game Balance Lab; v3 visitors also receive Riddle Repair Shop; v2 visitors also receive Toybox Tales. The v1 migration retains personal and edited entries. The newest available saved version takes priority; invalid data is never overwritten or silently replaced by older data.
 
 Token Town Market is an **AI project concept**, not a working AI service: compare imaginary shopping baskets using pretend tokens, explain totals and suggest swaps, with adult arithmetic checks. It does not use real budgets, process purchases or provide financial advice. No real people, photos, uploads, model or API are added. The existing notebook concepts also remain concepts, not implemented generators.
 
@@ -235,3 +235,12 @@ Verification: all 14 test*.js suites, all 28 JavaScript syntax checks and git di
 Added **Check the boundary, not just the answer**, an original AI-assisted note about testing authority boundaries independently of final output. The archive now offers **Clear search only** when a query is present. It removes the query while retaining the selected topic, returns to the first result page and focuses search. Clear filters still resets both. No storage, notebook migration or other project changes.
 
 Verification: all 14 test suites, 28 JavaScript syntax checks and whitespace checks passed. Regression tests cover empty results, repeated clearing, topic retention, pagination reset and focus. Local mobile visual QA could not launch because the Playwright browser executable is absent; visual checks remain unverified here. Exact remote commit and Pages deployment are checked separately after publication.
+
+
+## November 17 Pacific nightly session (November 18 UTC)
+
+Added **Instruction Gap Detective**, a family-friendly AI concept for finding missing steps in fictional paper-craft instructions and asking clarifying questions. It is a concept, not a connected AI feature. Notebook v20 preserves records, edited IDs, deletions and backups while adding the concept once.
+
+Fair Test Studio now offers **Clear trial log only**. After confirmation it clears expectations, observations, human verdicts and notes while retaining the question, planned change, controls, measurement, prediction and success rule. Cancel leaves everything intact. A successful reset invalidates old exports and focuses the first expectation. Empty and repeated resets preserve the current plan. No new storage or network behavior is introduced.
+
+Verification: all 14 test*.js suites and all 28 JavaScript syntax checks passed, including v1–v19 migration tests and cancel/repeat/empty result-reset flows. Local Chromium QA was attempted but socket creation was denied (Operation not permitted), so local desktop/mobile visual checks remain unverified. Remote commit and exact Pages deployment are checked separately after publication.

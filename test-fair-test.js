@@ -5,7 +5,7 @@ assert.match(buildPlan(example),/Trial 3:/);assert.match(buildPlan({...example,p
 for(const field of fields){assert.throws(()=>buildPlan({...example,[field]:'x'.repeat(301)}));assert.throws(()=>buildPlan({...example,[field]:3}));if(['question','change','keep','measure'].includes(field))assert.throws(()=>buildPlan({...example,[field]:'  '}));}
 assert.match(buildPlan({...example,question:'<script>literal</script>'}),/<script>literal<\/script>/);
 class El{constructor(){this.value='';this.hidden=false;this.handlers={};this.textContent='';}addEventListener(t,f){this.handlers[t]=f;}focus(){this.focused=true;}select(){this.selectionStart=0;this.selectionEnd=this.value.length;}click(){this.clicked=true;}}
-const els=Object.fromEntries([...fields,'experiment-form','example','clear','feedback','plan','download','result-title','print','print-plan','select-plan'].map(id=>[id,new El()]));let allow=true,downloads=[],revoked=[],prints=0;
+const els=Object.fromEntries([...fields,'experiment-form','example','clear','feedback','plan','download','result-title','print','print-plan','select-plan','clear-results'].map(id=>[id,new El()]));let allow=true,downloads=[],revoked=[],prints=0;
 const ctx={print:()=>{prints++;},document:{getElementById:id=>els[id],createElement:()=>{const e=new El();downloads.push(e);return e;}},confirm:()=>allow,URL:{createObjectURL:()=> 'blob:test',revokeObjectURL:u=>revoked.push(u)},Blob,setTimeout:fn=>fn()};
 vm.runInNewContext(fs.readFileSync('fair-test.js','utf8'),ctx);
 const click=id=>els[id].handlers.click();const submit=()=>els['experiment-form'].handlers.submit({preventDefault(){}});
@@ -57,3 +57,17 @@ click('example');els['trial-1-expected'].value='5';els['trial-1-observed'].value
 els['trial-1-observed'].handlers.input();assert.equal(els.download.hidden,true);submit();assert.equal(els['print-plan'].textContent,els.plan.value);
 allow=false;click('clear');assert.equal(els['trial-1-verdict'].value,'Pass');allow=true;click('clear');for(const id of fields)assert.equal(els[id].value,'');
 console.log('PASS: human-scored trial validation, optional unscored records, literal observations, stale output, print inclusion and cancel-safe clearing.');
+
+// Reset results for a repeat run without losing the planned experiment.
+click('example');els.rule.value='Keep this rule';els.notes.value='Old notes';
+els['trial-1-expected'].value='Five';els['trial-1-observed'].value='Six';els['trial-1-verdict'].value='Pass';submit();
+const prior=els.plan.value;allow=false;click('clear-results');
+assert.equal(els.plan.value,prior);assert.equal(els.notes.value,'Old notes');
+allow=true;click('clear-results');assert.equal(els.question.value,example.question);
+assert.equal(els.rule.value,'Keep this rule');assert.equal(els.prediction.value,example.prediction);
+for(const id of fields.filter(id=>id.startsWith('trial-')||id==='notes'))assert.equal(els[id].value,'');
+assert.equal(els.plan.hidden,true);assert.equal(els.download.hidden,true);assert.equal(els.print.hidden,true);
+assert.equal(els['trial-1-expected'].focused,true);submit();assert.doesNotMatch(els.plan.value,/Old notes|Observed: Six/);
+const fresh=els.plan.value;click('clear-results');assert.equal(els.plan.value,fresh);
+assert.match(els.feedback.textContent,/No trial results/);
+console.log('PASS: cancel-safe result reset, plan/rule preservation, stale exports hidden, empty/repeated reset and keyboard focus.');
