@@ -130,6 +130,14 @@
    summary: 'Several retrieved pages can repeat one original claim, so track where evidence originated before treating agreement as corroboration and test whether an answer changes when copied passages are counted only once.',
    topics: ['AI', 'RAG'],
    kind: 'original'
+  },
+  {
+   id: '2026-11-19-count-the-runs-that-stop',
+   date: '2026-11-19',
+   title: 'Count the runs that stop',
+   summary: 'Keep every planned case in an agent regression report: show completions, timeouts and human stops separately, and compare both outcome quality and completion coverage so a release cannot look better just because its hardest runs stopped producing answers.',
+   topics: ['AI', 'Agent harnesses'],
+   kind: 'original'
   }
  ];
  if (typeof module !== 'undefined') module.exports = entries;

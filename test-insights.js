@@ -56,15 +56,15 @@ assert.equal(e['insight-list'].children[0].children[0].children[1].textContent,'
 e['insight-topic'].value='MCP';e['insight-topic'].handlers.change();assert.equal(e['insight-list'].children.length,0);assert.equal(e['insight-empty'].hidden,false);
 e['insight-clear'].handlers.click();assert.equal(e['insight-list'].children.length,1);assert.equal(app.focused(),'insight-search');
 e['insight-search'].value='agent';e['insight-search'].handlers.input();assert.equal(e['insight-list'].children.length,1);
-e['insight-search'].value='absent';e['insight-search'].handlers.input();assert.equal(e['insight-count'].textContent,'0 of 1 insights match');
+e['insight-search'].value='absent';e['insight-search'].handlers.input();assert.equal(e['insight-count'].textContent,'Matches: 0 of 1');
 app=boot(fixture);e=app.elements;assert.equal(e['insight-pagination'].hidden,false);
 assert.equal(e['insight-count'].textContent,'25 insights in the archive · Showing 1–10');
 e['insight-next'].handlers.click();assert.equal(e['insight-count'].textContent,'25 insights in the archive · Showing 11–20');assert.equal(e['insight-page'].textContent,'Page 2 of 3');assert.equal(app.focused(),'insight-2026-10-15-fixture');assert.equal(app.scrolled(),'insight-2026-10-15-fixture');
 e['insight-next'].handlers.click();assert.equal(e['insight-list'].children.length,5);assert.equal(e['insight-count'].textContent,'25 insights in the archive · Showing 21–25');assert.equal(e['insight-next'].disabled,true);assert.equal(app.focused(),'insight-2026-10-05-fixture');
 e['insight-prev'].handlers.click();assert.equal(e['insight-page'].textContent,'Page 2 of 3');assert.equal(app.focused(),'insight-2026-10-15-fixture');assert.equal(app.scrolled(),'insight-2026-10-15-fixture');
 e['insight-search'].value='Fixture 25';e['insight-search'].handlers.input();assert.equal(e['insight-page'].textContent,'Page 1 of 1');assert.equal(app.focused(),'insight-2026-10-15-fixture','Filtering must not move focus to an article.');
-assert.equal(e['insight-count'].textContent,'1 of 25 insights match');
-e['insight-search'].value='fixture';e['insight-search'].handlers.input();assert.equal(e['insight-count'].textContent,'25 insights in the archive · Showing 1–10');
+assert.equal(e['insight-count'].textContent,'Matches: 1 of 25');
+e['insight-search'].value='fixture';e['insight-search'].handlers.input();assert.equal(e['insight-count'].textContent,'Matches: 25 of 25 · Showing 1–10');
 e['insight-clear'].handlers.click();assert.equal(e['insight-page'].textContent,'Page 1 of 3');
 app=boot(fixture,'#insight-2026-10-01-fixture');e=app.elements;
 assert.equal(e['insight-page'].textContent,'Page 3 of 3');assert.equal(app.scrolled(),'insight-2026-10-01-fixture');assert.equal(app.focused(),'insight-2026-10-01-fixture');

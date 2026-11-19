@@ -43,7 +43,10 @@
   let currentPage = 1;
   const make = (tag, text, className) => { const node=doc.createElement(tag);if(text!==undefined)node.textContent=text;if(className)node.className=className;return node; };
   function render() {
-   const filtered = filterEntries(all, $('insight-search').value, $('insight-topic').value);
+   const query = $('insight-search').value;
+   const topic = $('insight-topic').value;
+   const hasFilters = query.trim() !== '' || topic !== 'all';
+   const filtered = filterEntries(all, query, topic);
    const view = pageEntries(filtered, currentPage); currentPage=view.page;
    $('insight-list').replaceChildren();
    for (const entry of view.entries) {
@@ -74,7 +77,7 @@
     link.setAttribute('aria-label','Link to insight: '+entry.title);footer.append(link);
     article.append(meta,heading,summary,topics,footer);$('insight-list').append(article);
    }
-   $('insight-count').textContent=filtered.length===all.length ? `${all.length} ${all.length===1?'insight':'insights'} in the archive` : `${filtered.length} of ${all.length} insights match`;
+   $('insight-count').textContent=!hasFilters ? `${all.length} ${all.length===1?'insight':'insights'} in the archive` : `Matches: ${filtered.length} of ${all.length}`;
    if (view.pages>1) {
     const first=(view.page-1)*PAGE_SIZE+1;
     const last=first+view.entries.length-1;
