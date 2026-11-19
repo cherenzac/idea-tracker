@@ -71,3 +71,6 @@ assert.equal(els['trial-1-expected'].focused,true);submit();assert.doesNotMatch(
 const fresh=els.plan.value;click('clear-results');assert.equal(els.plan.value,fresh);
 assert.match(els.feedback.textContent,/No trial results/);
 console.log('PASS: cancel-safe result reset, plan/rule preservation, stale exports hidden, empty/repeated reset and keyboard focus.');
+
+assert.match(buildPlan(example),/Pass: 0; Fail: 0; Unclear: 0; Not scored: 3/);
+assert.match(buildPlan({...example,'trial-1-expected':'Five','trial-1-observed':'Five','trial-1-verdict':'Pass','trial-2-expected':'Five','trial-2-observed':'Four','trial-2-verdict':'Fail','trial-3-expected':'Five','trial-3-observed':'Could not count','trial-3-verdict':'Unclear'}),/Pass: 1; Fail: 1; Unclear: 1; Not scored: 0/);

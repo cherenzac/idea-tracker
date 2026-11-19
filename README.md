@@ -14,7 +14,7 @@ Then visit `http://localhost:8080`. Use a local server for consistent browser st
 
 ## Features
 
-- Twenty-eight generic home/family AI project concepts (not implemented AI features)
+- Twenty-nine generic home/family AI project concepts (not implemented AI features)
 - Five official external inspiration links, clearly attributed to their creators
 - Add, edit, and delete ideas (deletion asks for confirmation), with Undo last delete
 - Confirmation before replacing or canceling an unsaved form draft
@@ -31,7 +31,7 @@ Do not add passwords, API keys, private notes, or personal information to this r
 
 ## Saved-data upgrades
 
-This version uses `ideavision.ideas.v20`. Returning v19 visitors receive one new concept, **Instruction Gap Detective**, while keeping all existing entries, edits and deletions. Previous storage remains unchanged as a backup. The addition happens once; deleting it stays deleted on reload. Returning v18 visitors also receive Imaginary Language Lab; v17 visitors also receive Shape Packing Studio; v16 visitors also receive Puzzle Hint Ladder; v15 visitors also receive Shadow Story Stage; v14 visitors also receive Story Viewfinder; v13 visitors also receive Fact or Fable Studio; v12 visitors also receive Token Town Market; v11 visitors also receive Creature Habitat Lab; v10 visitors also receive Paper Bridge Lab; v9 visitors also receive Foley Forest; v8 visitors also receive Pattern Parade; v7 visitors also receive Comic Continuity Coach; v6 visitors also receive Make-Believe Museum; v5 visitors also receive Robot Route Coach; v4 visitors also receive Board Game Balance Lab; v3 visitors also receive Riddle Repair Shop; v2 visitors also receive Toybox Tales. The v1 migration retains personal and edited entries. The newest available saved version takes priority; invalid data is never overwritten or silently replaced by older data.
+This version uses `ideavision.ideas.v21`. Returning v20 visitors receive one new concept, **Sorting Rule Switch**, while keeping all existing entries, edits and deletions. Previous storage remains unchanged as a backup. The addition happens once; deleting it stays deleted on reload. Returning v19 visitors also receive Instruction Gap Detective; v18 visitors also receive Imaginary Language Lab; v17 visitors also receive Shape Packing Studio; v16 visitors also receive Puzzle Hint Ladder; v15 visitors also receive Shadow Story Stage; v14 visitors also receive Story Viewfinder; v13 visitors also receive Fact or Fable Studio; v12 visitors also receive Token Town Market; v11 visitors also receive Creature Habitat Lab; v10 visitors also receive Paper Bridge Lab; v9 visitors also receive Foley Forest; v8 visitors also receive Pattern Parade; v7 visitors also receive Comic Continuity Coach; v6 visitors also receive Make-Believe Museum; v5 visitors also receive Robot Route Coach; v4 visitors also receive Board Game Balance Lab; v3 visitors also receive Riddle Repair Shop; v2 visitors also receive Toybox Tales. The v1 migration retains personal and edited entries. The newest available saved version takes priority; invalid data is never overwritten or silently replaced by older data.
 
 Token Town Market is an **AI project concept**, not a working AI service: compare imaginary shopping baskets using pretend tokens, explain totals and suggest swaps, with adult arithmetic checks. It does not use real budgets, process purchases or provide financial advice. No real people, photos, uploads, model or API are added. The existing notebook concepts also remain concepts, not implemented generators.
 
@@ -250,3 +250,11 @@ Verification: all 14 test*.js suites and all 28 JavaScript syntax checks passed,
 Added **Trace repeated evidence**, an original AI-assisted note about checking whether apparently agreeing sources share one origin. Pressing Escape in the archive search now clears a nonempty query while retaining the topic and focusing search. Empty or repeated Escape leaves pagination alone. A visible hint describes the shortcut. No storage, notebook migrations, timers or other projects changed.
 
 Verification: all 14 test suites and 28 JavaScript syntax checks passed, including query recovery, topic preservation, focus, unrelated keys and repeated Escape. Browser layout and navigation checks could not run because the installed Playwright Chromium executable is missing; no cloud browser tool or alternate computer was available. Remote commit and exact Pages deployment are verified separately after publication.
+
+## November 18 Pacific nightly session (November 19 UTC)
+
+Added **Sorting Rule Switch**, a family-friendly AI concept about regrouping fictional objects when a sorting rule changes, including objects that fit neither group. This is a concept, not a connected AI feature. Notebook v21 adds it once while preserving earlier records, edits, deletions and storage backups.
+
+Improved the trial's existing Fair Test Studio: generated plans now summarize counts of the visitor's Pass, Fail, Unclear and Not scored judgments. Unscored trials are never counted as failures, and the summary is explicitly not a scientific conclusion. Counts appear in the same current snapshot used for download and printing, with existing stale-output protection. No new standalone page, storage or network behavior was added. The November 18 morning insight remains unchanged.
+
+Verification: all 14 test suites and all 28 JavaScript syntax checks passed, including v1–v20 migrations, edited IDs, repeat loads, deletions, corrupt storage and mixed/unscored judgment counts. Browser layout/navigation checks were attempted but Playwright's Chromium executable is missing; visual checks remain unverified. Remote commit and exact Pages deployment are checked separately after publication.
