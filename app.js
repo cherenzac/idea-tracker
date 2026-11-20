@@ -1,5 +1,6 @@
 'use strict';
-const KEY = 'ideavision.ideas.v21';
+const KEY = 'ideavision.ideas.v22';
+const V21_KEY = 'ideavision.ideas.v21';
 const V20_KEY = 'ideavision.ideas.v20';
 const V19_KEY = 'ideavision.ideas.v19';
 const V18_KEY = 'ideavision.ideas.v18';
@@ -158,7 +159,15 @@ const sortingNightlyIdea = {
  icon: '◉',
  status: 'New'
 };
+const pairNightlyIdea = {
+ id: 'family-2026-11-20',
+ title: 'Puzzle Pair Scorekeeper',
+ description: 'An AI project concept: try two pretend clue generators on the same fictional puzzles. Track when only one clue passes a preset rule, keep ties, and ask which puzzles the result leaves untested. A grown-up reviews every score. No players are tracked; no AI service is included.',
+ icon: '✦',
+ status: 'New'
+};
 const seeds = [
+ pairNightlyIdea,
  sortingNightlyIdea,
  instructionNightlyIdea,
  languageNightlyIdea,
@@ -267,25 +276,26 @@ try {
  } else {
   // Read the newest available version; never fall back past malformed saved data.
   const upgrades = [
-   [V20_KEY, [sortingNightlyIdea]],
-   [V19_KEY, [sortingNightlyIdea, instructionNightlyIdea]],
-   [V18_KEY, [sortingNightlyIdea, instructionNightlyIdea, languageNightlyIdea]],
-   [V17_KEY, [sortingNightlyIdea, instructionNightlyIdea, languageNightlyIdea, packingNightlyIdea]],
-   [V16_KEY, [sortingNightlyIdea, instructionNightlyIdea, languageNightlyIdea, packingNightlyIdea, hintNightlyIdea]],
-   [V15_KEY, [sortingNightlyIdea, instructionNightlyIdea, languageNightlyIdea, packingNightlyIdea, hintNightlyIdea, shadowNightlyIdea]],
-   [V14_KEY, [sortingNightlyIdea, instructionNightlyIdea, languageNightlyIdea, packingNightlyIdea, hintNightlyIdea, shadowNightlyIdea, viewpointNightlyIdea]],
-   [V13_KEY, [sortingNightlyIdea, instructionNightlyIdea, languageNightlyIdea, packingNightlyIdea, hintNightlyIdea, shadowNightlyIdea, viewpointNightlyIdea, evidenceNightlyIdea]],
-   [V12_KEY, [sortingNightlyIdea, instructionNightlyIdea, languageNightlyIdea, packingNightlyIdea, hintNightlyIdea, shadowNightlyIdea, viewpointNightlyIdea, evidenceNightlyIdea, marketNightlyIdea]],
-   [V11_KEY, [sortingNightlyIdea, instructionNightlyIdea, languageNightlyIdea, packingNightlyIdea, hintNightlyIdea, shadowNightlyIdea, viewpointNightlyIdea, evidenceNightlyIdea, marketNightlyIdea, habitatNightlyIdea]],
-   [V10_KEY, [sortingNightlyIdea, instructionNightlyIdea, languageNightlyIdea, packingNightlyIdea, hintNightlyIdea, shadowNightlyIdea, viewpointNightlyIdea, evidenceNightlyIdea, marketNightlyIdea, habitatNightlyIdea, bridgeNightlyIdea]],
-   [V9_KEY, [sortingNightlyIdea, instructionNightlyIdea, languageNightlyIdea, packingNightlyIdea, hintNightlyIdea, shadowNightlyIdea, viewpointNightlyIdea, evidenceNightlyIdea, marketNightlyIdea, habitatNightlyIdea, bridgeNightlyIdea, soundNightlyIdea]],
-   [V8_KEY, [sortingNightlyIdea, instructionNightlyIdea, languageNightlyIdea, packingNightlyIdea, hintNightlyIdea, shadowNightlyIdea, viewpointNightlyIdea, evidenceNightlyIdea, marketNightlyIdea, habitatNightlyIdea, bridgeNightlyIdea, soundNightlyIdea, patternNightlyIdea]],
-   [V7_KEY, [sortingNightlyIdea, instructionNightlyIdea, languageNightlyIdea, packingNightlyIdea, hintNightlyIdea, shadowNightlyIdea, viewpointNightlyIdea, evidenceNightlyIdea, marketNightlyIdea, habitatNightlyIdea, bridgeNightlyIdea, soundNightlyIdea, patternNightlyIdea, comicNightlyIdea]],
-   [V6_KEY, [sortingNightlyIdea, instructionNightlyIdea, languageNightlyIdea, packingNightlyIdea, hintNightlyIdea, shadowNightlyIdea, viewpointNightlyIdea, evidenceNightlyIdea, marketNightlyIdea, habitatNightlyIdea, bridgeNightlyIdea, soundNightlyIdea, patternNightlyIdea, comicNightlyIdea, museumNightlyIdea]],
-   [V5_KEY, [sortingNightlyIdea, instructionNightlyIdea, languageNightlyIdea, packingNightlyIdea, hintNightlyIdea, shadowNightlyIdea, viewpointNightlyIdea, evidenceNightlyIdea, marketNightlyIdea, habitatNightlyIdea, bridgeNightlyIdea, soundNightlyIdea, patternNightlyIdea, comicNightlyIdea, museumNightlyIdea, routeNightlyIdea]],
-   [V4_KEY, [sortingNightlyIdea, instructionNightlyIdea, languageNightlyIdea, packingNightlyIdea, hintNightlyIdea, shadowNightlyIdea, viewpointNightlyIdea, evidenceNightlyIdea, marketNightlyIdea, habitatNightlyIdea, bridgeNightlyIdea, soundNightlyIdea, patternNightlyIdea, comicNightlyIdea, museumNightlyIdea, routeNightlyIdea, latestNightlyIdea]],
-   [V3_KEY, [sortingNightlyIdea, instructionNightlyIdea, languageNightlyIdea, packingNightlyIdea, hintNightlyIdea, shadowNightlyIdea, viewpointNightlyIdea, evidenceNightlyIdea, marketNightlyIdea, habitatNightlyIdea, bridgeNightlyIdea, soundNightlyIdea, patternNightlyIdea, comicNightlyIdea, museumNightlyIdea, routeNightlyIdea, latestNightlyIdea, newNightlyIdea]],
-   [PREVIOUS_KEY, [sortingNightlyIdea, instructionNightlyIdea, languageNightlyIdea, packingNightlyIdea, hintNightlyIdea, shadowNightlyIdea, viewpointNightlyIdea, evidenceNightlyIdea, marketNightlyIdea, habitatNightlyIdea, bridgeNightlyIdea, soundNightlyIdea, patternNightlyIdea, comicNightlyIdea, museumNightlyIdea, routeNightlyIdea, latestNightlyIdea, newNightlyIdea, nightlyIdea]]
+   [V21_KEY, [pairNightlyIdea]],
+   [V20_KEY, [pairNightlyIdea, sortingNightlyIdea]],
+   [V19_KEY, [pairNightlyIdea, sortingNightlyIdea, instructionNightlyIdea]],
+   [V18_KEY, [pairNightlyIdea, sortingNightlyIdea, instructionNightlyIdea, languageNightlyIdea]],
+   [V17_KEY, [pairNightlyIdea, sortingNightlyIdea, instructionNightlyIdea, languageNightlyIdea, packingNightlyIdea]],
+   [V16_KEY, [pairNightlyIdea, sortingNightlyIdea, instructionNightlyIdea, languageNightlyIdea, packingNightlyIdea, hintNightlyIdea]],
+   [V15_KEY, [pairNightlyIdea, sortingNightlyIdea, instructionNightlyIdea, languageNightlyIdea, packingNightlyIdea, hintNightlyIdea, shadowNightlyIdea]],
+   [V14_KEY, [pairNightlyIdea, sortingNightlyIdea, instructionNightlyIdea, languageNightlyIdea, packingNightlyIdea, hintNightlyIdea, shadowNightlyIdea, viewpointNightlyIdea]],
+   [V13_KEY, [pairNightlyIdea, sortingNightlyIdea, instructionNightlyIdea, languageNightlyIdea, packingNightlyIdea, hintNightlyIdea, shadowNightlyIdea, viewpointNightlyIdea, evidenceNightlyIdea]],
+   [V12_KEY, [pairNightlyIdea, sortingNightlyIdea, instructionNightlyIdea, languageNightlyIdea, packingNightlyIdea, hintNightlyIdea, shadowNightlyIdea, viewpointNightlyIdea, evidenceNightlyIdea, marketNightlyIdea]],
+   [V11_KEY, [pairNightlyIdea, sortingNightlyIdea, instructionNightlyIdea, languageNightlyIdea, packingNightlyIdea, hintNightlyIdea, shadowNightlyIdea, viewpointNightlyIdea, evidenceNightlyIdea, marketNightlyIdea, habitatNightlyIdea]],
+   [V10_KEY, [pairNightlyIdea, sortingNightlyIdea, instructionNightlyIdea, languageNightlyIdea, packingNightlyIdea, hintNightlyIdea, shadowNightlyIdea, viewpointNightlyIdea, evidenceNightlyIdea, marketNightlyIdea, habitatNightlyIdea, bridgeNightlyIdea]],
+   [V9_KEY, [pairNightlyIdea, sortingNightlyIdea, instructionNightlyIdea, languageNightlyIdea, packingNightlyIdea, hintNightlyIdea, shadowNightlyIdea, viewpointNightlyIdea, evidenceNightlyIdea, marketNightlyIdea, habitatNightlyIdea, bridgeNightlyIdea, soundNightlyIdea]],
+   [V8_KEY, [pairNightlyIdea, sortingNightlyIdea, instructionNightlyIdea, languageNightlyIdea, packingNightlyIdea, hintNightlyIdea, shadowNightlyIdea, viewpointNightlyIdea, evidenceNightlyIdea, marketNightlyIdea, habitatNightlyIdea, bridgeNightlyIdea, soundNightlyIdea, patternNightlyIdea]],
+   [V7_KEY, [pairNightlyIdea, sortingNightlyIdea, instructionNightlyIdea, languageNightlyIdea, packingNightlyIdea, hintNightlyIdea, shadowNightlyIdea, viewpointNightlyIdea, evidenceNightlyIdea, marketNightlyIdea, habitatNightlyIdea, bridgeNightlyIdea, soundNightlyIdea, patternNightlyIdea, comicNightlyIdea]],
+   [V6_KEY, [pairNightlyIdea, sortingNightlyIdea, instructionNightlyIdea, languageNightlyIdea, packingNightlyIdea, hintNightlyIdea, shadowNightlyIdea, viewpointNightlyIdea, evidenceNightlyIdea, marketNightlyIdea, habitatNightlyIdea, bridgeNightlyIdea, soundNightlyIdea, patternNightlyIdea, comicNightlyIdea, museumNightlyIdea]],
+   [V5_KEY, [pairNightlyIdea, sortingNightlyIdea, instructionNightlyIdea, languageNightlyIdea, packingNightlyIdea, hintNightlyIdea, shadowNightlyIdea, viewpointNightlyIdea, evidenceNightlyIdea, marketNightlyIdea, habitatNightlyIdea, bridgeNightlyIdea, soundNightlyIdea, patternNightlyIdea, comicNightlyIdea, museumNightlyIdea, routeNightlyIdea]],
+   [V4_KEY, [pairNightlyIdea, sortingNightlyIdea, instructionNightlyIdea, languageNightlyIdea, packingNightlyIdea, hintNightlyIdea, shadowNightlyIdea, viewpointNightlyIdea, evidenceNightlyIdea, marketNightlyIdea, habitatNightlyIdea, bridgeNightlyIdea, soundNightlyIdea, patternNightlyIdea, comicNightlyIdea, museumNightlyIdea, routeNightlyIdea, latestNightlyIdea]],
+   [V3_KEY, [pairNightlyIdea, sortingNightlyIdea, instructionNightlyIdea, languageNightlyIdea, packingNightlyIdea, hintNightlyIdea, shadowNightlyIdea, viewpointNightlyIdea, evidenceNightlyIdea, marketNightlyIdea, habitatNightlyIdea, bridgeNightlyIdea, soundNightlyIdea, patternNightlyIdea, comicNightlyIdea, museumNightlyIdea, routeNightlyIdea, latestNightlyIdea, newNightlyIdea]],
+   [PREVIOUS_KEY, [pairNightlyIdea, sortingNightlyIdea, instructionNightlyIdea, languageNightlyIdea, packingNightlyIdea, hintNightlyIdea, shadowNightlyIdea, viewpointNightlyIdea, evidenceNightlyIdea, marketNightlyIdea, habitatNightlyIdea, bridgeNightlyIdea, soundNightlyIdea, patternNightlyIdea, comicNightlyIdea, museumNightlyIdea, routeNightlyIdea, latestNightlyIdea, newNightlyIdea, nightlyIdea]]
   ];
   let upgraded = false;
   for (const [key, additions] of upgrades) {

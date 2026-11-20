@@ -258,3 +258,11 @@ Added **Sorting Rule Switch**, a family-friendly AI concept about regrouping fic
 Improved the trial's existing Fair Test Studio: generated plans now summarize counts of the visitor's Pass, Fail, Unclear and Not scored judgments. Unscored trials are never counted as failures, and the summary is explicitly not a scientific conclusion. Counts appear in the same current snapshot used for download and printing, with existing stale-output protection. No new standalone page, storage or network behavior was added. The November 18 morning insight remains unchanged.
 
 Verification: all 14 test suites and all 28 JavaScript syntax checks passed, including v1–v20 migrations, edited IDs, repeat loads, deletions, corrupt storage and mixed/unscored judgment counts. Browser layout/navigation checks were attempted but Playwright's Chromium executable is missing; visual checks remain unverified. Remote commit and exact Pages deployment are checked separately after publication.
+
+## November 19 Pacific nightly session (November 20 UTC)
+
+Added **Puzzle Pair Scorekeeper**, a family-friendly AI concept for comparing fictional clue generators on the same puzzles. It is a proposal, not a working AI feature. Notebook v22 adds it once while preserving earlier edits, deletions and storage backups.
+
+Fair Test Studio now compares two binary pass/fail methods on the same cases. Enter all four paired counts (both pass, A only, B only, neither). The browser shows wins, ties, both pass rates and the signed B-minus-A difference, plus the exact two-sided McNemar p-value when there are discordant pairs. The exact binomial sum uses integer arithmetic before displaying a rounded probability. The UI limits input to 1–500 complete pairs and explains independent pairs, multiple metrics and small samples. The optional fictional example touches only the comparison; no network, uploads, storage, worksheet or print-output changes.
+
+Verification: all 15 test suites and all 30 JavaScript syntax checks passed, including exhaustive comparisons against enumerated fair-coin sequences for up to nine discordant pairs and notebook migration from v1–v21. Browser checks and exact Pages deployment are verified separately.
