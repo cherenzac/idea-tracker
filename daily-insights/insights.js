@@ -138,6 +138,15 @@
    summary: 'Keep every planned case in an agent regression report: show completions, timeouts and human stops separately, and compare both outcome quality and completion coverage so a release cannot look better just because its hardest runs stopped producing answers.',
    topics: ['AI', 'Agent harnesses'],
    kind: 'original'
+  },
+  {
+   id: '2026-11-20-test-where-corrections-land',
+   date: '2026-11-20',
+   title: 'Test where corrections land',
+   summary: 'After a user changes one field, score the agent’s reply and its proposed action separately. It can say Wednesday while still sending Tuesday to the calendar. Also check that unchanged fields stay intact, and that a withdrawn request produces no action at all.',
+   topics: ['AI', 'Agent harnesses', 'Agent governance'],
+   kind: 'source',
+   source: {name: 'Mem2ActBench: testing memory in tool selection and arguments (preprint)', url: 'https://arxiv.org/abs/2601.19935'}
   }
  ];
  if (typeof module !== 'undefined') module.exports = entries;

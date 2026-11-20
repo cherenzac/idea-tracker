@@ -28,6 +28,16 @@
 <details><summary>What does the exact test measure?</summary>
 <p>The two-sided exact McNemar test compares the number of A-only and B-only passes using a fair-coin binomial model. Ties contribute to the pass rates, but not to the test. The p-value is not the probability that A and B are equal.</p>
 <p>Pairs should be independent of one another. Repeated or related cases, shared failure modes, or testing many metrics need a different design or adjustment. With few discordant pairs, this test can miss real effects. A small p-value alone does not establish a useful improvement. Inputs stay in this page; no upload, storage or tracking.</p></details>
+<details id="correction-example"><summary>A worked example: did the correction reach the action?</summary>
+<p>These are fictional review cases. No model or tool runs here. Compare A and B on the same cases. Check the reply and the proposed action independently; count a case as a pass only if both match the expectation.</p>
+<ol>
+<li><strong>Changed time, unchanged location:</strong> Move a fictional Tuesday 10:00 meeting to Wednesday 11:00, Pacific time. Keep Room B. A reply saying “Wednesday” passes the time-in-reply check, but a proposed update with Tuesday or a different room fails the action check.</li>
+<li><strong>One-time change:</strong> Apply the new time to this occurrence only. A call that rewrites the recurring schedule fails, even if this week’s time is correct.</li>
+<li><strong>Withdrawal:</strong> If the user says not to move the meeting, acknowledge the withdrawal and expect no update calls.</li>
+<li><strong>Ambiguity:</strong> If “move it to Wednesday” could refer to either of two meetings, ask which meeting before proposing an update.</li>
+</ol>
+<p>Report stale, duplicate or out-of-scope calls separately. Block release on those errors in this review even if the overall pass count improves. A few hand-picked cases illustrate the rubric; they do not measure general model performance.</p>
+</details>
 </form></section>
 <footer><a href="index.html#project=ideas">← Back to IdeaVision</a><p>Browser-local planning, not a scientific simulator. No accounts, tracking or AI service.</p></footer></main><script src="fair-test.js?v=20261118-repeat"></script><script src="paired-test.js?v=1"></script></body></html>
 
