@@ -1,0 +1,38 @@
+'use strict';
+const assert=require('node:assert/strict'),fs=require('node:fs'),vm=require('node:vm');
+const {compare,minimum}=require('./audit-sampling');
+const close=(a,b)=>assert(Math.abs(a-b)<1e-12);
+const sample=compare(50,.02,10,.2,40,0);
+close(sample.random,1-.98**50);close(sample.sliced,1-.8**10);
+assert.equal(minimum(.02,.95),149);
+assert.equal(minimum(.5,.75),2);
+assert.equal(minimum(0,.95),Infinity);
+assert.equal(minimum(1,.95),1);
+assert.equal(minimum(1e-20,.95),null);
+assert.deepEqual(compare(10,0,0,1,10,0),{random:0,sliced:0});
+assert.deepEqual(compare(10,1,1,1,9,0),{random:1,sliced:1});
+for(const [p,target] of [[.01,.5],[.02,.95],[.3,.99],[.001,.99]]){
+ const n=minimum(p,target);assert(1-(1-p)**n>=target&&1-(1-p)**(n-1)<target);
+}
+assert.throws(()=>compare(3,.1,4,.2,-1,0),RangeError);
+assert.throws(()=>compare(4,.1,2,.2,1,0),RangeError);
+assert.throws(()=>compare(3,.1,1.5,.2,1.5,0),RangeError);
+assert.throws(()=>compare(3,-.1,1,.2,2,0),RangeError);
+assert.throws(()=>minimum(.1,1),RangeError);
+const elements={},get=id=>elements[id]??={value:'',textContent:'',handlers:{},addEventListener(type,callback){this.handlers[type]=callback;}};
+vm.runInNewContext(fs.readFileSync('./audit-sampling.js','utf8'),{document:{getElementById:get}});
+get('audit-example').handlers.click();
+assert.match(get('audit-output').textContent,/63\.58%.*89\.26%.*149/);
+get('audit-slice-count').value='51';
+get('audit-slice-count').handlers.input();
+assert.match(get('audit-output').textContent,/Inputs changed/);
+get('audit-form').handlers.submit({preventDefault(){}});
+assert.match(get('audit-output').textContent,/whole review counts/);
+get('audit-budget').value='';
+get('audit-form').handlers.submit({preventDefault(){}});
+assert.match(get('audit-output').textContent,/Complete every field/);
+const html=fs.readFileSync('./fair-test.html','utf8');
+assert.match(html,/id="audit-output" role="status"/);
+for(const id of Object.keys(elements).filter(id=>html.includes('id="'+id+'"')&&id!=='audit-output'&&id!=='audit-example'&&id!=='audit-form'))assert(html.includes('for="'+id+'"'));
+assert.match(html,/audit-sampling\.js\?v=1/);
+console.log('PASS: audit comparison mathematics, thresholds, boundaries, change invalidation, example and form wiring.');

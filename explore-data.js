@@ -550,5 +550,16 @@
     "sourceLabel": "Inspired by The Pudding",
     "sourceUrl": "https://pudding.cool/",
     "status": "Idea"
+  },
+  {
+    "id": "explore-51",
+    "title": "Label Swap Lab",
+    "category": "AI & Agents",
+    "description": "Propose a browser-local experiment using imaginary creatures. Rename the same two classes with neutral symbols, undo the rename when scoring, and see whether a classifier still groups the same examples together.",
+    "difficulty": "Intermediate",
+    "buildTime": "A weekend",
+    "sourceLabel": "Building resource: Python permutation recipes",
+    "sourceUrl": "https://docs.python.org/3/library/itertools.html#itertools.permutations",
+    "status": "Idea"
   }
 ];if(typeof module!=='undefined')module.exports=ideas;else root.IdeaVisionExplore=ideas;})(typeof window!=='undefined'?window:globalThis);

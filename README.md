@@ -266,3 +266,9 @@ Added **Puzzle Pair Scorekeeper**, a family-friendly AI concept for comparing fi
 Fair Test Studio now compares two binary pass/fail methods on the same cases. Enter all four paired counts (both pass, A only, B only, neither). The browser shows wins, ties, both pass rates and the signed B-minus-A difference, plus the exact two-sided McNemar p-value when there are discordant pairs. The exact binomial sum uses integer arithmetic before displaying a rounded probability. The UI limits input to 1–500 complete pairs and explains independent pairs, multiple metrics and small samples. The optional fictional example touches only the comparison; no network, uploads, storage, worksheet or print-output changes.
 
 Verification: all 15 test suites and all 30 JavaScript syntax checks passed, including exhaustive comparisons against enumerated fair-coin sequences for up to nine discordant pairs and notebook migration from v1–v21. Browser checks and exact Pages deployment are verified separately.
+
+### November 20 Pacific evening: Audit sampling comparison and Label Swap Lab
+
+Fair Test Studio includes a local, synthetic review-planning calculator. Compare a random review with a budget split across two slices, and find the minimum number of independent random reviews to reach a detection target. The worked scenario yields 63.58% versus 89.26% at the same 50-review budget; reaching 95% at a 2% failure rate takes 149 independent reviews. The tool estimates detection odds under assumed rates and perfect review, not failure prevalence or safety. No input is stored or transmitted.
+
+Label Swap Lab is one new Explore Projects idea, not a deployed classifier. It proposes checking whether opaque class names change grouping decisions when outputs are mapped back to the same categories. Existing notebook data, storage keys, and saved project IDs are unchanged.
