@@ -26,11 +26,25 @@
    <div id="insight-list" class="insight-list"></div>
    <p id="insight-empty" class="empty" hidden>No insights match yet. Try another topic or clear the filters.</p>
    <nav id="insight-pagination" class="pagination" aria-label="Insight archive pages" hidden><button id="insight-prev" type="button">← Newer</button><span id="insight-page"></span><button id="insight-next" type="button">Older →</button></nav>
+   <p><a href="#ema-worked-example">November 21 worked example: order and moving averages</a></p>
    <noscript><p class="notice">Enable JavaScript to browse the insight archive. You can also <a href="https://github.com/cherenzac/idea-tracker/blob/main/daily-insights/insights.js">read the published entries on GitHub</a>.</p></noscript>
+  </section>
+  <section class="editorial-note" id="ema-worked-example" aria-labelledby="ema-example-heading">
+   <h2 id="ema-example-heading">Worked example: same data, different order</h2>
+   <p>Start at <var>c</var> = 0. For each observation <var>x</var>, update <var>c</var> to (<var>c</var> + <var>x</var>) / 2. Move the value 12 through three zeros. Evaluate each final estimate on the same four observations:</p>
+   <ul>
+    <li>12 first: final estimate 0.75, mean squared error 32.0625.</li>
+    <li>12 second: final estimate 1.5, mean squared error 29.25.</li>
+    <li>12 third: final estimate 3, mean squared error 27.</li>
+    <li>12 last: final estimate 6, mean squared error 36.</li>
+   </ul>
+   <p>The arithmetic mean is 3 in all four orders. On this fixed sample, mean squared error at any estimate <var>c</var> is 27 + (<var>c</var> − 3)². That explains the batch baseline without assuming it will generalize to a changing stream.</p>
+   <p>This is a one-centroid, fixed-step illustration with no reassignment. It is not an implementation or benchmark of <a href="https://arxiv.org/html/2611.09501v1#S3.SS2">e-means, which uses a different update and discusses centroid finalization</a>.</p>
+   <p><a href="#insight-2026-11-21-check-the-order-of-online-updates">Back to the November 21 insight</a></p>
   </section>
   <footer class="editorial-note"><p><strong>A small editorial notebook.</strong> Short, dated notes about building AI systems. Original thoughts are labeled; public-source inspiration includes a direct source link. These are design perspectives, not claims that a feature has been built.</p><p>No account, tracking or uploads. This page does not read private conversations, connect to X or update itself. New entries appear when a site update is published.</p><a href="../#project=ideas">Back to IdeaVision ↗</a></footer>
  </main>
- <script src="insights.js?v=20261120"></script>
+ <script src="insights.js?v=20261121"></script>
  <script src="insights-app.js?v=20261119"></script>
 </body>
 </html>

@@ -147,6 +147,15 @@
    topics: ['AI', 'Agent harnesses', 'Agent governance'],
    kind: 'source',
    source: {name: 'Mem2ActBench: testing memory in tool selection and arguments (preprint)', url: 'https://arxiv.org/abs/2601.19935'}
+  },
+  {
+   id: '2026-11-21-check-the-order-of-online-updates',
+   date: '2026-11-21',
+   title: 'Check the order of online updates',
+   summary: 'A fixed-step moving average can end at a different estimate when the same observations arrive in a different order. For a stationary replay, hold the sample and initial state fixed, rotate the order, and compare against a batch baseline. Set aside a chronological test too: if the stream really drifts, giving more weight to recent events can be intentional.',
+   topics: ['AI'],
+   kind: 'source',
+   source: {name: 'Bessa et al.: e-means, §3.2 on centroid finalization (preprint)', url: 'https://arxiv.org/html/2611.09501v1#S3.SS2'}
   }
  ];
  if (typeof module !== 'undefined') module.exports = entries;
