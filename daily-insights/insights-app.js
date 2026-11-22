@@ -11,6 +11,10 @@
   const parsed = new Date(value + 'T00:00:00Z');
   return Number.isFinite(parsed.getTime()) && parsed.toISOString().slice(0,10) === value;
  }
+ function validWorkedExample(value) {
+  return value===undefined || (Array.isArray(value) && value.length>0 && value.length<=5
+   && Array.from(value).every(line=>typeof line==='string' && line.trim().length>0 && line.length<=500));
+ }
  function validateEntries(entries) {
   if (!Array.isArray(entries)) return [];
   const ids = new Set();
@@ -19,6 +23,7 @@
     && !ids.has(entry.id) && validDate(entry.date) && entry.id.startsWith(entry.date + '-')
     && typeof entry.title === 'string' && entry.title.trim().length > 0 && entry.title.length <= 120
     && typeof entry.summary === 'string' && entry.summary.trim().length > 0 && entry.summary.length <= 360
+    && validWorkedExample(entry.workedExample)
     && Array.isArray(entry.topics) && entry.topics.length > 0 && entry.topics.every(topic => TOPICS.includes(topic))
     && (entry.kind === 'original' || (entry.kind === 'source' && entry.source && typeof entry.source.name === 'string'
      && entry.source.name.trim().length > 0 && safeSource(entry.source.url)));
@@ -29,7 +34,7 @@
  function filterEntries(entries, query = '', topic = 'all') {
   const words = query.trim().toLowerCase().split(/\s+/).filter(Boolean);
   return entries.filter(entry => (topic === 'all' || entry.topics.includes(topic))
-   && words.every(word => [entry.title,entry.summary,entry.date,formatDate(entry.date),...entry.topics,entry.source?.name || ''].join(' ').toLowerCase().includes(word)));
+   && words.every(word => [entry.title,entry.summary,entry.date,formatDate(entry.date),...entry.topics,entry.source?.name || '',...(entry.workedExample||[])].join(' ').toLowerCase().includes(word)));
  }
  function pageEntries(entries, requestedPage = 1) {
   const pages = Math.max(1, Math.ceil(entries.length / PAGE_SIZE));
@@ -75,7 +80,14 @@
     }
     const link=make('a','Link to this insight ↗');link.href='#insight-'+entry.id;
     link.setAttribute('aria-label','Link to insight: '+entry.title);footer.append(link);
-    article.append(meta,heading,summary,topics,footer);$('insight-list').append(article);
+    article.append(meta,heading,summary);
+    if(entry.workedExample){
+     const details=make('details',undefined,'entry-example');
+     details.append(make('summary','Worked example and assumptions'));
+     for(const line of entry.workedExample)details.append(make('p',line));
+     article.append(details);
+    }
+    article.append(topics,footer);$('insight-list').append(article);
    }
    $('insight-count').textContent=!hasFilters ? `${all.length} ${all.length===1?'insight':'insights'} in the archive` : `Matches: ${filtered.length} of ${all.length}`;
    if (view.pages>1) {

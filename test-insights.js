@@ -141,3 +141,45 @@ e['insight-search'].handlers.keydown({key:'Escape',preventDefault(){prevented++;
 assert.equal(prevented,1);assert.equal(e['insight-page'].textContent,'Page 2 of 3');
 assert.match(html,/aria-describedby="search-help"/);
 console.log('PASS: Escape search recovery, topic retention, focus, paging, unrelated keys and empty repeat.');
+
+const spectral=published.find(entry=>entry.id==='2026-11-22-check-the-trace-not-just-its-average');
+assert(spectral&&spectral.workedExample.length===4);
+for(const v of [[],[''],['x'.repeat(501)],new Array(1),['valid',null],'not an array']){
+ assert.equal(api.validateEntries([{...spectral,workedExample:v}]).length,0);
+}
+assert.equal(api.filterEntries([spectral],'31→0','Agent harnesses').length,1);
+let caseView=boot([spectral],'#insight-'+spectral.id);
+let article=caseView.elements['insight-list'].children[0];
+let detail=article.children.find(child=>child.tagName==='details');
+assert.equal(detail.children[0].tagName,'summary');
+assert.equal(detail.children[1].textContent,spectral.workedExample[0]);
+const literal='<img src=x onerror=alert(1)>';
+caseView=boot([{...spectral,workedExample:[literal]}]);
+article=caseView.elements['insight-list'].children[0];detail=article.children.find(child=>child.tagName==='details');
+assert.equal(detail.children[1].textContent,literal);
+assert.equal(detail.children[1].children.length,0);
+assert(!boot([originalEntry]).elements['insight-list'].children[0].children.some(child=>child.tagName==='details'));
+
+// Direct forward DFT and inverse reconstruction, independent of the prose's expected values.
+{
+ const N=32, theta=2*Math.PI/N;
+ const x=Array.from({length:N},(_,n)=>n<16?1:0);
+ const bins=Array.from({length:N},(_,k)=>[x.reduce((s,v,n)=>s+v*Math.cos(k*n*theta),0),x.reduce((s,v,n)=>s-v*Math.sin(k*n*theta),0)]);
+ const energy=indices=>indices.reduce((s,k)=>s+bins[k][0]**2+bins[k][1]**2,0);
+ const all=Array.from({length:N},(_,k)=>k);
+ const fullEnergy=energy(all);
+ const inverse=indices=>x.map((_,n)=>indices.reduce((s,k)=>s+bins[k][0]*Math.cos(k*n*theta)-bins[k][1]*Math.sin(k*n*theta),0)/N);
+ const close=(a,b,eps=1e-11)=>assert(Math.abs(a-b)<eps,`${a} differs from ${b}`);
+ inverse(all).forEach((v,n)=>close(v,x[n]));
+ close(fullEnergy/N,x.reduce((s,v)=>s+v*v,0));
+ for(const [k,expectedEnergy,expectedMse] of [[1,'90.66','0.04671'],[15,'50.39','0.24803']]){
+  const keep=[0,k,N-k],y=inverse(keep);
+  const mse=x.reduce((s,v,n)=>s+(v-y[n])**2,0)/N;
+  close(y.reduce((s,v)=>s+v,0)/N,.5);
+  close(y[15],.5625);close(y[16],.4375);
+  const percent=(100*energy(keep)/fullEnergy).toFixed(2);
+  assert.equal(percent,expectedEnergy);assert.equal(mse.toFixed(5),expectedMse);
+  assert(spectral.workedExample[2].includes(percent+'%')&&spectral.workedExample[2].includes(mse.toFixed(5)));
+ }
+}
+console.log('PASS: worked example disclosure, search, text-only rendering, and direct Fourier reconstruction and metric checks.');

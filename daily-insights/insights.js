@@ -156,6 +156,27 @@
    topics: ['AI'],
    kind: 'source',
    source: {name: 'Bessa et al.: e-means, §3.2 on centroid finalization (preprint)', url: 'https://arxiv.org/html/2611.09501v1#S3.SS2'}
+  },
+  {
+    "id": "2026-11-22-check-the-trace-not-just-its-average",
+    "date": "2026-11-22",
+    "title": "Check the trace, not just its average",
+    "summary": "A dashboard can preserve an average and one local change while losing most of the trace shape. In a synthetic Fourier replay, two three-bin summaries pass both checks but reconstruct very differently. For agent harnesses, keep the aggregate, then score the relevant time slices and failure windows separately.",
+    "topics": [
+      "AI",
+      "Agent harnesses"
+    ],
+    "kind": "source",
+    "source": {
+      "name": "Jorge Jovicich, MIT HST.583: Fourier transform concepts (lecture slides)",
+      "url": "https://web.mit.edu/hst.583/www/www_2004/hst583_jovicich_oct20.pdf"
+    },
+    "workedExample": [
+      "Reproduce it: take 32 equally spaced samples on a circle, with x[0] through x[15] = 1 and x[16] through x[31] = 0. In the 32-point DFT, keep DC (k = 0) and either k = ±1 or k = ±15; zero all other bins and invert. Negative indices wrap modulo 32, so the kept pairs are (1, 31) and (15, 17).",
+      "Both reconstructions average 0.5 and have values 0.5625 and 0.4375 at n = 15 and n = 16, the same 0.125 downward change. That local change matches between reconstructions, not the original step of 1.",
+      "Across all 32 samples, the ±1 result retains 90.66% of the original energy and has mean squared error 0.04671. The ±15 result retains 50.39% and has mean squared error 0.24803. Retained energy is the kept sum of squared DFT magnitudes divided by the original sum, including DC; error is the average of (x[n] − reconstruction[n])².",
+      "Boundary and metric choices matter: the DFT repeats this toy block, so there is another edge at 31→0. This is a synthetic 1D example, not a claim about clinical images, real agent traces or the superiority of one metric. In a harness, choose trace checks that reflect the failure you need to detect."
+    ]
   }
  ];
  if (typeof module !== 'undefined') module.exports = entries;
