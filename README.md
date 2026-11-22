@@ -272,3 +272,9 @@ Verification: all 15 test suites and all 30 JavaScript syntax checks passed, inc
 Fair Test Studio includes a local, synthetic review-planning calculator. Compare a random review with a budget split across two slices, and find the minimum number of independent random reviews to reach a detection target. The worked scenario yields 63.58% versus 89.26% at the same 50-review budget; reaching 95% at a 2% failure rate takes 149 independent reviews. The tool estimates detection odds under assumed rates and perfect review, not failure prevalence or safety. No input is stored or transmitted.
 
 Label Swap Lab is one new Explore Projects idea, not a deployed classifier. It proposes checking whether opaque class names change grouping decisions when outputs are mapped back to the same categories. Existing notebook data, storage keys, and saved project IDs are unchanged.
+
+### November 21 Pacific evening: Position-only answer order check
+
+Fair Test Studio compares the same three candidate answers in all six presentation orders. With wording and semantic labels fixed, it reports correctness, differences from the ABC order, and differences over all 15 unordered pairs. The fictional first-position rule gets 2/6 right and changes across 12/15 pairs; always selecting the wrong answer gives no changes but 0/6 correct. These are descriptive comparisons for one question, not independent observations or a significance test. No model, network service, or new browser storage is involved.
+
+Tie Rule Garden is a new idea in Explore Projects, not a working application. It compares tie-breaking policies over repeated fictional recommendations without changing their scores. Existing notebook and favorite IDs are unchanged.

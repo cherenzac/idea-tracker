@@ -1,6 +1,6 @@
 <!doctype html>
 <html lang="en">
-<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Fair Test Studio · IdeaVision</title><link rel="stylesheet" href="fair-test.css?v=2"></head>
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Fair Test Studio · IdeaVision</title><link rel="stylesheet" href="fair-test.css?v=3"></head>
 <body><a class="skip" href="#planner">Skip to planner</a><header><a href="index.html#project=ideas">◈ IDEA VISION</a><span>THE SMALL EXPERIMENT CLUB</span></header>
 <main><section class="hero"><div><p class="eyebrow">ASK. CHANGE ONE THING. NOTICE.</p><h1>A little question.<br><em>A fairer test.</em></h1><p class="lead">Turn a curious idea into a clear experiment plan. Change one thing, keep the rest steady, and decide what you will observe.</p></div><aside><span class="stamp">01 → 02 → 03</span><h2>Small tests, honest answers.</h2><p>This worksheet organizes your words. It does not use AI, predict results or certify that an experiment is safe.</p><p>Use harmless materials, with adult review. No people, animals, chemicals, heat or electricity experiments.</p></aside></section>
 <section class="workspace" id="planner" aria-label="Experiment planner"><form id="experiment-form"><div class="section-top"><h2>Plan your question</h2><button type="button" id="example">Try a paper example</button></div><p id="privacy">Nothing is uploaded or saved in this browser. Download your plan before closing or reloading.</p>
@@ -57,6 +57,31 @@
 <p>Each review independently has its slice’s assumed error rate, and reviewers catch every error they see. For <var>n</var> random reviews at error rate <var>p</var>, the chance of detecting any error is 1 − (1 − <var>p</var>)<sup><var>n</var></sup>. The split plan multiplies the two slices’ chances of missing all errors before subtracting from one.</p>
 <p>In the fictional example, the targeted slice is 10% of traffic but gets 20% of reviews. To compare plans for the same underlying population, derive the overall error rate using traffic shares, not review shares. Detection odds are not a prevalence estimate or a guarantee. Correlated cases, missing labels, or imperfect review can change the odds. Nothing is uploaded or saved.</p>
 </details></form></section>
-<footer><a href="index.html#project=ideas">← Back to IdeaVision</a><p>Browser-local planning, not a scientific simulator. No accounts, tracking or AI service.</p></footer></main><script src="fair-test.js?v=20261118-repeat"></script><script src="paired-test.js?v=1"></script><script src="audit-sampling.js?v=1"></script></body></html>
+<section class="audit-sampling" id="order-check" aria-labelledby="order-title">
+<form id="order-form">
+<div class="section-top"><h2 id="order-title">Does answer position change the choice?</h2></div>
+<p>Use one question with three fixed options. Keep their wording and semantic labels A, B and C unchanged. Show all six orders independently, then record the label actually picked, not its display position.</p>
+<div class="actions">
+<button id="order-first" type="button">Try first-position picks</button>
+<button id="order-right" type="button">Try stable correct picks</button>
+<button id="order-wrong" type="button">Try stable wrong picks</button>
+</div>
+<p>Fictional example: Which shape has three sides? A = triangle, B = square, C = pentagon. The three demo buttons use that fixed question.</p>
+<label for="order-correct">Correct label<select id="order-correct"><option value="">Choose a label</option><option value="A">A</option><option value="B">B</option><option value="C">C</option></select></label>
+<div class="paired-grid">
+<label for="order-abc">Order A › B › C<select id="order-abc"><option value="">Choose a label</option><option value="A">A</option><option value="B">B</option><option value="C">C</option></select></label>
+<label for="order-acb">Order A › C › B<select id="order-acb"><option value="">Choose a label</option><option value="A">A</option><option value="B">B</option><option value="C">C</option></select></label>
+<label for="order-bac">Order B › A › C<select id="order-bac"><option value="">Choose a label</option><option value="A">A</option><option value="B">B</option><option value="C">C</option></select></label>
+<label for="order-bca">Order B › C › A<select id="order-bca"><option value="">Choose a label</option><option value="A">A</option><option value="B">B</option><option value="C">C</option></select></label>
+<label for="order-cab">Order C › A › B<select id="order-cab"><option value="">Choose a label</option><option value="A">A</option><option value="B">B</option><option value="C">C</option></select></label>
+<label for="order-cba">Order C › B › A<select id="order-cba"><option value="">Choose a label</option><option value="A">A</option><option value="B">B</option><option value="C">C</option></select></label>
+</div>
+<div class="actions"><button class="primary" type="submit">Score the six orders</button></div>
+<p id="order-output" role="status"></p>
+<details><summary>Why track correctness and stability separately?</summary>
+<p>ABC is the reference for the five comparisons against that one order. The 15 unordered comparisons cover every pair of orders and do not pick a favorite reference. A system can choose the same wrong option every time, so zero flips does not mean good performance.</p>
+<p>These are descriptive counts for one question, not independent observations or a significance test. Repeat on more questions; for stochastic systems, run multiple independent repeats per order under the same settings. This tool records your entries; it does not call a model, store your inputs or upload them.</p>
+</details></form></section>
+<footer><a href="index.html#project=ideas">← Back to IdeaVision</a><p>Browser-local planning, not a scientific simulator. No accounts, tracking or AI service.</p></footer></main><script src="fair-test.js?v=20261118-repeat"></script><script src="paired-test.js?v=1"></script><script src="audit-sampling.js?v=1"></script><script src="order-check.js?v=1"></script></body></html>
 
 

@@ -561,5 +561,16 @@
     "sourceLabel": "Building resource: Python permutation recipes",
     "sourceUrl": "https://docs.python.org/3/library/itertools.html#itertools.permutations",
     "status": "Idea"
+  },
+  {
+    "id": "explore-52",
+    "title": "Tie Rule Garden",
+    "category": "AI & Agents",
+    "description": "Give fictional garden plots equal recommendation scores, then compare how alphabetical, seeded-random, and rotation-based tie rules distribute the first choice across repeated rounds. Keep scores fixed to isolate the tie rule.",
+    "difficulty": "Intermediate",
+    "buildTime": "A weekend",
+    "sourceLabel": "Building resource: Python sorting stability",
+    "sourceUrl": "https://docs.python.org/3/howto/sorting.html#sort-stability-and-complex-sorts",
+    "status": "Idea"
   }
 ];if(typeof module!=='undefined')module.exports=ideas;else root.IdeaVisionExplore=ideas;})(typeof window!=='undefined'?window:globalThis);
