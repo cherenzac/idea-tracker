@@ -1,6 +1,6 @@
 <!doctype html>
 <html lang="en">
-<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Fair Test Studio · IdeaVision</title><link rel="stylesheet" href="fair-test.css?v=3"></head>
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Fair Test Studio · IdeaVision</title><link rel="stylesheet" href="fair-test.css?v=4"></head>
 <body><a class="skip" href="#planner">Skip to planner</a><header><a href="index.html#project=ideas">◈ IDEA VISION</a><span>THE SMALL EXPERIMENT CLUB</span></header>
 <main><section class="hero"><div><p class="eyebrow">ASK. CHANGE ONE THING. NOTICE.</p><h1>A little question.<br><em>A fairer test.</em></h1><p class="lead">Turn a curious idea into a clear experiment plan. Change one thing, keep the rest steady, and decide what you will observe.</p></div><aside><span class="stamp">01 → 02 → 03</span><h2>Small tests, honest answers.</h2><p>This worksheet organizes your words. It does not use AI, predict results or certify that an experiment is safe.</p><p>Use harmless materials, with adult review. No people, animals, chemicals, heat or electricity experiments.</p></aside></section>
 <section class="workspace" id="planner" aria-label="Experiment planner"><form id="experiment-form"><div class="section-top"><h2>Plan your question</h2><button type="button" id="example">Try a paper example</button></div><p id="privacy">Nothing is uploaded or saved in this browser. Download your plan before closing or reloading.</p>
@@ -82,6 +82,18 @@
 <p>ABC is the reference for the five comparisons against that one order. The 15 unordered comparisons cover every pair of orders and do not pick a favorite reference. A system can choose the same wrong option every time, so zero flips does not mean good performance.</p>
 <p>These are descriptive counts for one question, not independent observations or a significance test. Repeat on more questions; for stochastic systems, run multiple independent repeats per order under the same settings. This tool records your entries; it does not call a model, store your inputs or upload them.</p>
 </details></form></section>
-<footer><a href="index.html#project=ideas">← Back to IdeaVision</a><p>Browser-local planning, not a scientific simulator. No accounts, tracking or AI service.</p></footer></main><script src="fair-test.js?v=20261118-repeat"></script><script src="paired-test.js?v=1"></script><script src="audit-sampling.js?v=1"></script><script src="order-check.js?v=1"></script></body></html>
+<section class="audit-sampling" id="approval-revision" aria-labelledby="approval-demo-title">
+<div class="section-top"><h2 id="approval-demo-title">A review belongs to one draft</h2></div>
+<p>Try a fictional print order. Review the $120 draft, then change the amount to $210 or choose a different recipient at the same price. Either change makes the earlier review stale. This demo cannot place orders, send messages, or charge anything.</p>
+<div class="paired-grid">
+<label for="approval-demo-recipient">Fictional recipient<select id="approval-demo-recipient"><option>Maple Print Desk</option><option>Cedar Print Desk</option></select></label>
+<label for="approval-demo-amount">Draft total (USD)<select id="approval-demo-amount"><option value="120">$120</option><option value="210">$210</option></select></label>
+</div>
+<div class="actions"><button id="approval-demo-review" type="button">Review this fictional draft</button><button id="approval-demo-proceed" type="button" class="primary">Simulate proceeding</button></div>
+<p id="approval-demo-reviewed">No reviewed draft yet.</p>
+<p id="approval-demo-status" role="status">Draft revision 1: Maple Print Desk, $120 USD. Not reviewed.</p>
+<details><summary>Why not just compare the final values?</summary><p>This demo deliberately requires fresh review after any material edit, even if someone restores the previous values. In a real harness, bind the confirmed snapshot and revision to the action on the trusted side of the tool boundary, check it right before the action, and test amount changes and destination-only changes separately. This browser-local demo is not an authorization mechanism.</p></details>
+</section>
+<footer><a href="index.html#project=ideas">← Back to IdeaVision</a><p>Browser-local planning, not a scientific simulator. No accounts, tracking or AI service.</p></footer></main><script src="fair-test.js?v=20261118-repeat"></script><script src="paired-test.js?v=1"></script><script src="audit-sampling.js?v=1"></script><script src="order-check.js?v=1"></script><script src="approval-revision.js?v=1"></script></body></html>
 
 

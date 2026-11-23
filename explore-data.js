@@ -572,5 +572,16 @@
     "sourceLabel": "Building resource: Python sorting stability",
     "sourceUrl": "https://docs.python.org/3/howto/sorting.html#sort-stability-and-complex-sorts",
     "status": "Idea"
+  },
+  {
+    "id": "explore-53",
+    "title": "Partial Replay Scorecard",
+    "category": "AI & Agents",
+    "description": "Sketch a practice exercise for a fictional sticker workshop. Some steps finish, others stop or repeat. Compare a final-score-only grade with a log that records which steps ran, what was skipped, and whether repeating a step counted twice.",
+    "difficulty": "Intermediate",
+    "buildTime": "A weekend",
+    "sourceLabel": "Building resource: Python event and state logging",
+    "sourceUrl": "https://docs.python.org/3/howto/logging.html",
+    "status": "Idea"
   }
 ];if(typeof module!=='undefined')module.exports=ideas;else root.IdeaVisionExplore=ideas;})(typeof window!=='undefined'?window:globalThis);

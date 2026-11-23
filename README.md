@@ -278,3 +278,9 @@ Label Swap Lab is one new Explore Projects idea, not a deployed classifier. It p
 Fair Test Studio compares the same three candidate answers in all six presentation orders. With wording and semantic labels fixed, it reports correctness, differences from the ABC order, and differences over all 15 unordered pairs. The fictional first-position rule gets 2/6 right and changes across 12/15 pairs; always selecting the wrong answer gives no changes but 0/6 correct. These are descriptive comparisons for one question, not independent observations or a significance test. No model, network service, or new browser storage is involved.
 
 Tie Rule Garden is a new idea in Explore Projects, not a working application. It compares tie-breaking policies over repeated fictional recommendations without changing their scores. Existing notebook and favorite IDs are unchanged.
+
+### November 22 Pacific evening: Review one exact draft
+
+Fair Test Studio now includes a synthetic approval-revision exercise. Review a fictional $120 order and change its total or its recipient; either change invalidates the review. Reverting the change does not resurrect the prior revision’s approval. A current review permits one simulation, never a real action. No orders, payments, messages or new storage are involved.
+
+Partial Replay Scorecard is a new Explore Projects proposal about measuring skipped, repeated and completed steps in a fictional workshop. It is not a built application.
