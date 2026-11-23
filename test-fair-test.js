@@ -74,3 +74,13 @@ console.log('PASS: cancel-safe result reset, plan/rule preservation, stale expor
 
 assert.match(buildPlan(example),/Pass: 0; Fail: 0; Unclear: 0; Not scored: 3/);
 assert.match(buildPlan({...example,'trial-1-expected':'Five','trial-1-observed':'Five','trial-1-verdict':'Pass','trial-2-expected':'Five','trial-2-observed':'Four','trial-2-verdict':'Fail','trial-3-expected':'Five','trial-3-observed':'Could not count','trial-3-verdict':'Unclear'}),/Pass: 1; Fail: 1; Unclear: 1; Not scored: 0/);
+{
+ const fs=require('node:fs'),assert=require('node:assert/strict');
+ const page=fs.readFileSync('./fair-test.html','utf8'),css=fs.readFileSync('./fair-test.css','utf8');
+ const directory=page.match(/<nav class="studio-directory" aria-label="Studio sections">.*?<\/nav>/s)?.[0];
+ assert(directory);
+ const targets=Array.from(directory.matchAll(/href="#([^"]+)"/g),m=>m[1]);
+ assert.deepEqual(targets,['planner','paired','audit-sampling','order-check','approval-revision']);
+ for(const target of targets){assert.equal(page.split('id="'+target+'"').length,2);assert(page.includes('id="'+target+'" tabindex="-1"'));}
+ assert.match(css,/@media print\{\.studio-directory\{display:none!important\}\}/);
+}

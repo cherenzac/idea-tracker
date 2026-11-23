@@ -1,9 +1,10 @@
 <!doctype html>
 <html lang="en">
-<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Fair Test Studio · IdeaVision</title><link rel="stylesheet" href="fair-test.css?v=4"></head>
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Fair Test Studio · IdeaVision</title><link rel="stylesheet" href="fair-test.css?v=5"></head>
 <body><a class="skip" href="#planner">Skip to planner</a><header><a href="index.html#project=ideas">◈ IDEA VISION</a><span>THE SMALL EXPERIMENT CLUB</span></header>
 <main><section class="hero"><div><p class="eyebrow">ASK. CHANGE ONE THING. NOTICE.</p><h1>A little question.<br><em>A fairer test.</em></h1><p class="lead">Turn a curious idea into a clear experiment plan. Change one thing, keep the rest steady, and decide what you will observe.</p></div><aside><span class="stamp">01 → 02 → 03</span><h2>Small tests, honest answers.</h2><p>This worksheet organizes your words. It does not use AI, predict results or certify that an experiment is safe.</p><p>Use harmless materials, with adult review. No people, animals, chemicals, heat or electricity experiments.</p></aside></section>
-<section class="workspace" id="planner" aria-label="Experiment planner"><form id="experiment-form"><div class="section-top"><h2>Plan your question</h2><button type="button" id="example">Try a paper example</button></div><p id="privacy">Nothing is uploaded or saved in this browser. Download your plan before closing or reloading.</p>
+<nav class="studio-directory" aria-label="Studio sections"><strong>Jump to a section</strong><ul><li><a href="#planner">Plan an experiment</a></li><li><a href="#paired">Compare paired outcomes</a></li><li><a href="#audit-sampling">Plan an audit sample</a></li><li><a href="#order-check">Check answer order</a></li><li><a href="#approval-revision">Review a draft revision</a></li></ul></nav>
+<section class="workspace" id="planner" tabindex="-1" aria-label="Experiment planner"><form id="experiment-form"><div class="section-top"><h2>Plan your question</h2><button type="button" id="example">Try a paper example</button></div><p id="privacy">Nothing is uploaded or saved in this browser. Download your plan before closing or reloading.</p>
 <label for="question">1. What do you want to find out?</label><textarea id="question" maxlength="300" required placeholder="Does folding paper change how much it can hold?"></textarea>
 <label for="change">2. Change just one thing</label><input id="change" maxlength="300" required placeholder="The shape of the paper: flat or folded">
 <label for="keep">3. What stays the same?</label><textarea id="keep" maxlength="300" required placeholder="Paper size, gap between supports, and paper squares used as weights"></textarea>
@@ -13,7 +14,7 @@
 <fieldset><legend>Trial log <small>(optional, scored by you)</small></legend><p>Decide your success rule before testing. Record each expectation before the trial and each observation afterward. Pass or Fail describes this rule only, not proof that your prediction is true. Leave untested trials unscored.</p><label for="rule">Success rule</label><textarea id="rule" maxlength="300" placeholder="For example: each paper bridge holds five paper squares."></textarea><fieldset class="trial"><legend>Trial 1</legend><label for="trial-1-expected">Expected result</label><input id="trial-1-expected" maxlength="300"><label for="trial-1-observed">Observed result</label><input id="trial-1-observed" maxlength="300"><label for="trial-1-verdict">Your outcome</label><select id="trial-1-verdict"><option value="">Not scored</option><option>Pass</option><option>Fail</option><option>Unclear</option></select></fieldset><fieldset class="trial"><legend>Trial 2</legend><label for="trial-2-expected">Expected result</label><input id="trial-2-expected" maxlength="300"><label for="trial-2-observed">Observed result</label><input id="trial-2-observed" maxlength="300"><label for="trial-2-verdict">Your outcome</label><select id="trial-2-verdict"><option value="">Not scored</option><option>Pass</option><option>Fail</option><option>Unclear</option></select></fieldset><fieldset class="trial"><legend>Trial 3</legend><label for="trial-3-expected">Expected result</label><input id="trial-3-expected" maxlength="300"><label for="trial-3-observed">Observed result</label><input id="trial-3-observed" maxlength="300"><label for="trial-3-verdict">Your outcome</label><select id="trial-3-verdict"><option value="">Not scored</option><option>Pass</option><option>Fail</option><option>Unclear</option></select></fieldset></fieldset>
 <div class="actions"><button class="primary" type="submit">Build my plan →</button><button type="button" id="clear-results">Clear trial log only</button><button type="button" id="clear">Clear worksheet</button></div><p id="feedback" role="status" aria-live="polite"></p></form>
 <section class="result" aria-labelledby="result-title"><p class="eyebrow">YOUR FIELD NOTE</p><h2 id="result-title">Ready when you are.</h2><p id="result-help">Fill in the four required fields, then build your plan. After testing, add your observations and rebuild to include them in your download or printout.</p><textarea id="plan" aria-label="Your experiment plan" readonly hidden></textarea><pre id="print-plan" hidden></pre><button id="select-plan" type="button" hidden>Select plan text</button><button id="print" type="button" hidden>Print plan</button><button id="download" type="button" hidden>Download plan (.txt)</button><p class="footnote">An observation is not proof. Repeat a gentle test, record what changed, and leave room for another explanation.</p></section></section>
-<section id="paired" aria-labelledby="paired-title">
+<section id="paired" tabindex="-1" aria-labelledby="paired-title">
 <form id="paired-form" novalidate>
 <div class="section-top"><h2 id="paired-title">Compare the same cases with A and B</h2><button type="button" id="paired-example">Use fictional puzzle results</button></div>
 <p>Score the same cases twice, once with A and once with B, using one pass rule set in advance. Put each complete pair in just one box. This calculator is separate from the worksheet above and does not read or change it.</p>
@@ -39,7 +40,7 @@
 <p>Report stale, duplicate or out-of-scope calls separately. Block release on those errors in this review even if the overall pass count improves. A few hand-picked cases illustrate the rubric; they do not measure general model performance.</p>
 </details>
 </form></section>
-<section class="audit-sampling" id="audit-sampling" aria-labelledby="audit-title">
+<section class="audit-sampling" id="audit-sampling" tabindex="-1" aria-labelledby="audit-title">
 <form id="audit-form">
 <div class="section-top"><h2 id="audit-title">Will a review catch a rare error?</h2><button id="audit-example" type="button">Use fictional audit numbers</button></div>
 <p>Compare the chance of finding at least one error in a random review with the same review budget split across two slices. Enter assumed rates, not claims about an actual system.</p>
@@ -57,7 +58,7 @@
 <p>Each review independently has its slice’s assumed error rate, and reviewers catch every error they see. For <var>n</var> random reviews at error rate <var>p</var>, the chance of detecting any error is 1 − (1 − <var>p</var>)<sup><var>n</var></sup>. The split plan multiplies the two slices’ chances of missing all errors before subtracting from one.</p>
 <p>In the fictional example, the targeted slice is 10% of traffic but gets 20% of reviews. To compare plans for the same underlying population, derive the overall error rate using traffic shares, not review shares. Detection odds are not a prevalence estimate or a guarantee. Correlated cases, missing labels, or imperfect review can change the odds. Nothing is uploaded or saved.</p>
 </details></form></section>
-<section class="audit-sampling" id="order-check" aria-labelledby="order-title">
+<section class="audit-sampling" id="order-check" tabindex="-1" aria-labelledby="order-title">
 <form id="order-form">
 <div class="section-top"><h2 id="order-title">Does answer position change the choice?</h2></div>
 <p>Use one question with three fixed options. Keep their wording and semantic labels A, B and C unchanged. Show all six orders independently, then record the label actually picked, not its display position.</p>
@@ -82,7 +83,7 @@
 <p>ABC is the reference for the five comparisons against that one order. The 15 unordered comparisons cover every pair of orders and do not pick a favorite reference. A system can choose the same wrong option every time, so zero flips does not mean good performance.</p>
 <p>These are descriptive counts for one question, not independent observations or a significance test. Repeat on more questions; for stochastic systems, run multiple independent repeats per order under the same settings. This tool records your entries; it does not call a model, store your inputs or upload them.</p>
 </details></form></section>
-<section class="audit-sampling" id="approval-revision" aria-labelledby="approval-demo-title">
+<section class="audit-sampling" id="approval-revision" tabindex="-1" aria-labelledby="approval-demo-title">
 <div class="section-top"><h2 id="approval-demo-title">A review belongs to one draft</h2></div>
 <p>Try a fictional print order. Review the $120 draft, then change the amount to $210 or choose a different recipient at the same price. Either change makes the earlier review stale. This demo cannot place orders, send messages, or charge anything.</p>
 <div class="paired-grid">

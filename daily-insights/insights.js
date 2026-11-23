@@ -177,6 +177,17 @@
       "Across all 32 samples, the ±1 result retains 90.66% of the original energy and has mean squared error 0.04671. The ±15 result retains 50.39% and has mean squared error 0.24803. Retained energy is the kept sum of squared DFT magnitudes divided by the original sum, including DC; error is the average of (x[n] − reconstruction[n])².",
       "Boundary and metric choices matter: the DFT repeats this toy block, so there is another edge at 31→0. This is a synthetic 1D example, not a claim about clinical images, real agent traces or the superiority of one metric. In a harness, choose trace checks that reflect the failure you need to detect."
     ]
+  },
+  {
+    "id": "2026-11-23-score-the-handoff-too",
+    "date": "2026-11-23",
+    "title": "Score the handoff too",
+    "summary": "When an agent hands off a case, count both the errors it avoids and the work it creates. In a fictional 100-case test, escalating 20 cases to prevent 4 wrong actions and escalating 50 to prevent 5 are different tradeoffs. Track residual errors and review effort together, with separate counts for high-severity cases.",
+    "topics": [
+      "AI",
+      "Agent governance"
+    ],
+    "kind": "original"
   }
  ];
  if (typeof module !== 'undefined') module.exports = entries;
