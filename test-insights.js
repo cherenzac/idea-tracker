@@ -183,3 +183,13 @@ assert(!boot([originalEntry]).elements['insight-list'].children[0].children.some
  }
 }
 console.log('PASS: worked example disclosure, search, text-only rendering, and direct Fourier reconstruction and metric checks.');
+{
+ const policy=published.find(x=>x.id==='2026-11-24-test-both-sides-of-a-policy-change');
+ assert(policy);const entries=api.validateEntries(published);
+ for(const dash of ['-','‑','–','−'])assert.deepEqual(api.filterEntries(entries,'as'+dash+'of $120','RAG').map(v=>v.id),[policy.id]);
+ assert.equal(api.filterEntries(entries,'as-of impossibleword','RAG').length,0);
+ assert.equal(api.filterEntries(entries,'as-of $120','MCP').length,0);
+ const live=boot(entries);
+ const e=live.elements;e['insight-search'].value='2026–11–24';e['insight-search'].handlers.input();
+ assert.equal(e['insight-list'].children.length,1);assert(e['insight-list'].children[0].id.endsWith(policy.id));
+}

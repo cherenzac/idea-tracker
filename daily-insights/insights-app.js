@@ -31,10 +31,11 @@
    return valid;
   }).slice().sort((a,b) => b.date.localeCompare(a.date) || a.id.localeCompare(b.id));
  }
+ function searchText(value) { return value.toLowerCase().replace(/[\u2010-\u2015\u2212]/g,'-'); }
  function filterEntries(entries, query = '', topic = 'all') {
-  const words = query.trim().toLowerCase().split(/\s+/).filter(Boolean);
+  const words = searchText(query.trim()).split(/\s+/).filter(Boolean);
   return entries.filter(entry => (topic === 'all' || entry.topics.includes(topic))
-   && words.every(word => [entry.title,entry.summary,entry.date,formatDate(entry.date),...entry.topics,entry.source?.name || '',...(entry.workedExample||[])].join(' ').toLowerCase().includes(word)));
+   && words.every(word => searchText([entry.title,entry.summary,entry.date,formatDate(entry.date),...entry.topics,entry.source?.name || '',...(entry.workedExample||[])].join(' ')).includes(word)));
  }
  function pageEntries(entries, requestedPage = 1) {
   const pages = Math.max(1, Math.ceil(entries.length / PAGE_SIZE));

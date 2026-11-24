@@ -188,6 +188,17 @@
       "Agent governance"
     ],
     "kind": "original"
+  },
+  {
+    "id": "2026-11-24-test-both-sides-of-a-policy-change",
+    "date": "2026-11-24",
+    "title": "Test both sides of a policy change",
+    "summary": "Give a RAG system two fictional policies, one with an $80 limit through June 30 and one with a $120 limit starting July 1, then ask the same as‑of question on both dates and grade the cited version separately from the answer.",
+    "topics": [
+      "RAG",
+      "Agent governance"
+    ],
+    "kind": "original"
   }
  ];
  if (typeof module !== 'undefined') module.exports = entries;
