@@ -583,5 +583,16 @@
     "sourceLabel": "Building resource: Python event and state logging",
     "sourceUrl": "https://docs.python.org/3/howto/logging.html",
     "status": "Idea"
+  },
+  {
+    "id": "explore-54",
+    "title": "Severity Budget Cards",
+    "category": "AI & Agents",
+    "description": "Invent harmless task cards with different costs for a wrong choice. Compare two pretend assistants with the same number of mistakes and see whether a severity-weighted score would change which one you choose.",
+    "difficulty": "Intermediate",
+    "buildTime": "A weekend",
+    "sourceLabel": "Building resource: Python weighted counts",
+    "sourceUrl": "https://docs.python.org/3/library/collections.html#collections.Counter",
+    "status": "Idea"
   }
 ];if(typeof module!=='undefined')module.exports=ideas;else root.IdeaVisionExplore=ideas;})(typeof window!=='undefined'?window:globalThis);

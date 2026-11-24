@@ -17,3 +17,14 @@ assert.equal(searchProjects(registry,'daily insights')[0].id,'daily-insights');
 assert.equal(searchProjects(registry,'vacation hotels')[0].id,'vacations');
 
 assert.equal(searchProjects(registry,'experiment worksheet')[0].id,'fair-test');
+{
+ const assert=require('node:assert/strict'), fs=require('node:fs');
+ const registry=require('./projects'),{searchProjects}=require('./navigation');
+ for(const query of ['agent approval','answer order','AUDIT   sampling','review snapshot']) {
+  const results=searchProjects(registry,query);
+  assert.deepEqual(results.map(p=>p.id),['fair-test'],query);
+  assert.match(results[0].url,/fair-test\.html$/);
+ }
+ assert.equal(searchProjects(registry,'audit somethingabsent').length,0);
+ assert.match(fs.readFileSync('./index.html','utf8'),/projects\.js\?v=20261124-alias/);
+}

@@ -284,3 +284,7 @@ Tie Rule Garden is a new idea in Explore Projects, not a working application. It
 Fair Test Studio now includes a synthetic approval-revision exercise. Review a fictional $120 order and change its total or its recipient; either change invalidates the review. Reverting the change does not resurrect the prior revision’s approval. A current review permits one simulation, never a real action. No orders, payments, messages or new storage are involved.
 
 Partial Replay Scorecard is a new Explore Projects proposal about measuring skipped, repeated and completed steps in a fictional workshop. It is not a built application.
+
+### November 23 Pacific evening: Find the studio by its exercises
+
+Browse all projects now returns Fair Test Studio for queries such as agent approval, answer order and audit sampling. Search still uses the same launcher and does not create projects or rewrite recents. Explore lists 54 proposals; Severity Budget Cards is a new concept, not a built application.
