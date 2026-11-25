@@ -193,3 +193,16 @@ console.log('PASS: worked example disclosure, search, text-only rendering, and d
  const e=live.elements;e['insight-search'].value='2026–11–24';e['insight-search'].handlers.input();
  assert.equal(e['insight-list'].children.length,1);assert(e['insight-list'].children[0].id.endsWith(policy.id));
 }
+{
+ const mix=published.find(e=>e.id==='2026-11-25-fix-the-mix-before-comparing');
+ assert.equal(api.validateEntries(published)[0].id,mix.id);
+ const a=[90,100,4,10],b=[19,20,45,100];
+ const raw=([x,n,y,m])=>100*(x+y)/(n+m);
+ const fixed=([x,n,y,m])=>50*(x/n+y/m);
+ assert(a[0]/a[1]<b[0]/b[1] && a[2]/a[3]<b[2]/b[3]);
+ assert(raw(a)>raw(b) && fixed(a)<fixed(b));
+ for (const x of [raw(a).toFixed(2),raw(b).toFixed(2),fixed(a),fixed(b)]) {
+  assert(mix.workedExample[1].includes(x+'%'));
+ }
+ assert.deepEqual(api.filterEntries(api.validateEntries(published),'fixed reference weights','Agent harnesses').map(e=>e.id),[mix.id]);
+}

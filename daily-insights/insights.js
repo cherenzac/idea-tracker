@@ -199,6 +199,22 @@
       "Agent governance"
     ],
     "kind": "original"
+  },
+  {
+    "id": "2026-11-25-fix-the-mix-before-comparing",
+    "date": "2026-11-25",
+    "title": "Fix the mix before comparing",
+    "summary": "An agent can improve on both easy and hard cases while its overall score drops because the test mix changed. Use the same held-out cases when possible; otherwise report each slice and compare against fixed reference weights chosen before looking at results.",
+    "topics": [
+      "AI",
+      "Agent harnesses"
+    ],
+    "kind": "original",
+    "workedExample": [
+      "Fictional releases: A passes 90/100 easy and 4/10 hard cases; B passes 19/20 easy and 45/100 hard cases. Easy improves from 90% to 95%; hard improves from 40% to 45%.",
+      "The raw aggregate falls from 85.45% (94/110) to 53.33% (64/120). Reweight both to the same 50/50 reference mix and the comparison reverses: 65% for A versus 70% for B.",
+      "Equal weights illustrate the method; they are not a production traffic estimate. Publish the weights and counts, and prefer paired cases within slices. Reweighting cannot correct differences in difficulty within a slice or replace uncertainty estimates."
+    ]
   }
  ];
  if (typeof module !== 'undefined') module.exports = entries;
