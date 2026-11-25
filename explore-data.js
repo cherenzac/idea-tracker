@@ -594,5 +594,16 @@
     "sourceLabel": "Building resource: Python weighted counts",
     "sourceUrl": "https://docs.python.org/3/library/collections.html#collections.Counter",
     "status": "Idea"
+  },
+  {
+    "id": "explore-55",
+    "title": "Ambiguous Clue Deck",
+    "category": "AI & Agents",
+    "description": "Invent a deck of picture-riddle clues where some clues uniquely identify an object and others fit several. Prototype a helper that asks one narrowing question instead of guessing, then compare how often it asks unnecessarily or guesses when the evidence is ambiguous.",
+    "difficulty": "Intermediate",
+    "buildTime": "A weekend",
+    "sourceLabel": "Building resource: Python set operations",
+    "sourceUrl": "https://docs.python.org/3/library/stdtypes.html#set-types-set-frozenset",
+    "status": "Idea"
   }
 ];if(typeof module!=='undefined')module.exports=ideas;else root.IdeaVisionExplore=ideas;})(typeof window!=='undefined'?window:globalThis);
