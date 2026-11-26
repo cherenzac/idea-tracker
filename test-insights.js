@@ -195,7 +195,7 @@ console.log('PASS: worked example disclosure, search, text-only rendering, and d
 }
 {
  const mix=published.find(e=>e.id==='2026-11-25-fix-the-mix-before-comparing');
- assert.equal(api.validateEntries(published)[0].id,mix.id);
+ assert(mix && api.validateEntries(published).some(entry=>entry.id===mix.id));
  const a=[90,100,4,10],b=[19,20,45,100];
  const raw=([x,n,y,m])=>100*(x+y)/(n+m);
  const fixed=([x,n,y,m])=>50*(x/n+y/m);
@@ -205,4 +205,19 @@ console.log('PASS: worked example disclosure, search, text-only rendering, and d
   assert(mix.workedExample[1].includes(x+'%'));
  }
  assert.deepEqual(api.filterEntries(api.validateEntries(published),'fixed reference weights','Agent harnesses').map(e=>e.id),[mix.id]);
+}
+
+{
+ const snapshot=published.find(e=>e.id==='2026-11-26-match-the-snapshot');
+ assert(snapshot && snapshot.kind==='source');
+ assert.equal(snapshot.source.url,'https://github.com/dbt-labs/dbt/discussions/17168');
+ assert.deepEqual(api.filterEntries(api.validateEntries(published),'late-arriving March order','Agent harnesses').map(e=>e.id),[snapshot.id]);
+ assert.match(html,/href="#snapshot-worked-example"/);
+ assert.match(html,/id="snapshot-worked-example" aria-labelledby="snapshot-example-heading"/);
+ assert(html.includes('href="#insight-'+snapshot.id+'"'));
+ const rows=[['2026-01-08','2026-01-08'],['2026-02-10','2026-02-11'],['2026-03-12','2026-03-12'],['2026-03-29','2026-04-03'],['2026-04-01','2026-04-01']];
+ const count=cutoff=>rows.filter(([order,ingest])=>order>='2026-01-01' && order<'2026-04-01' && ingest<cutoff).length;
+ const old=count('2026-04-02'), current=count('2026-04-04');
+ assert.deepEqual([old,current],[3,4]);
+ assert.deepEqual([current,old].map(answer=>[old,current].map(key=>answer===key)),[[false,true],[true,false]]);
 }

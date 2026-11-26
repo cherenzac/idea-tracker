@@ -215,6 +215,18 @@
       "The raw aggregate falls from 85.45% (94/110) to 53.33% (64/120). Reweight both to the same 50/50 reference mix and the comparison reverses: 65% for A versus 70% for B.",
       "Equal weights illustrate the method; they are not a production traffic estimate. Publish the weights and counts, and prefer paired cases within slices. Reweighting cannot correct differences in difficulty within a slice or replace uncertainty estimates."
     ]
+  },
+  {
+    "id": "2026-11-26-match-the-snapshot",
+    "date": "2026-11-26",
+    "title": "Match the snapshot before grading the answer",
+    "summary": "A late-arriving March order turns a Q1 count of three into four, so a fixed answer key can reward a stale cache and penalize a fresh query; freeze data and metric versions for regression tests, and grade live answers against the intended snapshot, not whatever snapshot the agent happened to read.",
+    "topics": ["AI", "Agent harnesses"],
+    "kind": "source",
+    "source": {
+      "name": "dbt Labs: Data agent evaluation proposal and discussion",
+      "url": "https://github.com/dbt-labs/dbt/discussions/17168"
+    }
   }
  ];
  if (typeof module !== 'undefined') module.exports = entries;
