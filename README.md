@@ -288,3 +288,9 @@ Partial Replay Scorecard is a new Explore Projects proposal about measuring skip
 ### November 23 Pacific evening: Find the studio by its exercises
 
 Browse all projects now returns Fair Test Studio for queries such as agent approval, answer order and audit sampling. Search still uses the same launcher and does not create projects or rewrite recents. Explore lists 54 proposals; Severity Budget Cards is a new concept, not a built application.
+
+### Delayed outcomes in a canary
+
+In Fair Test Studio, change the follow-up stage, pause threshold and assumed rework minutes in a fictional help-desk trial. The comparison withholds a reopen rate until both arms have complete seven-day follow-up. At 30 minutes per reopen, an initial 400-minute saving becomes 200 additional minutes, with a 20-minute break-even. The preselected reopen guardrail is separate from effort and is not a statistical test. The example runs locally without storage or network calls. Run `node test-delayed-outcomes.js` for gates, arithmetic and boundary checks.
+
+Explore’s Lost-and-Found Queue is a separate proposed exercise about wait-aware prioritization, not a built tool.

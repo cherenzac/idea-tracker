@@ -80,7 +80,7 @@ assert.match(buildPlan({...example,'trial-1-expected':'Five','trial-1-observed':
  const directory=page.match(/<nav class="studio-directory" aria-label="Studio sections">.*?<\/nav>/s)?.[0];
  assert(directory);
  const targets=Array.from(directory.matchAll(/href="#([^"]+)"/g),m=>m[1]);
- assert.deepEqual(targets,['planner','paired','audit-sampling','order-check','approval-revision','replay-clock']);
+ assert.deepEqual(targets,['planner','paired','audit-sampling','order-check','approval-revision', 'replay-clock', 'delayed-outcomes']);
  for(const target of targets){assert.equal(page.split('id="'+target+'"').length,2);assert(page.includes('id="'+target+'" tabindex="-1"'));}
  assert.match(css,/@media print\{\.studio-directory\{display:none!important\}\}/);
 }

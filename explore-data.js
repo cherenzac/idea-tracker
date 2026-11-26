@@ -605,5 +605,16 @@
     "sourceLabel": "Building resource: Python set operations",
     "sourceUrl": "https://docs.python.org/3/library/stdtypes.html#set-types-set-frozenset",
     "status": "Idea"
+  },
+  {
+    "id": "explore-56",
+    "title": "Lost-and-Found Queue",
+    "category": "AI & Agents",
+    "description": "Design a pretend library robot that sorts fictional lost-item notes. Compare a priority queue that always serves the most confident match with one that also boosts notes that have waited. Measure how long ambiguous notes wait, not just how many easy matches finish.",
+    "difficulty": "Intermediate",
+    "buildTime": "A weekend",
+    "sourceLabel": "Building resource: Python priority queue notes",
+    "sourceUrl": "https://docs.python.org/3/library/heapq.html#priority-queue-implementation-notes",
+    "status": "Idea"
   }
 ];if(typeof module!=='undefined')module.exports=ideas;else root.IdeaVisionExplore=ideas;})(typeof window!=='undefined'?window:globalThis);
