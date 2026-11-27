@@ -114,7 +114,7 @@ Run `node --check pomodoro.js && node test-pomodoro.js` in addition to the five 
 
 ## Explore Projects and the modern retro screen
 
-The **Explore Projects** channel contains exactly 50 original concepts inspired by linked primary sources, in five categories. They are ideas to build, not 50 functioning apps. Search, category and difficulty filters, 12-card pagination, a surprise picker, and browser-local favorites help choose a next project. Time estimates are rough MVP planning estimates; source tools may require models, APIs, accounts, hardware or paid services. Sources were inspected November 1, 2026; their future availability is outside this site's control.
+The **Explore Projects** channel contains 57 original concepts inspired by linked primary sources, in five categories. They are ideas to build, not 57 functioning apps. Search, category and difficulty filters, 12-card pagination, a surprise picker, and browser-local favorites help choose a next project. Time estimates are rough MVP planning estimates; source tools may require models, APIs, accounts, hardware or paid services. Sources were inspected November 1, 2026; their future availability is outside this site's control.
 
 Favorites use a separate `ideavision.saved-sparks.v1` localStorage key. They never alter the existing notebook. Storage failure is visible and falls back to in-memory use; no ideas/favorites are uploaded. The screen is wider with a mint chassis, pale reading surface and violet/coral accents, retaining decorative dials and the existing working tools. Respect reduced-motion preferences. The image-search reference informed colors and proportions only; no third-party image was copied.
 
@@ -294,3 +294,7 @@ Browse all projects now returns Fair Test Studio for queries such as agent appro
 In Fair Test Studio, change the follow-up stage, pause threshold and assumed rework minutes in a fictional help-desk trial. The comparison withholds a reopen rate until both arms have complete seven-day follow-up. At 30 minutes per reopen, an initial 400-minute saving becomes 200 additional minutes, with a 20-minute break-even. The preselected reopen guardrail is separate from effort and is not a statistical test. The example runs locally without storage or network calls. Run `node test-delayed-outcomes.js` for gates, arithmetic and boundary checks.
 
 Explore’s Lost-and-Found Queue is a separate proposed exercise about wait-aware prioritization, not a built tool.
+
+### Explore keyboard continuity
+
+Previous and Next move focus to the result count so you can continue through the newly displayed cards, including on the final page. Saving an idea keeps focus on its replacement Save button; removing it from the saved-only view moves focus to the result count instead. Typing in search and changing filters do not move focus. This does not change favorite IDs, saved notebook data or storage keys. Mirror Maze Caption Lab is an idea for testing spatial reasoning, not a built captioning tool.

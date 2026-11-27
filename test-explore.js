@@ -1,21 +1,44 @@
 'use strict';
 const assert=require('node:assert/strict'),fs=require('node:fs'),vm=require('node:vm');
 const data=require('./explore-data'),api=require('./explore');
-assert.equal(data.length,56);assert.equal(new Set(data.map(p=>p.id)).size,56);assert.equal(new Set(data.map(p=>p.title)).size,56);
+assert.equal(data.length,57);assert.equal(new Set(data.map(p=>p.id)).size,57);assert.equal(new Set(data.map(p=>p.title)).size,57);
 for(const p of data){assert.equal(p.status,'Idea');assert(api.safeSource(p.sourceUrl));assert(['Beginner','Intermediate','Advanced'].includes(p.difficulty));for(const k of ['title','description','category','buildTime','sourceLabel'])assert(p[k]);}
-assert.equal(api.filterIdeas(data,'','all','all',[],false).length,56);
+assert.equal(api.filterIdeas(data,'','all','all',[],false).length,57);
 assert.equal(api.filterIdeas(data,'no-matching-project-here','all','all',[],false).length,0);
-assert.equal(api.filterIdeas(data,'','AI & Agents','all',[],false).length,16);
+assert.equal(api.filterIdeas(data,'','AI & Agents','all',[],false).length,17);
 assert.equal(api.filterIdeas(data,'','all','all',[data[0].id],true)[0],data[0]);
 assert.deepEqual(api.cleanSaved([data[0].id,data[0].id,'not-real'],data),[data[0].id]);
 assert.equal(api.safeSource('javascript:alert(1)'),false);assert.equal(api.safeSource('https://user:pass@example.com'),false);
-class Element{constructor(){this.children=[];this.listeners={};this.attrs={};this.value='';this.checked=false;this.disabled=false;this.dataset={};this.textContent='';}append(...children){this.children.push(...children);}replaceChildren(...children){this.children=children;}setAttribute(k,v){this.attrs[k]=v;}addEventListener(k,f){this.listeners[k]=f;}querySelectorAll(){return this.children;}fire(k){this.listeners[k]?.();}}
-function run(broken=false){const els={};const get=id=>els[id]??=new Element();get('explore-level').value='all';const values={};const context={window:{IdeaVisionExplore:data},document:{getElementById:get,createElement:()=>new Element()},URL,localStorage:{getItem:()=>null,setItem:(k,v)=>{if(broken)throw Error('blocked');values[k]=v;}}};vm.runInNewContext(fs.readFileSync('./explore.js','utf8'),context);return{els,get,values};}
-const {get,values}=run();assert.equal(get('explore-grid').children.length,12);assert(get('explore-count').textContent.startsWith('56 of 56'));
+class Element{constructor(owner){this.owner=owner;this.children=[];this.listeners={};this.attrs={};this.value='';this.checked=false;this.disabled=false;this.dataset={};this.textContent='';}append(...children){this.children.push(...children);}replaceChildren(...children){this.children=children;}setAttribute(k,v){this.attrs[k]=v;}addEventListener(k,f){this.listeners[k]=f;}querySelectorAll(){return this.children;}fire(k){if(!this.disabled)this.listeners[k]?.();}focus(){this.owner.activeElement=this;}}
+function run(broken=false){const els={};const doc={activeElement:null};const get=id=>els[id]??=new Element(doc);get('explore-level').value='all';const values={};const context={window:{IdeaVisionExplore:data},document:Object.assign(doc,{getElementById:get,createElement:()=>new Element(doc)}),URL,localStorage:{getItem:()=>null,setItem:(k,v)=>{if(broken)throw Error('blocked');values[k]=v;}}};vm.runInNewContext(fs.readFileSync('./explore.js','utf8'),context);return{els,get,values,doc};}
+const {get,values}=run();assert.equal(get('explore-grid').children.length,12);assert(get('explore-count').textContent.startsWith('57 of 57'));
 get('explore-next').fire('click');assert.equal(get('explore-page').textContent,'Page 2 of 5');
 get('explore-grid').children[0].children[4].children[0].fire('click');assert.equal(JSON.parse(values['ideavision.saved-sparks.v1']).length,1);
 get('explore-saved').checked=true;get('explore-saved').fire('change');assert.equal(get('explore-grid').children.length,1);get('explore-grid').children[0].children[4].children[0].fire('click');assert.equal(get('explore-surprise').disabled,true);
 get('explore-clear').fire('click');assert.equal(get('explore-grid').children.length,12);get('explore-surprise').fire('click');assert.equal(get('explore-grid').children.length,1);get('explore-clear').fire('click');
-get('explore-categories').children[1].fire('click');assert.equal(get('explore-grid').children.length,12);get('explore-next').fire('click');assert.equal(get('explore-grid').children.length,4);
+get('explore-categories').children[1].fire('click');assert.equal(get('explore-grid').children.length,12);get('explore-next').fire('click');assert.equal(get('explore-grid').children.length,5);
 const b=run(true);b.get('explore-grid').children[0].children[4].children[0].fire('click');assert(b.get('explore-message').textContent.includes('could not be saved'));
-console.log('PASS: 56 sourced ideas, filters, pagination, favorites, surprise, empty state, unsafe links and storage failures.');
+const k=run();
+const saveAt=(i=0)=>k.get('explore-grid').children[i].children[4].children[0];
+assert.equal(k.doc.activeElement,null,'initial render does not focus results');
+const search=k.get('explore-search');search.focus();search.value='Mirror Maze';search.fire('input');
+assert.equal(k.doc.activeElement,search,'typing does not steal focus');assert.equal(k.get('explore-grid').children.length,1);
+const save=saveAt();save.focus();save.fire('click');
+assert.notEqual(saveAt(),save,'rerender rebuilds the card');
+assert.equal(k.doc.activeElement,saveAt(),'focus returns to the same idea');
+assert.equal(saveAt().attrs['aria-pressed'],'true');
+k.get('explore-saved').checked=true;k.get('explore-saved').fire('change');
+saveAt().focus();saveAt().fire('click');
+assert.equal(k.doc.activeElement,k.get('explore-count'),'removing the only visible favorite keeps focus in results');
+assert.equal(k.get('explore-count').textContent,'0 of 57 concepts');
+k.get('explore-clear').fire('click');
+for(let i=0;i<4;i++)k.get('explore-next').fire('click');
+assert.equal(k.get('explore-page').textContent,'Page 5 of 5');
+assert.equal(k.get('explore-next').disabled,true);
+assert.equal(k.doc.activeElement,k.get('explore-count'),'the last page does not strand focus on a disabled button');
+assert.equal(k.get('explore-grid').children[8].children[1].textContent,'Mirror Maze Caption Lab');
+k.get('explore-prev').fire('click');
+assert.equal(k.get('explore-page').textContent,'Page 4 of 5');
+assert.equal(k.doc.activeElement,k.get('explore-count'));
+assert.match(fs.readFileSync('./index.html','utf8'),/id="explore-count" tabindex="-1"/);
+console.log('PASS: 57 sourced ideas, filters, pagination, favorites, surprise, empty state, unsafe links and storage failures.');

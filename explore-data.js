@@ -616,5 +616,16 @@
     "sourceLabel": "Building resource: Python priority queue notes",
     "sourceUrl": "https://docs.python.org/3/library/heapq.html#priority-queue-implementation-notes",
     "status": "Idea"
+  },
+  {
+    "id": "explore-57",
+    "title": "Mirror Maze Caption Lab",
+    "category": "AI & Agents",
+    "description": "Draw imaginary mazes with exits on either side. Mirror each maze, then check whether a caption helper flips left and right while keeping the exit count and colors unchanged. Score direction changes separately from facts that should stay the same.",
+    "difficulty": "Intermediate",
+    "buildTime": "A weekend",
+    "sourceLabel": "Building resource: MDN canvas transformations",
+    "sourceUrl": "https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API/Tutorial/Transformations",
+    "status": "Idea"
   }
 ];if(typeof module!=='undefined')module.exports=ideas;else root.IdeaVisionExplore=ideas;})(typeof window!=='undefined'?window:globalThis);
