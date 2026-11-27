@@ -28,6 +28,7 @@
    <nav id="insight-pagination" class="pagination" aria-label="Insight archive pages" hidden><button id="insight-prev" type="button">← Newer</button><span id="insight-page"></span><button id="insight-next" type="button">Older →</button></nav>
    <p><a href="#ema-worked-example">November 21 worked example: order and moving averages</a></p>
    <p><a href="#snapshot-worked-example">November 26 worked example: a late order changes the answer key</a></p>
+   <p><a href="#index-break-even">November 27 worked example: when a faster lookup costs more</a></p>
    <noscript><p class="notice">Enable JavaScript to browse the insight archive. You can also <a href="https://github.com/cherenzac/idea-tracker/blob/main/daily-insights/insights.js">read the published entries on GitHub</a>.</p></noscript>
   </section>
   <section class="editorial-note" id="ema-worked-example" aria-labelledby="ema-example-heading">
@@ -57,9 +58,21 @@
    </details>
    <p><a href="#insight-2026-11-26-match-the-snapshot">Back to the November 26 insight</a></p>
   </section>
+  <section class="editorial-note" id="index-break-even" aria-labelledby="index-break-even-heading">
+   <h2 id="index-break-even-heading">Worked example: when does a retrieval index pay off?</h2>
+   <p>Suppose a plain scan costs 2,000 compute units per query, while indexed lookup costs 400 after a 48,000-unit build. For <var>q</var> queries on one index version, compare <code>2000 × q</code> with <code>48000 + 400 × q</code>.</p>
+   <ul>
+    <li><strong>20 queries:</strong> scan 40,000; index 56,000. Scanning uses less compute.</li>
+    <li><strong>30 queries:</strong> both cost 60,000.</li>
+    <li><strong>31 queries:</strong> scan 62,000; index 60,400. This is the first strict win for the index.</li>
+   </ul>
+   <p>At 40 queries, one build costs 64,000 units. If a document update forces a full rebuild halfway through, two builds cost 112,000. The same 40 queries cost 80,000 by scanning either way. In production, use measured build and update costs rather than assuming every update requires a rebuild.</p>
+   <p>This fictional model compares total compute, not latency or retrieval quality. Before switching, check recall against a reference, verify access rules still hold, and measure tail latency, freshness and storage separately. A cheaper index is not a reason to serve content a caller cannot access.</p>
+   <p><a href="#insight-2026-11-27-count-queries-between-rebuilds">Back to the November 27 insight</a></p>
+  </section>
   <footer class="editorial-note"><p><strong>A small editorial notebook.</strong> Short, dated notes about building AI systems. Original thoughts are labeled; public-source inspiration includes a direct source link. These are design perspectives, not claims that a feature has been built.</p><p>No account, tracking or uploads. This page does not read private conversations, connect to X or update itself. New entries appear when a site update is published.</p><a href="../#project=ideas">Back to IdeaVision ↗</a></footer>
  </main>
- <script src="insights.js?v=20261126"></script>
+ <script src="insights.js?v=20261127"></script>
  <script src="insights-app.js?v=20261124"></script>
 </body>
 </html>

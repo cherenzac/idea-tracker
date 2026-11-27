@@ -227,6 +227,14 @@
       "name": "dbt Labs: Data agent evaluation proposal and discussion",
       "url": "https://github.com/dbt-labs/dbt/discussions/17168"
     }
+  },
+  {
+    id: '2026-11-27-count-queries-between-rebuilds',
+    date: '2026-11-27',
+    title: 'Count queries between rebuilds',
+    summary: 'A faster RAG lookup can still cost more overall if its index is rebuilt often. In a toy model, spending 48,000 compute units up front to save 1,600 per query breaks even at 30 queries per build. Count queries against each usable index version, not against the service’s monthly traffic.',
+    topics: ['RAG', 'Agent harnesses'],
+    kind: 'original'
   }
  ];
  if (typeof module !== 'undefined') module.exports = entries;

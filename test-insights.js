@@ -221,3 +221,20 @@ console.log('PASS: worked example disclosure, search, text-only rendering, and d
  assert.deepEqual([old,current],[3,4]);
  assert.deepEqual([current,old].map(answer=>[old,current].map(key=>answer===key)),[[false,true],[true,false]]);
 }
+
+{
+ const index=published.find(e=>e.id==='2026-11-27-count-queries-between-rebuilds');
+ assert(index && index.kind==='original');
+ const all=api.validateEntries(published);
+ assert.deepEqual(api.filterEntries(all,'usable index version','RAG').map(e=>e.id),[index.id]);
+ assert.match(html,/href="#index-break-even"/);
+ assert.match(html,/id="index-break-even" aria-labelledby="index-break-even-heading"/);
+ assert(html.includes('href="#insight-'+index.id+'"'));
+ const scan=q=>2000*q, indexed=(q,builds=1)=>48000*builds+400*q;
+ const firstWin=Array.from({length:100},(_,q)=>q).find(q=>indexed(q)<scan(q));
+ assert.equal(firstWin,31);
+ assert.deepEqual([scan(20),indexed(20),scan(30),indexed(30),scan(31),indexed(31)],[40000,56000,60000,60000,62000,60400]);
+ assert(indexed(40)<scan(40) && indexed(40,2)>scan(40));
+ for (const n of [40000,56000,60000,62000,60400,64000,112000,80000]) assert(html.includes(n.toLocaleString('en-US')));
+}
+console.log('PASS: fictional retrieval index crossover, rebuild reversal, search and reciprocal links.');
