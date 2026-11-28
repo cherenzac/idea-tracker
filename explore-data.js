@@ -627,5 +627,16 @@
     "sourceLabel": "Building resource: MDN canvas transformations",
     "sourceUrl": "https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API/Tutorial/Transformations",
     "status": "Idea"
+  },
+  {
+    "id": "explore-58",
+    "title": "Clockless Clue Sorter",
+    "category": "AI & Agents",
+    "description": "Build a sorter for fictional clue cards with no clock times. Some cards name a prerequisite, such as 'fold before stacking.' Keep that order without assigning a time, report when either order fits, and flag a loop instead of forcing a timeline.",
+    "difficulty": "Intermediate",
+    "buildTime": "A weekend",
+    "sourceLabel": "Building resource: Python graphlib and topological sorting",
+    "sourceUrl": "https://docs.python.org/3/library/graphlib.html",
+    "status": "Idea"
   }
 ];if(typeof module!=='undefined')module.exports=ideas;else root.IdeaVisionExplore=ideas;})(typeof window!=='undefined'?window:globalThis);

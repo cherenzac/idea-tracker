@@ -114,7 +114,7 @@ Run `node --check pomodoro.js && node test-pomodoro.js` in addition to the five 
 
 ## Explore Projects and the modern retro screen
 
-The **Explore Projects** channel contains 57 original concepts inspired by linked primary sources, in five categories. They are ideas to build, not 57 functioning apps. Search, category and difficulty filters, 12-card pagination, a surprise picker, and browser-local favorites help choose a next project. Time estimates are rough MVP planning estimates; source tools may require models, APIs, accounts, hardware or paid services. Sources were inspected November 1, 2026; their future availability is outside this site's control.
+The **Explore Projects** channel contains 58 original concepts inspired by linked primary sources, in five categories. They are ideas to build, not 58 functioning apps. Search, category and difficulty filters, 12-card pagination, a surprise picker, and browser-local favorites help choose a next project. Time estimates are rough MVP planning estimates; source tools may require models, APIs, accounts, hardware or paid services. Sources were inspected November 1, 2026; their future availability is outside this site's control.
 
 Favorites use a separate `ideavision.saved-sparks.v1` localStorage key. They never alter the existing notebook. Storage failure is visible and falls back to in-memory use; no ideas/favorites are uploaded. The screen is wider with a mint chassis, pale reading surface and violet/coral accents, retaining decorative dials and the existing working tools. Respect reduced-motion preferences. The image-search reference informed colors and proportions only; no third-party image was copied.
 
@@ -298,3 +298,7 @@ Explore’s Lost-and-Found Queue is a separate proposed exercise about wait-awar
 ### Explore keyboard continuity
 
 Previous and Next move focus to the result count so you can continue through the newly displayed cards, including on the final page. Saving an idea keeps focus on its replacement Save button; removing it from the saved-only view moves focus to the result count instead. Typing in search and changing filters do not move focus. This does not change favorite IDs, saved notebook data or storage keys. Mirror Maze Caption Lab is an idea for testing spatial reasoning, not a built captioning tool.
+
+### Mirror Maze caption check
+
+Fair Test Studio’s `#mirror-check` section compares four synthetic caption styles on one original/mirror/crop trio. It separates direction accuracy, flip consistency, preservation of exit count and color, and abstention when a crop hides the necessary reference. A wrong-way flip can pass consistency while failing both accuracy checks. The widget scores structured claims only and never calls a model. Run `node test-mirror-check.js` for scoring and control checks. Clockless Clue Sorter is a distinct Explore **idea**, not a built application.
