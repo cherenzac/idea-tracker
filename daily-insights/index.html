@@ -29,6 +29,7 @@
    <p><a href="#ema-worked-example">November 21 worked example: order and moving averages</a></p>
    <p><a href="#snapshot-worked-example">November 26 worked example: a late order changes the answer key</a></p>
    <p><a href="#index-break-even">November 27 worked example: when a faster lookup costs more</a></p>
+   <p><a href="#fixed-recall-example">November 28 worked example: compare query settings at equal recall</a></p>
    <noscript><p class="notice">Enable JavaScript to browse the insight archive. You can also <a href="https://github.com/cherenzac/idea-tracker/blob/main/daily-insights/insights.js">read the published entries on GitHub</a>.</p></noscript>
   </section>
   <section class="editorial-note" id="ema-worked-example" aria-labelledby="ema-example-heading">
@@ -69,10 +70,23 @@
    <p>At 40 queries, one build costs 64,000 units. If a document update forces a full rebuild halfway through, two builds cost 112,000. The same 40 queries cost 80,000 by scanning either way. In production, use measured build and update costs rather than assuming every update requires a rebuild.</p>
    <p>This fictional model compares total compute, not latency or retrieval quality. Before switching, check recall against a reference, verify access rules still hold, and measure tail latency, freshness and storage separately. A cheaper index is not a reason to serve content a caller cannot access.</p>
    <p><a href="#insight-2026-11-27-count-queries-between-rebuilds">Back to the November 27 insight</a></p>
+   <p><a href="#fixed-recall-example">Next: compare two indexes at the same recall floor</a></p>
+  </section>
+  <section class="editorial-note" id="fixed-recall-example" aria-labelledby="fixed-recall-heading">
+   <h2 id="fixed-recall-heading">Worked example: tune the existing graph first</h2>
+   <p>In this fictional comparison, freeze the corpus, embeddings, distance metric and tie rule. For each of 100 held-out queries, compute the exact top 10. Recall@10 is the fraction of those 1,000 reference neighbors returned. Require at least 95% recall and keep the hardware and query concurrency fixed.</p>
+   <ul>
+    <li><strong>Existing graph, <code>ef=20</code>:</strong> 920 neighbors returned, 92% recall, 3 ms p95. This setting misses the floor.</li>
+    <li><strong>Existing graph, <code>ef=64</code>:</strong> 960 neighbors returned, 96% recall, 6 ms p95.</li>
+    <li><strong>Rebuilt graph, <code>ef=48</code>:</strong> 960 neighbors returned, 96% recall, 4 ms p95.</li>
+   </ul>
+   <p>The comparison is 6 ms versus 4 ms, not 3 ms versus 4 ms. First sweep query settings on each fixed graph using a validation set, then report the winning settings on held-out queries. In <a href="https://github.com/nmslib/hnswlib/blob/master/ALGO_PARAMS.md">hnswlib’s parameter guide</a>, <code>ef</code> changes search effort at query time; changing graph-build parameters such as <code>M</code> or <code>ef_construction</code> for the existing corpus means building a new graph.</p>
+   <p>These are invented measurements, not an HNSW benchmark. Check recall on important query slices, index size, and separate build cost. The p95 difference is a latency result, not a per-query compute saving. Neighbor recall does not measure whether the final answer is correct or whether the user can access the source.</p>
+   <p><a href="#insight-2026-11-28-compare-indexes-at-the-same-recall">Back to the November 28 insight</a></p>
   </section>
   <footer class="editorial-note"><p><strong>A small editorial notebook.</strong> Short, dated notes about building AI systems. Original thoughts are labeled; public-source inspiration includes a direct source link. These are design perspectives, not claims that a feature has been built.</p><p>No account, tracking or uploads. This page does not read private conversations, connect to X or update itself. New entries appear when a site update is published.</p><a href="../#project=ideas">Back to IdeaVision ↗</a></footer>
  </main>
- <script src="insights.js?v=20261127"></script>
+ <script src="insights.js?v=20261128"></script>
  <script src="insights-app.js?v=20261124"></script>
 </body>
 </html>

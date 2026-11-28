@@ -238,3 +238,23 @@ console.log('PASS: worked example disclosure, search, text-only rendering, and d
  for (const n of [40000,56000,60000,62000,60400,64000,112000,80000]) assert(html.includes(n.toLocaleString('en-US')));
 }
 console.log('PASS: fictional retrieval index crossover, rebuild reversal, search and reciprocal links.');
+
+{
+ const entry=published.find(e=>e.id==='2026-11-28-compare-indexes-at-the-same-recall');
+ assert(entry && entry.kind==='original');
+ assert.deepEqual(api.filterEntries(api.validateEntries(published),'same recall','RAG').map(e=>e.id),[entry.id]);
+ assert.match(html,/href="#fixed-recall-example"/);
+ assert.match(html,/id="fixed-recall-example" aria-labelledby="fixed-recall-heading"/);
+ assert(html.includes('href="#insight-'+entry.id+'"'));
+ assert.match(html,/insights\.js\?v=20261128/);
+ const cases=[
+  {graph:'existing',hits:920,p95:3},
+  {graph:'existing',hits:960,p95:6},
+  {graph:'rebuilt',hits:960,p95:4}
+ ];
+ const feasible=cases.filter(c=>c.hits/(100*10)>=.95);
+ assert.deepEqual(feasible.map(c=>c.p95),[6,4]);
+ assert.equal(feasible[0].hits/1000,feasible[1].hits/1000);
+ for(const {hits,p95} of cases) assert(html.includes(hits+' neighbors returned, '+hits/10+'% recall, '+p95+' ms p95'));
+}
+console.log('PASS: fixed-recall example, quality-constrained comparison and reciprocal links.');

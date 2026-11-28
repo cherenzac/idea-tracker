@@ -235,6 +235,14 @@
     summary: 'A faster RAG lookup can still cost more overall if its index is rebuilt often. In a toy model, spending 48,000 compute units up front to save 1,600 per query breaks even at 30 queries per build. Count queries against each usable index version, not against the service’s monthly traffic.',
     topics: ['RAG', 'Agent harnesses'],
     kind: 'original'
+  },
+  {
+    id: '2026-11-28-compare-indexes-at-the-same-recall',
+    date: '2026-11-28',
+    title: 'Compare retrieval indexes at the same recall',
+    summary: 'Before rebuilding a vector index, tune the graph you already have. Freeze a set of exact neighbors, set a recall floor, and find each graph’s fastest query setting above that floor. A faster setting that misses the floor is not a valid baseline. Compare build cost only after making that quality constraint explicit.',
+    topics: ['RAG', 'Agent harnesses'],
+    kind: 'original'
   }
  ];
  if (typeof module !== 'undefined') module.exports = entries;
